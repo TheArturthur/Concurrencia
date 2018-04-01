@@ -1,7 +1,6 @@
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.Almacen;
 
-// TODO: importar la clase de los semáforos.
 import es.upm.babel.cclib.Semaphore;
 
 /**
@@ -16,7 +15,6 @@ class AlmacenN implements Almacen {
     private int aExtraer = 0;
     private int aInsertar = 0;
 
-    // TODO: declaración de los semáforos necesarios
     private Semaphore semaphore= null;
 
     public AlmacenN(int n) {
@@ -26,12 +24,10 @@ class AlmacenN implements Almacen {
         aExtraer = 0;
         aInsertar = 0;
 
-        // TODO: inicialización de los semáforos
         semaphore= new Semaphore(1);
     }
 
     public void almacenar(Producto producto) {
-        // TODO: protocolo de acceso a la sección crítica y código de
         // sincronización para poder almacenar.
         while (true) {
             semaphore.await();
@@ -47,7 +43,6 @@ class AlmacenN implements Almacen {
         aInsertar++;
         aInsertar %= capacidad;
 
-        // TODO: protocolo de salida de la sección crítica y código de
         // sincronización para poder extraer.
         semaphore.signal();
     }
@@ -55,10 +50,9 @@ class AlmacenN implements Almacen {
     public Producto extraer() {
         Producto result;
 
-        // TODO: protocolo de acceso a la sección crítica y código de
         // sincronización para poder extraer.
         while (true) {
-            sempahore.await();
+            semaphore.await();
             if(nDatos==0)
                 semaphore.signal();//If no products, wait
             else
@@ -71,7 +65,6 @@ class AlmacenN implements Almacen {
         aExtraer++;
         aExtraer %= capacidad;
 
-        // TODO: protocolo de salida de la sección crítica y código de
         // sincronización para poder almacenar.
         semaphore.signal();
 
