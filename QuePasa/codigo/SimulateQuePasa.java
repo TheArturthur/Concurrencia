@@ -1,6 +1,6 @@
 package cc.qp;
 
-
+//prueba
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.List;
