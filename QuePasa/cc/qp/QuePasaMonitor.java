@@ -11,81 +11,81 @@ import java.util.Map;
 
 public class QuePasaMonitor implements QuePasa{
 
-    //Class Group for connecting group id, group name and a list of members for each group:
     class Group{
-        public int uidCreador;
-        public String nombre;
-        public List<Integer> miembros;
+        private int creatorId;
+        private String name;
+        private List<Integer> members;
 
-        //Class constructor:
-        public Group(int uidCreador, String nombre){
-            this.uidCreador= uidCreador;
-            this.nombre= nombre;
-            this.miembros.add(uidCreador);
+        //Constructor:
+        public Group(int creatorId, String name){
+            this.creatorId= creatorId;
+            this.name= name;
         }
 
-        public Integer[] getMiembros(){
-            return (Integer[]) miembros.toArray();
+        //Getters:
+        public int getCreatorId(){
+            return creatorId;
+        }
+        public String getName(){
+            return name;
         }
 
-        public int getId(){
-            return uidCreador;
+        public List<Integer> getMembers() {
+            return members;
         }
 
-        public String getNombre (){
-            return nombre;
+        //Setters:
+        public void addMember(int userId){
+            members.add(userId);
         }
     }
 
-    //Monitor and method conditions:
+    //Variable to store creators mapped with their groups:
+    private Map<Integer,List<String>> groupList;
+
+    //Variables to assure mutual exclusion:
     private Monitor mutex;
-    private Monitor.Cond condLeer;
-    private Group group;
-    private Map<Integer, String> groupList;
-
-    //Class constructor
-    public QuePasaMonitor(){
-        mutex= new Monitor();
-        condLeer= mutex.newCond();
-    }
+    private Monitor.Cond cond;
 
 
-    public void crearGrupo (int uid, String grupo) throws PreconditionFailedException{
-        //Start, to assure mutual exclusion:
+    @Override
+    public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
-        try {
-            if(!groupList.isEmpty() && groupList.containsKey(uid)){
-                throw new PreconditionFailedException();
-            }else{
-                group= new Group(uid, grupo);
-                groupList.put(uid, grupo);
-            }
-        }catch (PreconditionFailedException e){
-            System.out.println("El usuario ya tiene un grupo con el mismo nombre");
+        List<String> userGroups= groupList.get(creadorUid);
+        if(userGroups.contains(grupo)){
+            throw new PreconditionFailedException();
+        }else{
+            Group group= new Group(creadorUid, grupo);
+            userGroups.add(grupo);
+            groupList.put(creadorUid, userGroups);
         }
-        //End of the method and mutual exclusion for this method:
         mutex.leave();
     }
 
-    public void anadirMiembro (int creadorUid, String grupo, int uid) throws PreconditionFailedException{
+    @Override
+    public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
 
         mutex.leave();
     }
 
-    public void salirGrupo (int uid, String grupo) throws PreconditionFailedException{
+    @Override
+    public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
 
         mutex.leave();
     }
 
-    public void mandarMensaje (int uid, String grupo, Object contenido) throws PreconditionFailedException{
+    @Override
+    public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
 
         mutex.leave();
+
     }
 
-    public Mensaje leer (int uid){
+    @Override
+    public Mensaje leer(int uid) {
         mutex.enter();
 
         mutex.leave();
