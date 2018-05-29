@@ -29,7 +29,6 @@ public class QuePasaMonitor implements QuePasa{
         public String getName(){
             return name;
         }
-
         public List<Integer> getMembers() {
             return members;
         }
@@ -40,8 +39,8 @@ public class QuePasaMonitor implements QuePasa{
         }
     }
 
-    //Variable to store creators mapped with their groups:
-    private Map<Integer,List<String>> groupList;
+    //Variable to store creators mapped with their groups names:
+    private Map<Integer,List<String>> groupNames;
 
     //Variables to assure mutual exclusion:
     private Monitor mutex;
@@ -50,14 +49,19 @@ public class QuePasaMonitor implements QuePasa{
 
     @Override
     public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
+        //At the beginning of each method, we assure mutual exclusion:
         mutex.enter();
-        List<String> userGroups= groupList.get(creadorUid);
+        //List with the groups of creatorUid:
+        List<String> userGroups= groupNames.get(creadorUid);
+        //If the creator has another group with the same name, throw exception:
         if(userGroups.contains(grupo)){
             throw new PreconditionFailedException();
-        }else{
+        }
+        //If not, create a group and add it to the creator's list:
+        else{
             Group group= new Group(creadorUid, grupo);
             userGroups.add(grupo);
-            groupList.put(creadorUid, userGroups);
+            groupNames.put(creadorUid, userGroups);
         }
         mutex.leave();
     }
@@ -65,7 +69,10 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
+        List<String> userGroups= groupNames.get(creadorUid);
+        if(userGroups.contains(grupo)){
 
+        }
         mutex.leave();
     }
 
