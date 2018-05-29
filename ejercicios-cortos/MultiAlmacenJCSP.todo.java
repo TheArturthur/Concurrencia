@@ -1,3 +1,4 @@
+/*
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.MultiAlmacen;
 
@@ -72,3 +73,4 @@ class MultiAlmacenJCSP implements MultiAlmacen, CSProcess {
 	}
     }
 }
+*/

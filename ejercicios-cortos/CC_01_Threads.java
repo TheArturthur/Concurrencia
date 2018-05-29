@@ -1,6 +1,7 @@
 public class CC_01_Threads extends Thread{
     final static int N= 10;
     final static int T= 5000;
+    private int i;
 
     private CC_01_Threads (int i){
         this.i= i;
