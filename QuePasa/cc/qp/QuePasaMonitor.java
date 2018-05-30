@@ -21,6 +21,7 @@ public class QuePasaMonitor implements QuePasa{
 
     @Override
     public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
+        //At the beginning of each method, we assure mutual exclusion:
         mutex.enter();
         List<Group> userGroups= groupList.get(creadorUid);
         Group group= checkGroup(grupo,userGroups);
@@ -76,7 +77,7 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public Mensaje leer(int uid) {
         mutex.enter();
-        
+
         mutex.leave();
         return null;
     }
