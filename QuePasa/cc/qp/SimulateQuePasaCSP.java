@@ -1,3 +1,4 @@
+/*
 package cc.qp;
 
 import java.util.Scanner;
@@ -6,11 +7,12 @@ import java.util.List;
 
 import org.jcsp.lang.ProcessManager;
 
-/**
+*
  * Main class.
  * 
  * @author Babel Group
- */
+
+
 public class SimulateQuePasaCSP {
   
   
@@ -60,3 +62,4 @@ public class SimulateQuePasaCSP {
     }
   }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 // QuePasaCSP.java
 // Lars-Ake Fredlund y Julio Mariño
 // Esqueleto para la realización de la práctica por paso de mensajes
@@ -61,7 +62,9 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 	// TO DO
 	// TO DO
 
-	public PetAnadirMiembro(/* TO DO: parámetros */) {
+	public PetAnadirMiembro(
+ TO DO: parámetros
+) {
 	    // TO DO
 	    // TO DO
 	    // TO DO
@@ -75,7 +78,9 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 	// TO DO
 	// TO DO
 
-	public PetSalirGrupo(/* TO DO: parámetros */) {
+	public PetSalirGrupo(
+ TO DO: parámetros
+) {
 	    // TO DO
 	    // TO DO 
 	    // TO DO 
@@ -89,7 +94,9 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 	// TO DO
 	// TO DO
 
-	public PetMandarMensaje(/* TO DO: parámetros */) {
+	public PetMandarMensaje(
+ TO DO: parámetros
+) {
 	    // TO DO 
 	    // TO DO
 	    // TO DO 
@@ -102,7 +109,9 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 	// TO DO
 	// TO DO
 	
-	public PetLeer(/* TO DO: parámetros */) {
+	public PetLeer(
+ 		// TO DO: parámetros
+) {
 	    // TO DO
 	    // TO DO
 	}
@@ -208,7 +217,9 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 		// recepción del mensaje
 		PetCrearGrupo pet = (PetCrearGrupo) chCrearGrupo.in().read();
 		// comprobación de la PRE
-		if (/* TO DO: copia aquí tu implementación de la PRE */)
+		if (
+ TO DO: copia aquí tu implementación de la PRE
+)
 		    // status KO
 		    pet.chResp.out().write(false);
 		// ejecución normal
@@ -342,3 +353,4 @@ public class QuePasaCSP implements QuePasa, CSProcess {
     } // END run()
 } // END class QuePasaCSP
   
+*/
