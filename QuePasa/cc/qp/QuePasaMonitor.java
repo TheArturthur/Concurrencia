@@ -3,33 +3,37 @@ package cc.qp;
 //Grupo: Arturo Vidal Peña (w140307)
 
 import es.upm.babel.cclib.Monitor;
+
+import javax.swing.*;
 import java.time.chrono.MinguoChronology;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class QuePasaMonitor implements QuePasa{
 
-    //Variable to store creators mapped with their groups (shared memory variable):
-    private Map<Integer,List<Group>> groupList;
+    private Monitor mutex;
+    private Monitor.Cond cond;
+    private HashMap<Integer,ArrayList<Group>> groupList;
 
-    //Variables to assure mutual exclusion:
-    private Monitor mutex= new Monitor();
-    private Monitor.Cond cond= mutex.newCond();
+    public QuePasaMonitor(){
+        this.mutex= new Monitor();
+        this.cond= mutex.newCond();
+        this.groupList= new HashMap<>();
+    }
 
 
     @Override
     public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
         //At the beginning of each method, we assure mutual exclusion:
         mutex.enter();
-        List<Group> userGroups= groupList.get(creadorUid);
+        ArrayList<Group> userGroups= groupList.get(creadorUid);
         Group group= checkGroup(grupo,userGroups);
 
         if(group!= null){
+            mutex.leave();
             throw new PreconditionFailedException();
         }else{
             group= new Group(creadorUid, grupo);
+            group.addMember(creadorUid);
             userGroups.add(group);
             groupList.put(creadorUid, userGroups);
         }
@@ -39,10 +43,11 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
-        List<Group> userGroups= groupList.get(creadorUid);
+        ArrayList<Group> userGroups= groupList.get(creadorUid);
         Group group= checkGroup(grupo,userGroups);
 
         if(group== null || group.getMembers().contains(nuevoMiembroUid)){
+            mutex.leave();
             throw new PreconditionFailedException();
         }else{
             group.addMember(nuevoMiembroUid);
@@ -55,10 +60,11 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
-        List<Group> userGroups= groupList.get(miembroUid);
+        ArrayList<Group> userGroups= groupList.get(miembroUid);
         Group group= checkGroup(grupo,userGroups);
 
         if(group== null || group.getCreatorId()==miembroUid){
+            mutex.leave();
             throw new PreconditionFailedException();
         }else{
             group.getMembers().remove(miembroUid);
@@ -82,7 +88,7 @@ public class QuePasaMonitor implements QuePasa{
         return null;
     }
 
-    private Group checkGroup(String name, List<Group> list) {
+    private Group checkGroup(String name, ArrayList<Group> list) {
         Group res= null;
         for(Group i: list){
             if(i.getName().equals(name)){
@@ -95,28 +101,29 @@ public class QuePasaMonitor implements QuePasa{
     class Group{
         private int creatorId;
         private String name;
-        private List<Integer> members;
+        private ArrayList<Integer> members;
 
         //Constructor:
         public Group(int creatorId, String name){
             this.creatorId= creatorId;
             this.name= name;
+            this.members= new ArrayList<>();
         }
 
         //Getters:
         public int getCreatorId(){
-            return this.creatorId;
+            return creatorId;
         }
         public String getName(){
-            return this.name;
+            return name;
         }
         public List<Integer> getMembers() {
-            return this.members;
+            return members;
         }
 
         //Setters:
         public void addMember(int userId){
-            this.members.add(userId);
+            members.add(userId);
         }
     }
 }
