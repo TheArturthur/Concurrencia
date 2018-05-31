@@ -25,17 +25,21 @@ public class QuePasaMonitor implements QuePasa{
     public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
         //At the beginning of each method, we assure mutual exclusion:
         mutex.enter();
-        ArrayList<Group> userGroups= groupList.get(creadorUid);
-        Group group= checkGroup(grupo,userGroups);
-
-        if(group!= null){
+        if(!groupList.isEmpty()) {
+            ArrayList<Group> userGroups = groupList.get(creadorUid);
+            Group group = checkGroup(grupo, userGroups);
+            if (group != null) {
+                mutex.leave();
+                throw new PreconditionFailedException();
+            } else {
+                group = new Group(creadorUid, grupo);
+                group.addMember(creadorUid);
+                userGroups.add(group);
+                groupList.put(creadorUid, userGroups);
+            }
+        }else{
             mutex.leave();
             throw new PreconditionFailedException();
-        }else{
-            group= new Group(creadorUid, grupo);
-            group.addMember(creadorUid);
-            userGroups.add(group);
-            groupList.put(creadorUid, userGroups);
         }
         mutex.leave();
     }
