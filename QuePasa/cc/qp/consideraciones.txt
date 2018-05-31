@@ -1,0 +1,103 @@
+Explicaciones sobre problemas en monitores, y observaciones generales
+=====================================================================
+
+Para programar las operaciones usando monitores exigimos que se use siempre
+el mismo patrón, que se puede mostrar esquemático como (se asume que el monitor
+esta disponible en el atributo mutex):
+
+operacion(arg1, ..., argn) {
+  mutex.enter();        // La primera cosa SIEMPRE es llamar a mutex.enter()
+
+  if (!PRE) {           // Comprueba la precondicion
+     mutex.leave();
+     throw new PreconditionFailedException();
+  }
+
+  if (!CPRE)
+    somecondicion.await();  // Si el CPRE no se cumple, llama
+                            // await a algún condición.
+			    // En vuestro caso implica probablemente
+			    // a veces crear nuevas condicions y guardlas
+			    // en estructuras de datos; se permite.
+
+  POST;                     // Cambia el estado común
+
+  Desbloqueo;               // Desbloqueo de otros procesos, si posible
+
+  mutex.leave();            // Finalmente sale del monitor
+
+  return someValue;         // Si la operacion devuelve algo
+}
+
+El idea con este esqueleto es garantizar que solo puede haber un proceso
+que lee (PRE o CPRE) o modifica el estado común (POST) a la vez.
+
+Notad que se comprueba la precondicion DESPUÉS de haber llamado a
+mutex.enter(). También hay que tener en cuenta que TODO el cuerpo de la 
+operación esté protegido por el monitor. NUNCA se llama monitor.leave(), 
+y después otra vez a moniter.enter(), durante la ejecución de una operación. 
+Hacer esto sólo nos podría llevar a un desastre.
+
+Siempre se usa sólo un monitor. Y notad que sólo en el cuerpo de la operación
+se llama mutex.enter() y mutex.leave(), NUNCA dentro otros métodos
+(como en el método para hacer desbloqueo por ejemplo).
+
+
+Comentarios sobre uso de Monitores/condiciones:
+==============================================
+
+- falta mutex.enter antes que PRE:
+
+No se han llamado mutex.enter() antes que evaluar la precondicion.
+
+
+- pocas conditions:
+
+Es imposible que la solución puede funcionar correctamente con tan
+pocas conditions.
+
+- bucle await:
+
+Significa que hemos visto un bucle alrededor de la evaluación de CPRE,
+típicamente:
+
+while (!CPRE)
+  cond.await();
+
+No esta permitido. 
+
+- múltiple mutex.enter dentro un método, o mutex.enter y mutex.leave en el
+método de desbloqueo:
+
+Esto rompe con el esqueleto arriba. Solo se permite un mutex.enter y leave
+por el método que implementa una operación, y nunca en un método fuera de la 
+operación.
+
+- accede estado de recurso fuera del monitor:
+
+Hay que llamar a mutex.enter antes que acceder al estado (los atributos)
+del recurso.
+
+- mezclando POST y desbloqueo:
+
+El código que implementa POST y el código para el desbloqueo esta entremezclado,
+o el desbloqueo ocurre antes que el POST.
+
+En el esqueleto arriba están separados, y siempre se establece POST
+antes que intentar desbloquear otro proceso.
+
+Este es comentario sobre estilo, que es menos grave los otros comentarios
+sobre uso de monitores, pero seguro quitamos algún punto si no se cumple
+con el estilo recomendado.
+
+- pocos comentarios:
+
+El código contiene demasiado pocos comentarios. Se recomienda añadir comentarios
+para mejorar la legibilidad del código.
+
+- tiene atributos "static".
+
+La clase tiene atributos declarados static, por ejemplo las estructuras
+de datos que implementan "mensajes" o "miembros". Este es muy peligroso,
+ya que atributos static están compartidos entre todas las objetos
+de una clase.
