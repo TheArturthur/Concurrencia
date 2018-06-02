@@ -13,6 +13,7 @@ public class QuePasaMonitor implements QuePasa{
     private Monitor mutex;
     private Monitor.Cond cond;
     private HashMap<Integer,ArrayList<Group>> groupList;
+    private HashMap<Integer,ArrayList<Mensaje>> userMsg;
 
     public QuePasaMonitor(){
         this.mutex= new Monitor();
@@ -27,19 +28,27 @@ public class QuePasaMonitor implements QuePasa{
         mutex.enter();
         if(!groupList.isEmpty()) {
             ArrayList<Group> userGroups = groupList.get(creadorUid);
+            mutex.leave();
             Group group = checkGroup(grupo, userGroups);
+            mutex.enter();
             if (group != null) {
                 mutex.leave();
                 throw new PreconditionFailedException();
-            } else {
+            } else if(!userGroups.isEmpty()){
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
                 userGroups.add(group);
                 groupList.put(creadorUid, userGroups);
+            }else{
+                group = new Group(creadorUid, grupo);
+                group.addMember(creadorUid);
+                userGroups= new ArrayList<Group>();
+                userGroups.add(group);
+                groupList.put(creadorUid, userGroups);
             }
         }else{
-            mutex.leave();
-            throw new PreconditionFailedException();
+            groupList.put(creadorUid,new ArrayList<>());
+            crearGrupo(creadorUid,grupo);
         }
         mutex.leave();
     }
@@ -48,8 +57,9 @@ public class QuePasaMonitor implements QuePasa{
     public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
         ArrayList<Group> userGroups= groupList.get(creadorUid);
+        mutex.leave();
         Group group= checkGroup(grupo,userGroups);
-
+        mutex.enter();
         if(group== null || group.getMembers().contains(nuevoMiembroUid)){
             mutex.leave();
             throw new PreconditionFailedException();
@@ -79,7 +89,21 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
+        ArrayList<Group> userGroups= groupList.get(remitenteUid);
+        Group group= checkGroup(grupo, userGroups);
+        if(group!=null){
+            Mensaje msg= new Mensaje (remitenteUid, grupo, contenidos);
+            for(int i: group.getMembers()){
+                if(i!=remitenteUid){
+                    userMsg.get(i).set(1,msg);
 
+                    leer(i);
+                }
+            }
+        }else{
+            mutex.leave();
+            throw new PreconditionFailedException();
+        }
         mutex.leave();
 
     }
@@ -87,18 +111,26 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public Mensaje leer(int uid) {
         mutex.enter();
-
-        mutex.leave();
-        return null;
+        if(userMsg==null || userMsg.isEmpty()){
+            mutex.leave();
+            return null;
+        }else {
+            Mensaje res = userMsg.get(uid).get(1);
+            userMsg.remove(1);
+            mutex.leave();
+            return res;
+        }
     }
 
     private Group checkGroup(String name, ArrayList<Group> list) {
+        mutex.enter();
         Group res= null;
         for(Group i: list){
             if(i.getName().equals(name)){
                 res= i;
             }
         }
+        mutex.leave();
         return res;
     }
 
