@@ -1,24 +1,24 @@
 package cc.qp;
 
-//Grupo: Arturo Vidal Peña (w140307)
-
 import es.upm.babel.cclib.Monitor;
 
 import javax.swing.*;
 import java.time.chrono.MinguoChronology;
 import java.util.*;
 
-public class QuePasaMonitor implements QuePasa{
+public class QuePasaMonitor implements QuePasa, Practica{
 
     private Monitor mutex;
     private Monitor.Cond cond;
     private HashMap<Integer,ArrayList<Group>> groupList;
+    //Mapa con clave UID y valor Array de mensajes del usuario.
     private HashMap<Integer,ArrayList<Mensaje>> userMsg;
 
     public QuePasaMonitor(){
         this.mutex= new Monitor();
         this.cond= mutex.newCond();
         this.groupList= new HashMap<>();
+        this.userMsg = new HashMap<>();
     }
 
 
@@ -34,7 +34,7 @@ public class QuePasaMonitor implements QuePasa{
             if (group != null) {
                 mutex.leave();
                 throw new PreconditionFailedException();
-            } else if(!userGroups.isEmpty()){
+            } else if(userGroups!=null && !userGroups.isEmpty()){
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
                 userGroups.add(group);
@@ -89,15 +89,27 @@ public class QuePasaMonitor implements QuePasa{
     @Override
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
-        ArrayList<Group> userGroups= groupList.get(remitenteUid);
-        Group group= checkGroup(grupo, userGroups);
-        if(group!=null){
+        //Obtenemos la lista de grupos del usuario
+        ArrayList<Group> userGroups = null;
+        userGroups = groupList.get(remitenteUid);
+        //Comprobamos y obtenemos el grupo dentro de la lista de grupos
+        if(userGroups == null) {
+            System.out.println("El usuario no tiene grupos, no puede mandar mensajes.");
+            mutex.leave();
+            throw new PreconditionFailedException();
+        }
+        Group group = checkGroup(grupo, userGroups);
+        if(group!=null){//Si es null:
+            // Creamos el mensaje nuevo
             Mensaje msg= new Mensaje (remitenteUid, grupo, contenidos);
-            for(int i: group.getMembers()){
-                if(i!=remitenteUid){
-                    userMsg.get(i).set(1,msg);
-
-                    leer(i);
+            for(int i: group.getMembers()){//Para cada usuario que esté dentro del grupo
+                if(i!=remitenteUid){//y no sea el usuario que manda el mensaje:
+                    ArrayList<Mensaje> mensajesDeI = userMsg.get(i);
+                    if(mensajesDeI == null) {
+                        //Si no tiene lista de mensajes el usuario, se le tiene que crear en el Map.
+                    }
+                    mensajesDeI.add(msg);
+                    userMsg.put(i,mensajesDeI);
                 }
             }
         }else{
@@ -122,16 +134,35 @@ public class QuePasaMonitor implements QuePasa{
         }
     }
 
+    /**
+     *
+     * @param name
+     * @param list
+     * @return comprueba si el grupo existe para un determinado usuario, y en caso de existir y pertenecer, te lo devuelve.
+     */
     private Group checkGroup(String name, ArrayList<Group> list) {
         mutex.enter();
         Group res= null;
-        for(Group i: list){
-            if(i.getName().equals(name)){
-                res= i;
+        //Qué pasa si list es null?
+        if(list!= null && !list.isEmpty()) {
+
+            for (Group i : list) {
+                if (i.getName().equals(name)) {
+                    res = i;
+                }
             }
+            mutex.leave();
+            return res;
         }
         mutex.leave();
         return res;
+    }
+
+    @Override
+    public Alumno[] getAutores() {
+        return new Alumno[]{
+                new Alumno ("Arturo Vidal Peña","w140307")
+        };
     }
 
     class Group{
