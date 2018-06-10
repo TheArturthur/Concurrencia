@@ -4,7 +4,6 @@ import es.upm.babel.cclib.Monitor;
 
 import javax.swing.*;
 import java.lang.reflect.Array;
-import java.time.chrono.MinguoChronology;
 import java.util.*;
 
 public class QuePasaMonitor implements QuePasa, Practica {
@@ -19,9 +18,9 @@ public class QuePasaMonitor implements QuePasa, Practica {
 
     public QuePasaMonitor() {
         this.mutex = new Monitor();
-        this.userCond = new HashMap<>();
-        this.groupList = new HashMap<>();
-        this.userMsg = new HashMap<>();
+        this.userCond = new HashMap<Integer, ArrayList<Monitor.Cond>>();
+        this.groupList = new HashMap<Integer, ArrayList<Group>>();
+        this.userMsg = new HashMap<Integer, ArrayList<Mensaje>>();
     }
 
 
@@ -45,12 +44,12 @@ public class QuePasaMonitor implements QuePasa, Practica {
             } else {
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
-                userGroups = new ArrayList<>();
+                userGroups = new ArrayList<Group>();
                 userGroups.add(group);
                 groupList.put(creadorUid, userGroups);
             }
         } else {
-            groupList.put(creadorUid, new ArrayList<>());
+            groupList.put(creadorUid, new ArrayList<Group>());
             crearGrupo(creadorUid, grupo);
         }
         mutex.leave();
@@ -116,7 +115,7 @@ public class QuePasaMonitor implements QuePasa, Practica {
                     ArrayList<Mensaje> messages = userMsg.get(i);
                     if (messages == null) {
                         //If user doesn't have message list, we create it in the Map.
-                        messages = new ArrayList<>();
+                        messages = new ArrayList<Mensaje>();
                     }
                     messages.add(msg);
                     userMsg.put(i, messages);
@@ -137,7 +136,7 @@ public class QuePasaMonitor implements QuePasa, Practica {
             return null;
         } else {
             if (!userCond.containsKey(uid)) {//if user hasn't a map for conditions created:
-                ArrayList<Monitor.Cond> conditions = new ArrayList<>();
+                ArrayList<Monitor.Cond> conditions = new ArrayList<Monitor.Cond>();
                 userCond.put(uid, conditions);
             }
             //now that every user has a map for conditions, we check whether it's empty or not:
@@ -202,7 +201,7 @@ public class QuePasaMonitor implements QuePasa, Practica {
         public Group(int creatorId, String name) {
             this.creatorId = creatorId;
             this.name = name;
-            this.members = new ArrayList<>();
+            this.members = new ArrayList<Integer>();
         }
 
         //Getters:
