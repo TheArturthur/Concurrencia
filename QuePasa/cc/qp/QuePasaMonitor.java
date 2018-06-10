@@ -3,21 +3,24 @@ package cc.qp;
 import es.upm.babel.cclib.Monitor;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.time.chrono.MinguoChronology;
 import java.util.*;
 
-public class QuePasaMonitor implements QuePasa, Practica{
+public class QuePasaMonitor implements QuePasa, Practica {
 
     private Monitor mutex;
-    private HashMap<Integer,ArrayList<Monitor.Cond>> userCond;
-    private HashMap<Integer,ArrayList<Group>> groupList;
-    //Mapa con clave UID y valor Array de mensajes del usuario.
-    private HashMap<Integer,ArrayList<Mensaje>> userMsg;
+    //Map with key UID and value an ArrayList of the user conditions.
+    private HashMap<Integer, ArrayList<Monitor.Cond>> userCond;
+    //Map with key UID and value an ArrayList of groups the user is in.
+    private HashMap<Integer, ArrayList<Group>> groupList;
+    //Map with key UID and value an ArrayList of messages the user has to read.
+    private HashMap<Integer, ArrayList<Mensaje>> userMsg;
 
-    public QuePasaMonitor(){
-        this.mutex= new Monitor();
-        this.userCond= new HashMap<>();
-        this.groupList= new HashMap<>();
+    public QuePasaMonitor() {
+        this.mutex = new Monitor();
+        this.userCond = new HashMap<>();
+        this.groupList = new HashMap<>();
         this.userMsg = new HashMap<>();
     }
 
@@ -26,7 +29,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
         //At the beginning of each method, we assure mutual exclusion:
         mutex.enter();
-        if(!groupList.isEmpty()) {
+        if (!groupList.isEmpty()) {
             ArrayList<Group> userGroups = groupList.get(creadorUid);
             mutex.leave();
             Group group = checkGroup(grupo, userGroups);
@@ -34,21 +37,21 @@ public class QuePasaMonitor implements QuePasa, Practica{
             if (group != null) {
                 mutex.leave();
                 throw new PreconditionFailedException();
-            } else if(userGroups!=null && !userGroups.isEmpty()){
+            } else if (userGroups != null && !userGroups.isEmpty()) {
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
                 userGroups.add(group);
                 groupList.put(creadorUid, userGroups);
-            }else{
+            } else {
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
-                userGroups= new ArrayList<Group>();
+                userGroups = new ArrayList<>();
                 userGroups.add(group);
                 groupList.put(creadorUid, userGroups);
             }
-        }else{
-            groupList.put(creadorUid,new ArrayList<>());
-            crearGrupo(creadorUid,grupo);
+        } else {
+            groupList.put(creadorUid, new ArrayList<>());
+            crearGrupo(creadorUid, grupo);
         }
         mutex.leave();
     }
@@ -56,17 +59,21 @@ public class QuePasaMonitor implements QuePasa, Practica{
     @Override
     public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
-        ArrayList<Group> userGroups= groupList.get(creadorUid);
+        ArrayList<Group> userGroups = groupList.get(creadorUid);
+
+        //we check if the group was created by creadorUid:
         mutex.leave();
-        Group group= checkGroup(grupo,userGroups);
+        Group group = checkGroup(grupo, userGroups);
         mutex.enter();
-        if(group== null || group.getMembers().contains(nuevoMiembroUid)){
+
+        if (group == null || group.getMembers().contains(nuevoMiembroUid)) {
             mutex.leave();
             throw new PreconditionFailedException();
-        }else{
+        } else {
+            //if nuevoMiembroUid isn't a member, we add it to the member list and the group to its group list:
             group.addMember(nuevoMiembroUid);
             userGroups.add(group);
-            groupList.put(creadorUid,userGroups);
+            groupList.put(creadorUid, userGroups);
         }
         mutex.leave();
     }
@@ -74,13 +81,14 @@ public class QuePasaMonitor implements QuePasa, Practica{
     @Override
     public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
-        ArrayList<Group> userGroups= groupList.get(miembroUid);
-        Group group= checkGroup(grupo,userGroups);
+        ArrayList<Group> userGroups = groupList.get(miembroUid);
+        Group group = checkGroup(grupo, userGroups);
 
-        if(group== null || group.getCreatorId()==miembroUid){
+        if (group == null || group.getCreatorId() == miembroUid) {
             mutex.leave();
             throw new PreconditionFailedException();
-        }else{
+        } else {
+            //if the group has the user as a member, it removes it from the list:
             group.getMembers().remove(miembroUid);
         }
         mutex.leave();
@@ -89,31 +97,32 @@ public class QuePasaMonitor implements QuePasa, Practica{
     @Override
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
-        //Obtenemos la lista de grupos del usuario
-        ArrayList<Group> userGroups = null;
+        //We get the user's group list:
+        ArrayList<Group> userGroups;
         userGroups = groupList.get(remitenteUid);
-        //Comprobamos y obtenemos el grupo dentro de la lista de grupos
-        if(userGroups == null) {
-            System.out.println("El usuario no tiene grupos, no puede mandar mensajes.");
+        //We check and get the group in the user's group list:
+        if (userGroups == null) {
             mutex.leave();
             throw new PreconditionFailedException();
         }
         Group group = checkGroup(grupo, userGroups);
-        if(group!=null){//Si es null:
-            // Creamos el mensaje nuevo
-            Mensaje msg= new Mensaje (remitenteUid, grupo, contenidos);
-            for(int i: group.getMembers()){//Para cada usuario que esté dentro del grupo
-                if(i!=remitenteUid){//y no sea el usuario que manda el mensaje:
-                    ArrayList<Mensaje> mensajesDeI = userMsg.get(i);
-                    if(mensajesDeI == null) {
-                        //Si no tiene lista de mensajes el usuario, se le tiene que crear en el Map.
-                        mensajesDeI= new ArrayList<>();
+        if (group != null) {//If group exists:
+            // We create the new message:
+            Mensaje msg = new Mensaje(remitenteUid, grupo, contenidos);
+            for (int i : group.getMembers()) {
+                //For each user inside the group member's list
+                if (i != remitenteUid) {
+                    //not being the message sender
+                    ArrayList<Mensaje> messages = userMsg.get(i);
+                    if (messages == null) {
+                        //If user doesn't have message list, we create it in the Map.
+                        messages = new ArrayList<>();
                     }
-                    mensajesDeI.add(msg);
-                    userMsg.put(i,mensajesDeI);
+                    messages.add(msg);
+                    userMsg.put(i, messages);
                 }
             }
-        }else{
+        } else {
             mutex.leave();
             throw new PreconditionFailedException();
         }
@@ -123,42 +132,55 @@ public class QuePasaMonitor implements QuePasa, Practica{
     @Override
     public Mensaje leer(int uid) {
         mutex.enter();
-        if(userMsg==null || userMsg.isEmpty()){//!CPRE
+        if (userMsg == null || userMsg.isEmpty()) {//!CPRE
             mutex.leave();
             return null;
-        }else {
-            if (userCond.containsKey(uid)) {
-                if (userCond.get(uid).isEmpty() || !userCond.get(uid).contains(cond)) {
-                    Monitor.Cond condition = mutex.newCond();
-                    userCond.get(uid).add(condition);
-                }
+        } else {
+            if (!userCond.containsKey(uid)) {//if user hasn't a map for conditions created:
+                ArrayList<Monitor.Cond> conditions = new ArrayList<>();
+                userCond.put(uid, conditions);
             }
-            Mensaje res = userMsg.get(uid).get(1);
-            userMsg.remove(1);
-            mutex.leave();
-            return res;
+            //now that every user has a map for conditions, we check whether it's empty or not:
+            if (!userCond.get(uid).isEmpty()) {
+                //if not empty, we create a new condition and add it to the user conditions array list:
+                Monitor.Cond cond = mutex.newCond();
+                cond.await();
+                ArrayList<Monitor.Cond> conditions = userCond.get(uid);
+                conditions.add(cond);
+                userCond.put(uid, conditions);
+                //then we unlock the first condition on the array list:
+                mutex.leave();
+                unlock(uid);
+                mutex.enter();
+            }
+            //either if it was empty or not, we remove and return the message:
+            return userMsg.get(uid).remove(0);
         }
     }
 
     /**
-     *
+     * @param uid
+     * @return unlocks the first condition on the conditions array list for the uid
+     */
+    private void unlock(int uid) {
+        Monitor.Cond cond = userCond.get(uid).remove(0);
+        cond.signal();
+    }
+
+    /**
      * @param name
      * @param list
-     * @return comprueba si el grupo existe para un determinado usuario, y en caso de existir y pertenecer, te lo devuelve.
+     * @return checks if the group exists for the user, if it does and the user is a member, it returns the group.
      */
     private Group checkGroup(String name, ArrayList<Group> list) {
         mutex.enter();
-        Group res= null;
-        //Qué pasa si list es null?
-        if(list!= null && !list.isEmpty()) {
-
+        Group res = null;
+        if (list != null && !list.isEmpty()) {
             for (Group i : list) {
                 if (i.getName().equals(name)) {
                     res = i;
                 }
             }
-            mutex.leave();
-            return res;
         }
         mutex.leave();
         return res;
@@ -167,36 +189,39 @@ public class QuePasaMonitor implements QuePasa, Practica{
     @Override
     public Alumno[] getAutores() {
         return new Alumno[]{
-                new Alumno ("Arturo Vidal Peña","w140307")
+                new Alumno("Arturo Vidal Peña", "w140307")
         };
     }
 
-    class Group{
+    class Group {
         private int creatorId;
         private String name;
         private ArrayList<Integer> members;
 
         //Constructor:
-        public Group(int creatorId, String name){
-            this.creatorId= creatorId;
-            this.name= name;
-            this.members= new ArrayList<>();
+        public Group(int creatorId, String name) {
+            this.creatorId = creatorId;
+            this.name = name;
+            this.members = new ArrayList<>();
         }
 
         //Getters:
-        public int getCreatorId(){
+        public int getCreatorId() {
             return creatorId;
         }
-        public String getName(){
+
+        public String getName() {
             return name;
         }
+
         public List<Integer> getMembers() {
             return members;
         }
 
         //Setters:
-        public void addMember(int userId){
+        public void addMember(int userId) {
             members.add(userId);
         }
     }
 }
+
