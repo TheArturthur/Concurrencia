@@ -9,14 +9,14 @@ import java.util.*;
 public class QuePasaMonitor implements QuePasa, Practica{
 
     private Monitor mutex;
-    private Monitor.Cond cond;
+    private HashMap<Integer,ArrayList<Monitor.Cond>> userCond;
     private HashMap<Integer,ArrayList<Group>> groupList;
     //Mapa con clave UID y valor Array de mensajes del usuario.
     private HashMap<Integer,ArrayList<Mensaje>> userMsg;
 
     public QuePasaMonitor(){
         this.mutex= new Monitor();
-        this.cond= mutex.newCond();
+        this.userCond= new HashMap<>();
         this.groupList= new HashMap<>();
         this.userMsg = new HashMap<>();
     }
@@ -107,6 +107,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
                     ArrayList<Mensaje> mensajesDeI = userMsg.get(i);
                     if(mensajesDeI == null) {
                         //Si no tiene lista de mensajes el usuario, se le tiene que crear en el Map.
+                        mensajesDeI= new ArrayList<>();
                     }
                     mensajesDeI.add(msg);
                     userMsg.put(i,mensajesDeI);
@@ -117,16 +118,21 @@ public class QuePasaMonitor implements QuePasa, Practica{
             throw new PreconditionFailedException();
         }
         mutex.leave();
-
     }
 
     @Override
     public Mensaje leer(int uid) {
         mutex.enter();
-        if(userMsg==null || userMsg.isEmpty()){
+        if(userMsg==null || userMsg.isEmpty()){//!CPRE
             mutex.leave();
             return null;
         }else {
+            if (userCond.containsKey(uid)) {
+                if (userCond.get(uid).isEmpty() || !userCond.get(uid).contains(cond)) {
+                    Monitor.Cond condition = mutex.newCond();
+                    userCond.get(uid).add(condition);
+                }
+            }
             Mensaje res = userMsg.get(uid).get(1);
             userMsg.remove(1);
             mutex.leave();
