@@ -2,8 +2,6 @@ package cc.qp;
 
 import es.upm.babel.cclib.Monitor;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class QuePasaMonitor implements QuePasa, Practica {
@@ -129,29 +127,32 @@ public class QuePasaMonitor implements QuePasa, Practica {
     @Override
     public Mensaje leer(int uid) {
         mutex.enter();
-        if (userMsg.get(uid) == null || userMsg.get(uid).isEmpty()) {//!CPRE
-            mutex.leave();
-            return null;
-        } else {
-            if (!userCond.containsKey(uid)) {//if user hasn't a map for conditions created:
-                ArrayList<Monitor.Cond> conditions = new ArrayList<Monitor.Cond>();
-                userCond.put(uid, conditions);
-            }
-            //now that every user has a map for conditions, we check whether it's empty or not:
-            if (!userCond.get(uid).isEmpty()) {
-                //if not empty, we create a new condition and add it to the user conditions array list:
-                Monitor.Cond cond = mutex.newCond();
-                cond.await();
-                ArrayList<Monitor.Cond> conditions = userCond.get(uid);
-                conditions.add(cond);
-                userCond.put(uid, conditions);
-                //then we unlock the first condition on the array list:
-                unlock(uid);
-            }
-            //either if it was empty or not, we remove and return the message:
-            mutex.leave();
-            return userMsg.get(uid).remove(0);
+        //first, we must check if the user has a map for conditions created. If not, we create it:
+        if (!userCond.containsKey(uid)) {
+            ArrayList<Monitor.Cond> conditions = new ArrayList<Monitor.Cond>();
+            userCond.put(uid, conditions);
         }
+        //now that every user has a map for conditions, we check whether the user has messages or not:
+        //if not, we'll lock the method until the user has a message to read.
+
+        if (userMsg.get(uid) == null || userMsg.get(uid).isEmpty()) {//!CPRE
+            Monitor.Cond condition= mutex.newCond();
+            condition.await();
+            userCond.get(uid).add(condition);
+        }
+        if (!userCond.get(uid).isEmpty()) {
+            //if not empty, we create a new condition and add it to the user conditions array list:
+            Monitor.Cond cond = mutex.newCond();
+            cond.await();
+            ArrayList<Monitor.Cond> conditions = userCond.get(uid);
+            conditions.add(cond);
+            userCond.put(uid, conditions);
+            //then we unlock the first condition on the array list:
+            unlock(uid);
+        }
+        //either if it was empty or not, we remove and return the message:
+        mutex.leave();
+        return userMsg.get(uid).remove(0);
     }
 
     /**
@@ -187,35 +188,34 @@ public class QuePasaMonitor implements QuePasa, Practica {
         };
     }
 
-    class Group {
-        private int creatorId;
-        private String name;
-        private ArrayList<Integer> members;
+class Group {
+    private int creatorId;
+    private String name;
+    private ArrayList<Integer> members;
 
-        //Constructor:
-        public Group(int creatorId, String name) {
-            this.creatorId = creatorId;
-            this.name = name;
-            this.members = new ArrayList<Integer>();
-        }
+    //Constructor:
+    public Group(int creatorId, String name) {
+        this.creatorId = creatorId;
+        this.name = name;
+        this.members = new ArrayList<Integer>();
+    }
 
-        //Getters:
-        public int getCreatorId() {
-            return creatorId;
-        }
+    //Getters:
+    public int getCreatorId() {
+        return creatorId;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public List<Integer> getMembers() {
-            return members;
-        }
+    public List<Integer> getMembers() {
+        return members;
+    }
 
-        //Setters:
-        public void addMember(int userId) {
-            members.add(userId);
-        }
+    //Setters:
+    public void addMember(int userId) {
+        members.add(userId);
     }
 }
-
+}
