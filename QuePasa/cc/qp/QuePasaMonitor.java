@@ -30,9 +30,7 @@ public class QuePasaMonitor implements QuePasa, Practica {
         mutex.enter();
         if (!groupList.isEmpty()) {
             ArrayList<Group> userGroups = groupList.get(creadorUid);
-            mutex.leave();
             Group group = checkGroup(grupo, userGroups);
-            mutex.enter();
             if (group != null) {
                 mutex.leave();
                 throw new PreconditionFailedException();
@@ -131,7 +129,7 @@ public class QuePasaMonitor implements QuePasa, Practica {
     @Override
     public Mensaje leer(int uid) {
         mutex.enter();
-        if (userMsg == null || userMsg.isEmpty()) {//!CPRE
+        if (userMsg.get(uid) == null || userMsg.get(uid).isEmpty()) {//!CPRE
             mutex.leave();
             return null;
         } else {
@@ -148,11 +146,10 @@ public class QuePasaMonitor implements QuePasa, Practica {
                 conditions.add(cond);
                 userCond.put(uid, conditions);
                 //then we unlock the first condition on the array list:
-                mutex.leave();
                 unlock(uid);
-                mutex.enter();
             }
             //either if it was empty or not, we remove and return the message:
+            mutex.leave();
             return userMsg.get(uid).remove(0);
         }
     }
@@ -172,7 +169,6 @@ public class QuePasaMonitor implements QuePasa, Practica {
      * @return checks if the group exists for the user, if it does and the user is a member, it returns the group.
      */
     private Group checkGroup(String name, ArrayList<Group> list) {
-        mutex.enter();
         Group res = null;
         if (list != null && !list.isEmpty()) {
             for (Group i : list) {
@@ -181,7 +177,6 @@ public class QuePasaMonitor implements QuePasa, Practica {
                 }
             }
         }
-        mutex.leave();
         return res;
     }
 
