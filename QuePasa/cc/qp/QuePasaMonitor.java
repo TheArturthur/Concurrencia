@@ -26,18 +26,24 @@ public class QuePasaMonitor implements QuePasa, Practica {
     public void crearGrupo(int creadorUid, String grupo) throws PreconditionFailedException {
         //At the beginning of each method, we assure mutual exclusion:
         mutex.enter();
+        //We now check if the user already is in a group with the same name (A.K.A same group):
         if (!groupList.isEmpty()) {
             ArrayList<Group> userGroups = groupList.get(creadorUid);
+            //checkGroup will give us an Group-type object if it is in user's group list (null if not):
             Group group = checkGroup(grupo, userGroups);
+            //if the user is in a group with the same name, we throw the exception:
             if (group != null) {
                 mutex.leave();
                 throw new PreconditionFailedException();
             } else if (userGroups != null && !userGroups.isEmpty()) {
+
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
                 userGroups.add(group);
                 groupList.put(creadorUid, userGroups);
             } else {
+                //if user's group list is empty or doesn't exists, we create a new list, add the group to the list
+                //and add the list to the map groupList
                 group = new Group(creadorUid, grupo);
                 group.addMember(creadorUid);
                 userGroups = new ArrayList<Group>();
@@ -100,8 +106,10 @@ public class QuePasaMonitor implements QuePasa, Practica {
             mutex.leave();
             throw new PreconditionFailedException();
         }
+        //We now have the group object:
         Group group = checkGroup(grupo, userGroups);
-        if (group != null) {//If group exists:
+        //If this group exists:
+        if (group != null) {
             // We create the new message:
             Mensaje msg = new Mensaje(remitenteUid, grupo, contenidos);
             for (int i : group.getMembers()) {
@@ -115,6 +123,9 @@ public class QuePasaMonitor implements QuePasa, Practica {
                     }
                     messages.add(msg);
                     userMsg.put(i, messages);
+                    if(!userCond.get(remitenteUid).isEmpty()) {
+                        unlock(remitenteUid);
+                    }
                 }
             }
         } else {
@@ -160,8 +171,8 @@ public class QuePasaMonitor implements QuePasa, Practica {
      * @return unlocks the first condition on the conditions array list for the uid
      */
     private void unlock(int uid) {
-        Monitor.Cond cond = userCond.get(uid).remove(0);
-        cond.signal();
+            Monitor.Cond cond = userCond.get(uid).remove(0);
+            cond.signal();
     }
 
     /**
