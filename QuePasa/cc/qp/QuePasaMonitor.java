@@ -15,11 +15,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
     //Map with the name of the group as key and value an ArrayList with the conditions to read messages
     //Conditions sorted according to groupList members (i.e: condition for user in pos 0 (creator) will be in pos 0 as well)
     private HashMap<String, ArrayList<Monitor.Cond>> groupConds;
+    private HashMap<Integer, ArrayList<Mensaje>> userMsg;
 
     public QuePasaMonitor(){
         this.mutex = new Monitor();
         this.groupList = new HashMap<String, ArrayList<Integer>>();
         this.groupConds = new HashMap<String, ArrayList<Monitor.Cond>>();
+        this.userMsg = new HashMap<Integer, ArrayList<Mensaje>>();
     }
 
     @Override
@@ -81,14 +83,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
         //If the creator of grupo isn't creadorUid (grupo doesn't exists in the list) or nuevoMiembroUid is already a member, throw exception:
-        if(groupList.containsKey(grupo) || groupList.get(grupo).contains(nuevoMiembroUid)){
+        if(!groupList.containsKey(grupo) || groupList.get(grupo).contains(nuevoMiembroUid)){
             mutex.leave();
             throw new PreconditionFailedException();
         }else{
             //grupo exists and nuevoMiembroUid is not a member:
             groupList.get(grupo).add(nuevoMiembroUid);
             Monitor.Cond condition = mutex.newCond();
-            condition.await();
             groupConds.get(grupo).add(groupList.get(grupo).indexOf(nuevoMiembroUid),condition);
             mutex.leave();
         }
@@ -138,15 +139,35 @@ public class QuePasaMonitor implements QuePasa, Practica{
      */
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
+        if(!groupList.containsKey(grupo) || groupList.get(grupo).contains(remitenteUid)){
+            mutex.leave();
+            throw new PreconditionFailedException();
+        }else{
+            // We create the new message:
+            Mensaje msg = new Mensaje(remitenteUid, grupo, contenidos);
+            for (int i : groupList.get(grupo)) {
+                //For each user inside the group member's list
+                ArrayList<Mensaje> messages = userMsg.get(i);
+                if (messages == null) {
+                    //If user doesn't have message list, we create it in the Map.
+                    messages = new ArrayList<Mensaje>();
+                }
+                messages.add(msg);
+                userMsg.put(i, messages);
 
+                //We now block the condition for each user in the group to read the messages:(¿NECESARIO?)
+                //groupConds.get(grupo).get(groupList.get(grupo).indexOf(i)).await();
+            }
+            mutex.leave();
+        }
     }
 
     @Override
     /**
      *
-     * <PRE>
+     * <CPRE>
      *      self.mensajes(uid) != {}
-     * </PRE>
+     * </CPRE>
      *
      * @param uid
      *
@@ -154,6 +175,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
      *
      */
     public Mensaje leer(int uid) {
+        mutex.enter();
+        ArrayList<String> gruposDeUid = new ArrayList<String>();
+        for(String grupo : groupList.keySet()){
+            if(groupList.get(grupo).contains(uid)){
+                gruposDeUid.add(grupo);
+            }
+        }
         return null;
     }
 }
