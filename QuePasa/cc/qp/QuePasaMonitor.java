@@ -14,16 +14,18 @@ public class QuePasaMonitor implements QuePasa, Practica{
     private HashMap<String,ArrayList<Integer>> groupList;
     //Map with the name of the group as key and value an ArrayList with the conditions to read messages
     //Conditions sorted according to groupList members (i.e: condition for user in pos 0 (creator) will be in pos 0 as well)
-    private HashMap<String, ArrayList<Monitor.Cond>> groupConds;
+    private HashMap<Integer, Monitor.Cond> userCond;
     private HashMap<Integer, ArrayList<Mensaje>> userMsg;
+    private ArrayList<Integer> toSignal;
 
     public QuePasaMonitor(){
         this.mutex = new Monitor();
         this.groupList = new HashMap<String, ArrayList<Integer>>();
-        this.groupConds = new HashMap<String, ArrayList<Monitor.Cond>>();
+        this.userCond = new HashMap<Integer, Monitor.Cond>();
         this.userMsg = new HashMap<Integer, ArrayList<Mensaje>>();
+        this.toSignal = new ArrayList<Integer>();
     }
-
+    private ArrayList<Integer> users;
     @Override
     public Alumno[] getAutores() {
         return new Alumno[]{
@@ -58,10 +60,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
             ArrayList<Integer> members = new ArrayList<Integer>();
             members.add(0,creadorUid);
             groupList.put(grupo,members);
-            Monitor.Cond condition = mutex.newCond();
-            ArrayList<Monitor.Cond> conditionsList = new ArrayList<Monitor.Cond>();
-            conditionsList.add(condition);
-            groupConds.put(grupo,conditionsList);
+            //At the end of each method, we leave mutual exclusion:
             mutex.leave();
         }
     }
@@ -82,15 +81,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
      */
     public void anadirMiembro(int creadorUid, String grupo, int nuevoMiembroUid) throws PreconditionFailedException {
         mutex.enter();
-        //If the creator of grupo isn't creadorUid (grupo doesn't exists in the list) or nuevoMiembroUid is already a member, throw exception:
-        if(!groupList.containsKey(grupo) || groupList.get(grupo).contains(nuevoMiembroUid)){
+        //If grupo exists and its creator isn't creadorUid or nuevoMiembroUid is already a member, throw exception:
+        if(!groupList.containsKey(grupo) || getOwner(grupo)!=creadorUid || groupList.get(grupo).contains(nuevoMiembroUid)){
             mutex.leave();
             throw new PreconditionFailedException();
         }else{
             //grupo exists and nuevoMiembroUid is not a member:
             groupList.get(grupo).add(nuevoMiembroUid);
-            Monitor.Cond condition = mutex.newCond();
-            groupConds.get(grupo).add(groupList.get(grupo).indexOf(nuevoMiembroUid),condition);
             mutex.leave();
         }
     }
@@ -111,15 +108,14 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
         //check if miembroUid is in grupo.members and is not the creator:
-        if(groupList.get(grupo).contains(miembroUid) && groupList.get(grupo).get(0)!=miembroUid){
-            //If it's a member and not the creator: we remove it:
-            groupConds.get(grupo).remove(groupList.get(grupo).indexOf(miembroUid));
-            groupList.get(grupo).remove(miembroUid);
-            mutex.leave();
-        }else{
+        if(!groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
             //If it's not a member or it's the creator of grupo, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
+        }else{
+            //If it's a member and not the creator, we remove it:
+            groupList.get(grupo).remove(miembroUid);
+            mutex.leave();
         }
     }
 
@@ -139,27 +135,33 @@ public class QuePasaMonitor implements QuePasa, Practica{
      */
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
-        if(!groupList.containsKey(grupo) || groupList.get(grupo).contains(remitenteUid)){
+        //We check if remitenteUid is a member of grupo
+        if(!groupList.get(grupo).contains(remitenteUid)) {
+            //If not, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
         }else{
-            // We create the new message:
-            Mensaje msg = new Mensaje(remitenteUid, grupo, contenidos);
-            for (int i : groupList.get(grupo)) {
-                //For each user inside the group member's list
-                ArrayList<Mensaje> messages = userMsg.get(i);
-                if (messages == null) {
-                    //If user doesn't have message list, we create it in the Map.
-                    messages = new ArrayList<Mensaje>();
+            //We create the message to insert:
+            Mensaje message = new Mensaje(remitenteUid,grupo,contenidos);
+            //For each user member of grupo, add the message:
+            for (int user : groupList.get(grupo)){
+                //If user isn't in userMsg, we add them:
+                if(!userMsg.containsKey(user)){
+                    userMsg.put(user,new ArrayList<Mensaje>());
                 }
-                messages.add(msg);
-                userMsg.put(i, messages);
-
-                //We now block the condition for each user in the group to read the messages:(¿NECESARIO?)
-                //groupConds.get(grupo).get(groupList.get(grupo).indexOf(i)).await();
+                userMsg.get(user).add(message);
+                //We now create a condition for the user, if he didn't have one:
+                if (!userCond.containsKey(user)) {
+                    Monitor.Cond condition = mutex.newCond();
+                    userCond.put(user,condition);
+                    toSignal.add(user);
+                }
             }
+            unlock();
             mutex.leave();
         }
+
+
     }
 
     @Override
@@ -176,12 +178,32 @@ public class QuePasaMonitor implements QuePasa, Practica{
      */
     public Mensaje leer(int uid) {
         mutex.enter();
-        ArrayList<String> gruposDeUid = new ArrayList<String>();
-        for(String grupo : groupList.keySet()){
-            if(groupList.get(grupo).contains(uid)){
-                gruposDeUid.add(grupo);
-            }
+        Mensaje res = null;
+        if (!userCond.containsKey(uid)) {
+           Monitor.Cond condition = mutex.newCond();
+            userCond.put(uid, condition);
         }
-        return null;
+        //If there are no messages for uid, we block the condition:
+        if(userMsg.size()==0 || userMsg.get(uid).isEmpty()){
+            //We add the users to a FIFO list, to ensure reliability when signaling their conditions:
+            toSignal.add(uid);
+            userCond.get(uid).await();
+        }else{
+            //There are messages for uid.
+            //We remove the first one and assign it to res:
+            res = userMsg.get(uid).remove(0);
+        }
+        //Return the message and leaving the Monitor:
+        mutex.leave();
+        return res;
+    }
+
+    private void unlock(){
+        int user = toSignal.remove(0);
+        userCond.get(user).signal();
+    }
+
+    private int getOwner(String grupo){
+        return groupList.get(grupo).get(0);
     }
 }
