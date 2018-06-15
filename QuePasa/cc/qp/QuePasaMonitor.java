@@ -156,7 +156,9 @@ public class QuePasaMonitor implements QuePasa, Practica{
                 //We now create a condition for the user, if he didn't have one:
                 if (!userCond.containsKey(user)) {
                     Monitor.Cond condition = mutex.newCond();
+                    //We put the condition in the Map with user's conditions:
                     userCond.put(user,condition);
+                    //Also, we add the user to the FIFO list, and block the condition for the user:
                     toSignal.enqueue(user);
                     userCond.get(user).await();
                 }
@@ -212,10 +214,8 @@ public class QuePasaMonitor implements QuePasa, Practica{
             Integer user = toSignal.dequeue();
             LinkedList<Mensaje> mensajes = userMsg.get(user);
             //comprueblo la CPRE
-            if (!mensajes.isEmpty()){
+            if (!mensajes.isEmpty())
                 userCond.get(user).signal();
-                int j = 2;
-            }
             else
                 toSignal.enqueue(user);
         }
