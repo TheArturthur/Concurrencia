@@ -1,7 +1,7 @@
 package cc.qp;
 
+import es.upm.aedlib.fifo.FIFOList;
 import es.upm.babel.cclib.Monitor;
-import sun.security.util.PendingException;
 
 import java.util.*;
 
@@ -15,17 +15,20 @@ public class QuePasaMonitor implements QuePasa, Practica{
     //Map with the name of the group as key and value an ArrayList with the conditions to read messages
     //Conditions sorted according to groupList members (i.e: condition for user in pos 0 (creator) will be in pos 0 as well)
     private HashMap<Integer, Monitor.Cond> userCond;
-    private HashMap<Integer, ArrayList<Mensaje>> userMsg;
-    private ArrayList<Integer> toSignal;
+    //Map with the user as key and value an ArrayList with the messages left to read of the user:
+    private HashMap<Integer, LinkedList<Mensaje>> userMsg;
+    //FIFOList with the users with messages to read:
+    private FIFOList<Integer> toSignal;
+    private HashMap<Integer, Monitor.Cond> cLeer;
 
     public QuePasaMonitor(){
         this.mutex = new Monitor();
         this.groupList = new HashMap<String, ArrayList<Integer>>();
         this.userCond = new HashMap<Integer, Monitor.Cond>();
-        this.userMsg = new HashMap<Integer, ArrayList<Mensaje>>();
-        this.toSignal = new ArrayList<Integer>();
+        this.userMsg = new HashMap<Integer, LinkedList<Mensaje>>();
+        this.toSignal = new FIFOList<Integer>();
+        this.cLeer = new HashMap<Integer, Monitor.Cond>();
     }
-    private ArrayList<Integer> users;
     @Override
     public Alumno[] getAutores() {
         return new Alumno[]{
@@ -108,13 +111,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
         //check if miembroUid is in grupo.members and is not the creator:
-        if(!groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
+        if(!groupList.containsKey(grupo) || !groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
             //If it's not a member or it's the creator of grupo, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
         }else{
             //If it's a member and not the creator, we remove it:
-            groupList.get(grupo).remove(miembroUid);
+            groupList.get(grupo).remove(groupList.get(grupo).indexOf(miembroUid));
             mutex.leave();
         }
     }
@@ -136,7 +139,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
         //We check if remitenteUid is a member of grupo
-        if(!groupList.get(grupo).contains(remitenteUid)) {
+        if(!groupList.containsKey(grupo) || !groupList.get(grupo).contains(remitenteUid)) {
             //If not, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
@@ -147,14 +150,15 @@ public class QuePasaMonitor implements QuePasa, Practica{
             for (int user : groupList.get(grupo)){
                 //If user isn't in userMsg, we add them:
                 if(!userMsg.containsKey(user)){
-                    userMsg.put(user,new ArrayList<Mensaje>());
+                    userMsg.put(user,new LinkedList<Mensaje>());
                 }
                 userMsg.get(user).add(message);
                 //We now create a condition for the user, if he didn't have one:
                 if (!userCond.containsKey(user)) {
                     Monitor.Cond condition = mutex.newCond();
                     userCond.put(user,condition);
-                    toSignal.add(user);
+                    toSignal.enqueue(user);
+                    userCond.get(user).await();
                 }
             }
             unlock();
@@ -180,27 +184,41 @@ public class QuePasaMonitor implements QuePasa, Practica{
         mutex.enter();
         Mensaje res = null;
         if (!userCond.containsKey(uid)) {
-           Monitor.Cond condition = mutex.newCond();
+            Monitor.Cond condition = mutex.newCond();
             userCond.put(uid, condition);
+        }
+        if(!userMsg.containsKey(uid)){
+            userMsg.put(uid,new LinkedList<Mensaje>());
         }
         //If there are no messages for uid, we block the condition:
         if(userMsg.size()==0 || userMsg.get(uid).isEmpty()){
             //We add the users to a FIFO list, to ensure reliability when signaling their conditions:
-            toSignal.add(uid);
+            toSignal.enqueue(uid);
             userCond.get(uid).await();
         }else{
             //There are messages for uid.
             //We remove the first one and assign it to res:
             res = userMsg.get(uid).remove(0);
+            unlock();
         }
         //Return the message and leaving the Monitor:
         mutex.leave();
         return res;
     }
 
-    private void unlock(){
-        int user = toSignal.remove(0);
-        userCond.get(user).signal();
+    private void unlock() {
+        //codigo de desbloqueo
+        for(int i = 0; i < toSignal.size(); i++) {
+            Integer user = toSignal.dequeue();
+            LinkedList<Mensaje> mensajes = userMsg.get(user);
+            //comprueblo la CPRE
+            if (!mensajes.isEmpty()){
+                userCond.get(user).signal();
+                int j = 2;
+            }
+            else
+                toSignal.enqueue(user);
+        }
     }
 
     private int getOwner(String grupo){
