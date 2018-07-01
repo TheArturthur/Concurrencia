@@ -15,7 +15,9 @@ public class QuePasaMonitor implements QuePasa, Practica{
     //Map with the name of the group as key and value an ArrayList with the conditions to read messages
     //Conditions sorted according to groupList members (i.e: condition for user in pos 0 (creator) will be in pos 0 as well)
     private HashMap<Integer, Monitor.Cond> userCond;
+    //Map with the user as key and the user's list of messages to read as value
     private HashMap<Integer, ArrayList<Mensaje>> userMsg;
+    //List with the user to signal their conditions
     private ArrayList<Integer> toSignal;
 
     public QuePasaMonitor(){
@@ -154,8 +156,8 @@ public class QuePasaMonitor implements QuePasa, Practica{
                 if (!userCond.containsKey(user)) {
                     Monitor.Cond condition = mutex.newCond();
                     userCond.put(user,condition);
-                    toSignal.add(user);
                 }
+                toSignal.add(user);
             }
             unlock();
             mutex.leave();
@@ -173,29 +175,32 @@ public class QuePasaMonitor implements QuePasa, Practica{
      *
      * @param uid
      *
-     * @return
+     * @return message
      *
      */
     public Mensaje leer(int uid) {
         mutex.enter();
-        Mensaje res = null;
-        if (!userCond.containsKey(uid)) {
-           Monitor.Cond condition = mutex.newCond();
-            userCond.put(uid, condition);
-        }
-        //If there are no messages for uid, we block the condition:
-        if(userMsg.size()==0 || userMsg.get(uid).isEmpty()){
-            //We add the users to a FIFO list, to ensure reliability when signaling their conditions:
-            toSignal.add(uid);
+        if(userMsg.get(uid)==null || userMsg.get(uid).isEmpty()){
+            //if the user has no messages to read:
+            //we set the user condition to await for the proper unlock and return null value:
+            if (!userCond.containsKey(uid)) {
+                Monitor.Cond condition = mutex.newCond();
+                userCond.put(uid,condition);
+            }
             userCond.get(uid).await();
+            mutex.leave();
+            return null;
         }else{
-            //There are messages for uid.
-            //We remove the first one and assign it to res:
-            res = userMsg.get(uid).remove(0);
+            //we get the first message of the list:
+            Mensaje message = userMsg.get(uid).get(0);
+            //we delete the message from the list (no longer needed there):
+            userMsg.get(uid).remove(message);
+            //return the message:
+            unlock();
+            mutex.leave();
+            return message;
         }
-        //Return the message and leaving the Monitor:
-        mutex.leave();
-        return res;
+
     }
 
     private void unlock(){
