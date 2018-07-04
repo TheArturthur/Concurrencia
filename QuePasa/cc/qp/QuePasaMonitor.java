@@ -1,7 +1,6 @@
 package cc.qp;
 
 import es.upm.babel.cclib.Monitor;
-import sun.security.util.PendingException;
 
 import java.util.*;
 
@@ -110,13 +109,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
         //check if miembroUid is in grupo.members and is not the creator:
-        if(!groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
+        if(groupList==null || groupList.isEmpty() || !groupList.containsKey(grupo) || !groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
             //If it's not a member or it's the creator of grupo, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
         }else{
             //If it's a member and not the creator, we remove it:
-            groupList.get(grupo).remove(miembroUid);
+            groupList.get(grupo).remove(groupList.get(grupo).indexOf(miembroUid));
             mutex.leave();
         }
     }
@@ -138,7 +137,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
         //We check if remitenteUid is a member of grupo
-        if(!groupList.get(grupo).contains(remitenteUid)) {
+        if(groupList==null || groupList.isEmpty() || !groupList.containsKey(grupo) || !groupList.get(grupo).contains(remitenteUid)) {
             //If not, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
@@ -158,8 +157,8 @@ public class QuePasaMonitor implements QuePasa, Practica{
                     userCond.put(user,condition);
                 }
                 toSignal.add(user);
+                unlock();
             }
-            unlock();
             mutex.leave();
         }
 
@@ -188,9 +187,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
                 userCond.put(uid,condition);
             }
             userCond.get(uid).await();
-            mutex.leave();
-            return null;
-        }else{
+        }
             //we get the first message of the list:
             Mensaje message = userMsg.get(uid).get(0);
             //we delete the message from the list (no longer needed there):
@@ -199,12 +196,13 @@ public class QuePasaMonitor implements QuePasa, Practica{
             unlock();
             mutex.leave();
             return message;
-        }
     }
 
     private void unlock(){
-        int user = toSignal.remove(0);
-        userCond.get(user).signal();
+        if(toSignal.size()!=0) {
+            int user = toSignal.remove(0);
+            userCond.get(user).signal();
+        }
     }
 
     private int getOwner(String grupo){
