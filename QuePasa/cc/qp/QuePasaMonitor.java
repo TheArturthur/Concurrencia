@@ -200,7 +200,6 @@ public class QuePasaMonitor implements QuePasa, Practica{
             mutex.leave();
             return message;
         }
-
     }
 
     private void unlock(){
