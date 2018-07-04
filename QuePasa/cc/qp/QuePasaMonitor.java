@@ -166,8 +166,6 @@ public class QuePasaMonitor implements QuePasa, Practica{
             unlock();
             mutex.leave();
         }
-
-
     }
 
     @Override
