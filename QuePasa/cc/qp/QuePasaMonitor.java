@@ -109,7 +109,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void salirGrupo(int miembroUid, String grupo) throws PreconditionFailedException {
         mutex.enter();
         //check if miembroUid is in grupo.members and is not the creator:
-        if(groupList==null || groupList.isEmpty() || !groupList.containsKey(grupo) || !groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
+        if(groupList.isEmpty() || !groupList.containsKey(grupo) || !groupList.get(grupo).contains(miembroUid) || getOwner(grupo)==miembroUid){
             //If it's not a member or it's the creator of grupo, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
@@ -137,7 +137,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
     public void mandarMensaje(int remitenteUid, String grupo, Object contenidos) throws PreconditionFailedException {
         mutex.enter();
         //We check if remitenteUid is a member of grupo
-        if(groupList==null || groupList.isEmpty() || !groupList.containsKey(grupo) || !groupList.get(grupo).contains(remitenteUid)) {
+        if(groupList.isEmpty() || !groupList.containsKey(grupo) || !groupList.get(grupo).contains(remitenteUid)) {
             //If not, throw exception:
             mutex.leave();
             throw new PreconditionFailedException();
@@ -146,23 +146,25 @@ public class QuePasaMonitor implements QuePasa, Practica{
             Mensaje message = new Mensaje(remitenteUid,grupo,contenidos);
             //For each user member of grupo, add the message:
             for (int user : groupList.get(grupo)){
-                //If user isn't in userMsg, we add them:
+                //If user isn't in userMsg, we add the user with an empty list of messages:
                 if(!userMsg.containsKey(user)){
                     userMsg.put(user,new ArrayList<Mensaje>());
                 }
                 userMsg.get(user).add(message);
-                //We now create a condition for the user, if he didn't have one:
+
+                //We now create a condition for the user, if the user didn't have one:
                 if (!userCond.containsKey(user)) {
                     Monitor.Cond condition = mutex.newCond();
                     userCond.put(user,condition);
                 }
-                toSignal.add(user);
-                unlock();
+                if (user!=remitenteUid) {
+                    userCond.get(user).await();
+                    toSignal.add(user);
+                }
             }
+            unlock();
             mutex.leave();
         }
-
-
     }
 
     @Override
@@ -179,29 +181,35 @@ public class QuePasaMonitor implements QuePasa, Practica{
      */
     public Mensaje leer(int uid) {
         mutex.enter();
-        if(userMsg.get(uid)==null || userMsg.get(uid).isEmpty()){
-            //if the user has no messages to read:
-            //we set the user condition to await for the proper unlock and return null value:
-            if (!userCond.containsKey(uid)) {
-                Monitor.Cond condition = mutex.newCond();
-                userCond.put(uid,condition);
-            }
+        //If there's no message list associated to the user, we create one:
+        if(!userMsg.containsKey(uid)){
+            userMsg.put(uid, new ArrayList<Mensaje>());
+            userCond.put(uid, mutex.newCond());
+        }
+        if(userMsg.get(uid).isEmpty()){
+            //If the user's message list is empty, we add a condition for the user and get it awaiting:
+            userCond.put(uid, mutex.newCond());
             userCond.get(uid).await();
         }
-            //we get the first message of the list:
-            Mensaje message = userMsg.get(uid).get(0);
-            //we delete the message from the list (no longer needed there):
-            userMsg.get(uid).remove(message);
-            //return the message:
-            unlock();
-            mutex.leave();
-            return message;
+        //we get the first message of the list and remove it from the list:
+        Mensaje message = userMsg.get(uid).remove(0);
+        //return the message:
+        unlock();
+        mutex.leave();
+        return message;
     }
 
-    private void unlock(){
-        if(toSignal.size()!=0) {
-            int user = toSignal.remove(0);
-            userCond.get(user).signal();
+    private void unlock() {
+        boolean unlocked = false;
+        for (int i = 0; i < toSignal.size() && !unlocked; i++) {
+            Integer user = toSignal.remove(0);
+            //we check the CPRE again:
+            if (!userMsg.get(user).isEmpty()) {
+                userCond.get(user).signal();
+                unlocked = true;
+            }else {
+                toSignal.add(user);
+            }
         }
     }
 
