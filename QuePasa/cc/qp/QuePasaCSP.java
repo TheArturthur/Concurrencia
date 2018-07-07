@@ -1,4 +1,4 @@
-/*
+
 // QuePasaCSP.java
 // Lars-Ake Fredlund y Julio Mariño
 // Esqueleto para la realización de la práctica por paso de mensajes
@@ -56,52 +56,46 @@ public class QuePasaCSP implements QuePasa, CSProcess {
     }
 
     public class PetAnadirMiembro {
-	// TO DO: atributos de la clase
-	// TO DO
-	// TO DO
-	// TO DO
-	// TO DO
+	    // TO DO: atributos de la clase
+	    // TO DO
+	    // TO DO
+	    // TO DO
+	    // TO DO
 
-	public PetAnadirMiembro(
- TO DO: parámetros
-) {
-	    // TO DO
-	    // TO DO
-	    // TO DO
-	    // TO DO
-	}
+	    public PetAnadirMiembro(/* TO DO: parámetros*/) {
+	        // TO DO
+	        // TO DO
+	        // TO DO
+	        // TO DO
+	    }
     }
 
     public class PetSalirGrupo {
-	// TO DO : atributos de la clase
-	// TO DO
-	// TO DO
-	// TO DO
-
-	public PetSalirGrupo(
- TO DO: parámetros
-) {
+	    // TO DO : atributos de la clase
 	    // TO DO
-	    // TO DO 
-	    // TO DO 
-	}
+	    // TO DO
+	    // TO DO
+
+	    public PetSalirGrupo(/*TO DO: parámetros*/) {
+    	    // TO DO
+            // TO DO
+	        // TO DO
+	    }
     }
 
     public class PetMandarMensaje {
-	// TO DO: atributos de la clase 
-	// TO DO 
-	// TO DO
-	// TO DO
-	// TO DO
+	    // TO DO: atributos de la clase
+	    // TO DO
+	    // TO DO
+	    // TO DO
+	    // TO DO
 
-	public PetMandarMensaje(
- TO DO: parámetros
-) {
-	    // TO DO 
-	    // TO DO
-	    // TO DO 
-	    // TO DO
-	}
+	    public PetMandarMensaje(/*TO DO: parámetros*/) {
+	        // TO DO
+    	    // TO DO
+    	    // TO DO
+    	    // TO DO
+    	}
     }
 
     public class PetLeer {
@@ -165,6 +159,7 @@ public class QuePasaCSP implements QuePasa, CSProcess {
   
     public Mensaje leer(int uid)
     {
+        return null;
 	// TO DO
 	// TO DO
 	// TO DO
@@ -217,9 +212,7 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 		// recepción del mensaje
 		PetCrearGrupo pet = (PetCrearGrupo) chCrearGrupo.in().read();
 		// comprobación de la PRE
-		if (
- TO DO: copia aquí tu implementación de la PRE
-)
+		if (/*TO DO: copia aquí tu implementación de la PRE*/true)
 		    // status KO
 		    pet.chResp.out().write(false);
 		// ejecución normal
@@ -352,5 +345,3 @@ public class QuePasaCSP implements QuePasa, CSProcess {
 	} // END while(true) SERVIDOR
     } // END run()
 } // END class QuePasaCSP
-  
-*/
