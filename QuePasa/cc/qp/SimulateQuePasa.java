@@ -20,8 +20,8 @@ public class SimulateQuePasa {
   
   public static final void main(final String[] args) {
     
-    final QuePasa sharedResource = new QuePasaMonitor();
-    //final QuePasa sharedResource = new QuePasaCSP();
+    //final QuePasa sharedResource = new QuePasaMonitor();
+    final QuePasa sharedResource = new QuePasaCSP();
     
     // usuarios 
     LinkedList<Integer> usarios = new LinkedList<Integer>();
