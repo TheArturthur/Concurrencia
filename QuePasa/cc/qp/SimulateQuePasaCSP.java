@@ -1,4 +1,3 @@
-/*
 package cc.qp;
 
 import java.util.Scanner;
@@ -62,4 +61,3 @@ public class SimulateQuePasaCSP {
     }
   }
 }
-*/

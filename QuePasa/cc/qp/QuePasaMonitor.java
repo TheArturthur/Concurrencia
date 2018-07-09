@@ -137,7 +137,7 @@ public class QuePasaMonitor implements QuePasa, Practica{
                 }else{
                     //If it's not, we go to the next message on the list.
                     i++;
-                    //We don't do it on top of the loop because, if we eliminate a message, the list moves backwards automatically, so we won't be checking all the messages
+                    //We don't do it on top of the loop because, if we eliminate a message, the list moves backwards automatically, so we wouldn't be checking all the messages
                 }
             }
             //Now, we remove the user from the member's list of the group:
