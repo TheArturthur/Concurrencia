@@ -1,6 +1,6 @@
-import es.upm.babel.cclib.Producto;
+/*import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.Almacen;
-
+*/
 // TODO: importar la clase de los semáforos.
 
 /**
@@ -8,7 +8,7 @@ import es.upm.babel.cclib.Almacen;
  * FIFO de hasta un determinado número de productos y el uso
  * simultáneo del almacén por varios threads.
  */
-class AlmacenN implements Almacen {
+/*class AlmacenN implements Almacen {
    private int capacidad = 0;
    private Producto[] almacenado = null;
    private int nDatos = 0;
@@ -60,3 +60,4 @@ class AlmacenN implements Almacen {
       return result;
    }
 }
+*/

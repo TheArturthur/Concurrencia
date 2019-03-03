@@ -1,10 +1,10 @@
-import es.upm.babel.cclib.Producto;
-import es.upm.babel.cclib.MultiAlmacen;
+/*import es.upm.babel.cclib.Producto;
+import es.upm.babel.cclib.MultiAlmacen;*/
 
 // importar la librería de monitores
 
 
-class MultiAlmacenMon implements MultiAlmacen {
+/*class MultiAlmacenMon implements MultiAlmacen {
     private int capacidad = 0;
     private Producto almacenado[] = null;
     private int aExtraer = 0;
@@ -76,3 +76,4 @@ class MultiAlmacenMon implements MultiAlmacen {
       return result;
    }
 }
+*/

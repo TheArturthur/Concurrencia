@@ -1,15 +1,15 @@
-import es.upm.babel.cclib.Producto;
+/*import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.Almacen;
 import es.upm.babel.cclib.Productor;
 import es.upm.babel.cclib.Consumidor;
 import es.upm.babel.cclib.Consumo;
 import es.upm.babel.cclib.Fabrica;
-
+*/
 /**
  * Programa concurrente para productor-buffer-consumidor con almacen
  * de tamaño 1 implementado con semáforos (Almacen1).
  */
-class CC_05_P1CSem {
+/*class CC_05_P1CSem {
     public static final void main(final String[] args)
        throws InterruptedException
     {
@@ -65,3 +65,4 @@ class CC_05_P1CSem {
         }
     }
 }
+*/

@@ -1,12 +1,14 @@
+/*
 import es.upm.babel.cclib.MultiAlmacen;
 import es.upm.babel.cclib.MultiProductor;
 import es.upm.babel.cclib.MultiConsumidor;
+*/
 
 /**
  * Programa concurrente para productor-buffer-consumidor con multialmacen
  * de capacidad N implementado con monitores (MultiAlmacenMon).
  */
-class CC_09_PmultiCMon {
+/*class CC_09_PmultiCMon {
     public static final void main(final String[] args)
         throws InterruptedException {
 
@@ -66,3 +68,4 @@ class CC_09_PmultiCMon {
         }
     }
 }
+*/

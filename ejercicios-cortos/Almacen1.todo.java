@@ -1,5 +1,7 @@
+/*
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.Almacen;
+*/
 
 // TODO: importar la clase de los semáforos.
 
@@ -7,7 +9,7 @@ import es.upm.babel.cclib.Almacen;
  * Implementación de la clase Almacen que permite el almacenamiento
  * de producto y el uso simultáneo del almacen por varios threads.
  */
-class Almacen1 implements Almacen {
+/*class Almacen1 implements Almacen {
    // Producto a almacenar: null representa que no hay producto
    private Producto almacenado = null;
 
@@ -44,3 +46,4 @@ class Almacen1 implements Almacen {
       return result;
    }
 }
+*/

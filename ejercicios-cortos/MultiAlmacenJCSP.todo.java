@@ -1,11 +1,12 @@
 /*
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.MultiAlmacen;
+*/
 
 // importamos la librería JCSP
-import org.jcsp.lang.*;
+//import org.jcsp.lang.*;
 
-class MultiAlmacenJCSP implements MultiAlmacen, CSProcess {
+/*class MultiAlmacenJCSP implements MultiAlmacen, CSProcess {
 
     // Canales para enviar y recibir peticiones al/del servidor
     private final Any2OneChannel chAlmacenar = Channel.any2one();
