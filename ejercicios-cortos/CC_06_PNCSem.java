@@ -1,13 +1,14 @@
-/*import es.upm.babel.cclib.Producto;
+package excluded;
+
 import es.upm.babel.cclib.Almacen;
 import es.upm.babel.cclib.Productor;
 import es.upm.babel.cclib.Consumidor;
-*/
+
 /**
  * Programa concurrente para productor-buffer-consumidor con almacen
- * de capacidad N implementado con semáforos (AlmacenN).
+ * de capacidad N implementado con semáforos (excluded.AlmacenN).
  */
-/*class CC_06_PNCSem {
+class CC_06_PNCSem {
    public static final void main(final String[] args)
       throws InterruptedException
    {
@@ -62,4 +63,3 @@ import es.upm.babel.cclib.Consumidor;
       }
    }
 }
-*/

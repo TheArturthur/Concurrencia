@@ -1,3 +1,5 @@
+package excluded;
+
 public class ControlAccesoPuente {
 
    public ControlAccesoPuente() {

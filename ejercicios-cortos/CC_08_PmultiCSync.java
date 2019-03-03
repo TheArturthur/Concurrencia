@@ -1,14 +1,14 @@
-/*
+package excluded;
+
 import es.upm.babel.cclib.MultiAlmacen;
 import es.upm.babel.cclib.MultiProductor;
 import es.upm.babel.cclib.MultiConsumidor;
-*/
 
 /**
  * Programa concurrente para productor-buffer-consumidor con multialmacen
  * de capacidad N implementado con métodos synchronized (MultiAlmacenSync).
  */
-/*class CC_08_PmultiCSync {
+class CC_08_PmultiCSync {
     public static final void main(final String[] args)
         throws InterruptedException
     {
@@ -69,4 +69,3 @@ import es.upm.babel.cclib.MultiConsumidor;
         }
     }
 }
-*/

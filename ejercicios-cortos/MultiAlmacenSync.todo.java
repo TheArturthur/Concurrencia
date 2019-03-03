@@ -1,7 +1,7 @@
-/*import es.upm.babel.cclib.Producto;
+import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.MultiAlmacen;
-*/
-/*class MultiAlmacenSync implements MultiAlmacen {
+
+class MultiAlmacenSync implements MultiAlmacen {
     private int capacidad = 0;
     private Producto almacenado[] = null;
     private int aExtraer = 0;
@@ -70,4 +70,3 @@ import es.upm.babel.cclib.MultiAlmacen;
       return result;
    }
 }
-*/

@@ -1,4 +1,4 @@
-// Exclusión mutua con espera activa.
+package excluded;// Exclusión mutua con espera activa.
 //
 // Intentar garantizar la exclusión mutua en sc_inc y sc_dec sin
 // utilizar más mecanismo de concurrencia que el de la espera activa
@@ -62,7 +62,7 @@ class CC_03_MutexEA {
 
    // La labor del proceso incrementador es ejecutar no_sc() y luego
    // sc_inc() durante N_PASOS asegurando exclusión mutua sobre
-   // sc_inc().º
+   // sc_inc().
    static class Incrementador extends Thread {
       public void run () {
          for (int i = 0; i < N_PASOS; i++) {

@@ -146,13 +146,13 @@ variable) y el objetivo es hacerlo utilizando sólo nuevas variables y
 synchronized, semáforos o cualquier otro mecanismo de concurrencia).
 
 \subsection*{Material a entregar}
-El fichero fuente a entregar debe llamarse \url{CC_03_MutexEA.java}.
+El fichero fuente a entregar debe llamarse \url{excluded.CC_03_MutexEA.java}.
 
 \subsection*{Material de apoyo}
 Se ofrece un \textbf{intento
 fallido} para asegurar la exclusión mutua en la ejecución de las
-secciones críticas en el fichero \url{CC_03_MutexEA.todo.java}:
-\lstinputlisting{CC_03_MutexEA.todo.java}
+secciones críticas en el fichero \url{excluded.CC_03_MutexEA.todo.java}:
+\lstinputlisting{excluded.CC_03_MutexEA.todo.java}
 
 \clearpage
 \section{Garantizar exclusión mutua con semáforos}
@@ -206,15 +206,15 @@ asegurar la exclusión mutua en el acceso a los atributos
 compartidos.
 
 \subsection*{Material a entregar}
-El fichero fuente a entregar debe llamarse \url{Almacen1.java}.
+El fichero fuente a entregar debe llamarse \url{excluded.Almacen1.java}.
 
 \subsection*{Material de apoyo}
 Se ofrece un esqueleto de código que el alumno debe completar en el fichero
-\url{Almacen1.todo.java}:
-\lstinputlisting{Almacen1.todo.java}
+\url{excluded.Almacen1.todo.java}:
+\lstinputlisting{excluded.Almacen1.todo.java}
 
-El programa principal \url{CC_05_P1CSem.java} es el siguiente:
-\lstinputlisting{CC_05_P1CSem.java}
+El programa principal \url{excluded.CC_05_P1CSem.java} es el siguiente:
+\lstinputlisting{excluded.CC_05_P1CSem.java}
 
 Para valorar si el problema está bien resuelto, os recordamos que el
 objetivo es asegurar
@@ -236,20 +236,20 @@ productos, lo que permite a los productores seguir trabajando aunque
 los consumidores se vuelvan, momentáneamente, lentos.
 
 \subsection*{Material a entregar}
-El fichero fuente a entregar debe llamarse \url{AlmacenN.java}.
+El fichero fuente a entregar debe llamarse \url{excluded.AlmacenN.java}.
 
 \subsection*{Material de apoyo}
 Se ofrece un esqueleto de código que el alumno debe completar en el fichero
-\url{AlmacenN.todo.java}:
-\lstinputlisting{AlmacenN.todo.java}
+\url{excluded.AlmacenN.todo.java}:
+\lstinputlisting{excluded.AlmacenN.todo.java}
 
 y el programa principal \url{CC_06_PNSem.java} es el siguiente:
-\lstinputlisting{CC_06_PNCSem.java}
+\lstinputlisting{excluded.CC_06_PNCSem.java}
 
 \clearpage
 \section{Especificación de un recurso compartido}
 El ejercicio consiste en \textbf{elaborar la especificación formal del
-  recurso compartido ControlAccesoPuente}. El recurso compartido forma
+  recurso compartido excluded.ControlAccesoPuente}. El recurso compartido forma
 parte de un programa concurrente que gestiona los accesos y salidas de
 coches de un puente de un solo carril. El puente tiene dos entradas y
 dos salidas.  Los coches que entran por la entrada sur salen por la
@@ -269,10 +269,10 @@ salida. Los procesos comparten un recurso compartido que les sirve
 para comunicarse.
 
 A continuación se muestra el interfaz del recurso
-compartido que hay que especificar \linebreak (\url{ControlAccesoPuente.java}):
-\lstinputlisting{ControlAccesoPuente.java}
-y el programa concurrente \url{CC_07_Puente.java}:
-\lstinputlisting{CC_07_Puente.java}
+compartido que hay que especificar \linebreak (\url{excluded.ControlAccesoPuente.java}):
+\lstinputlisting{excluded.ControlAccesoPuente.java}
+y el programa concurrente \url{excluded.CC_07_Puente.java}:
+\lstinputlisting{excluded.CC_07_Puente.java}
 
 \clearpage
 \section{Multibuffer con métodos synchronized}
@@ -329,8 +329,8 @@ Se ofrece un esqueleto de código que el alumno debe completar en el fichero
 \lstinputlisting{MultiAlmacenSync.todo.java}
 
 El programa principal para probar este ejercicio es el
-\url{CC_08_PmultiCSync.java}: 
-\lstinputlisting{CC_08_PmultiCSync.java}
+\url{excluded.CC_08_PmultiCSync.java}:
+\lstinputlisting{excluded.CC_08_PmultiCSync.java}
 
 \clearpage
 
@@ -358,8 +358,8 @@ El programa principal para probar este ejercicio es el
 %% \lstinputlisting{MultiAlmacenLocks.todo.java}
 
 %% El programa principal para probar este ejercicio es el
-%% \url{CC_09_PmultiCLocks.java}: 
-%% \lstinputlisting{CC_09_PmultiCLocks.java}
+%% \url{excluded.CC_09_PmultiCLocks.java}:
+%% \lstinputlisting{excluded.CC_09_PmultiCLocks.java}
 
 %% \subsection*{Versión con los monitores de la CCLib}
 %% Lamentablemente, la implementación de \emph{locks \& conditions} de
@@ -381,8 +381,8 @@ Se ofrece un esqueleto de código que el alumno debe completar en el fichero
 \lstinputlisting{MultiAlmacenMon.todo.java}
 
 El programa principal para probar este ejercicio es el
-\url{CC_09_PmultiCMon.java}: 
-\lstinputlisting{CC_09_PmultiCMon.java}
+\url{excluded.CC_09_PmultiCMon.java}:
+\lstinputlisting{excluded.CC_09_PmultiCMon.java}
 
 \clearpage
 \section{Multibuffer con paso de mensajes}
@@ -400,22 +400,22 @@ Se ofrece un esqueleto de código que el alumno debe completar en el fichero
 
 El programa principal para probar este ejercicio es el
 \url{CC_10_PmultiJCSP.java}: 
-\lstinputlisting{CC_10_PmultiCJCSP.java}
+\lstinputlisting{excluded.CC_10_PmultiCJCSP.java}
 
 \end{document}
 
 \clearpage
-\section*{Especificación ControlAccesoPuente}
+\section*{Especificación excluded.ControlAccesoPuente}
 
 \begin{ctadsol}
-  \nombrectad{ControlAccesoPuente}
+  \nombrectad{excluded.ControlAccesoPuente}
   \\
   \operaciones
   \operacion{Solicitar\_Entrada}{Entrada[e]}
   \operacion{Avisar\_Salida}{Salida[e]}
   \\
   \semdom
-  \tipo{ControlAccesoPuente = (sn : \nat \por ns : \nat)}
+  \tipo{excluded.ControlAccesoPuente = (sn : \nat \por ns : \nat)}
   \tiponl{Un contador para los coches que van sur-norte y otro para los que van norte-sur. Siempre uno debe ser 0.}
   \donde{
     $Entrada = EN | ES$\\

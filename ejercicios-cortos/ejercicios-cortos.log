@@ -1026,7 +1026,7 @@ LaTeX Font Warning: Font shape `OT1/cmtt/b/n' undefined
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 155.
- (./CC_03_MutexEA.todo.java [4
+ (./excluded.CC_03_MutexEA.todo.java [4
 
 ] [5]) [6] (./CC_04_MutexSem.todo.java
 [7
@@ -1045,14 +1045,14 @@ Overfull \hbox (3.85431pt too wide) in paragraph at lines 195--198
 
 (../../../lib/cclib/es/upm/babel/cclib/Almacen.java) [10
 
-] (./Almacen1.todo.java) (./CC_05_P1CSem.java [11] [12]) [13] (./AlmacenN.todo.
+] (./excluded.Almacen1.todo.java) (./excluded.CC_05_P1CSem.java [11] [12]) [13] (./excluded.AlmacenN.todo.
 java [14
 
 ])
-(./CC_06_PNCSem.java [15]) [16] (./Puente.java [17
+(./excluded.CC_06_PNCSem.java [15]) [16] (./Puente.java [17
 
 ])
-(./ControlAccesoPuente.java) (./CC_07_Puente.java [18]) [19] [20]
+(./excluded.ControlAccesoPuente.java) (./excluded.CC_07_Puente.java [18]) [19] [20]
 Underfull \hbox (badness 10000) in paragraph at lines 292--322
 
  []
@@ -1085,7 +1085,7 @@ om-ple-tar en el fi-che-ro []$\OT1/cmtt/m/n/10 MultiAlmacenSync .
 
 [21
 
-] (./MultiAlmacenSync.todo.java [22]) (./CC_08_PmultiCSync.java
+] (./MultiAlmacenSync.todo.java [22]) (./excluded.CC_08_PmultiCSync.java
 Overfull \hbox (7.03615pt too wide) in paragraph at lines 6--7
 [][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1103,7 +1103,7 @@ om-ple-tar en el fi-che-ro []$\OT1/cmtt/m/n/10 MultiAlmacenMon .
 
 (./MultiAlmacenMon.todo.java [25
 
-]) (./CC_09_PmultiCMon.java
+]) (./excluded.CC_09_PmultiCMon.java
 Overfull \hbox (7.03615pt too wide) in paragraph at lines 6--7
 [][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1121,7 +1121,7 @@ om-ple-tar en el fi-che-ro []$\OT1/cmtt/m/n/10 MultiAlmacenJCSP .
 
 (./MultiAlmacenJCSP.todo.java [29
 
-]) (./CC_10_PmultiCJCSP.java
+]) (./excluded.CC_10_PmultiCJCSP.java
 Overfull \hbox (7.03615pt too wide) in paragraph at lines 7--8
 [][][][][][][][][][][][][][][][][][][][][] 
  []
