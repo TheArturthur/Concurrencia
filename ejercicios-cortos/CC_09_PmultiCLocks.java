@@ -1,13 +1,16 @@
-package excluded;
+/*
+
 
 import es.upm.babel.cclib.MultiAlmacen;
 import es.upm.babel.cclib.MultiProductor;
 import es.upm.babel.cclib.MultiConsumidor;
 
+*/
 /**
  * Programa concurrente para productor-buffer-consumidor con multialmacen
  * de capacidad N implementado con cerrojos (MultiAlmacenLocks).
- */
+ *//*
+
 class CC_09_PmultiCLocks {
     public static final void main(final String[] args)
         throws InterruptedException {
@@ -68,3 +71,4 @@ class CC_09_PmultiCLocks {
         }
     }
 }
+*/

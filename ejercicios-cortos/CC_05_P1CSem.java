@@ -1,4 +1,4 @@
-package excluded;
+
 
 import es.upm.babel.cclib.Almacen;
 import es.upm.babel.cclib.Productor;
@@ -8,7 +8,7 @@ import es.upm.babel.cclib.Fabrica;
 
 /**
  * Programa concurrente para productor-buffer-consumidor con almacen
- * de tamaño 1 implementado con semáforos (excluded.Almacen1).
+ * de tamaño 1 implementado con semáforos (Almacen1).
  */
 class CC_05_P1CSem {
     public static final void main(final String[] args)

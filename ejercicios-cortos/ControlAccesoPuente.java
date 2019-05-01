@@ -1,4 +1,4 @@
-package excluded;
+
 
 public class ControlAccesoPuente {
 
@@ -11,11 +11,13 @@ public class ControlAccesoPuente {
     * opuesto entonces el proceso que lo invoque debe bloquear.
     */
    public void solicitarEntrada (Puente.Entrada e) {
+	   
    }
 
    /**
     * Decrementa el número de coches en el puente.
     */
    public void avisarSalida (Puente.Salida s) {
+	   
    }
 }

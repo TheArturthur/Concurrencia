@@ -1,7 +1,6 @@
-package excluded;
-
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.Almacen;
+import es.upm.babel.cclib.Semaphore;
 
 // TODO: importar la clase de los semáforos.
 
@@ -18,6 +17,10 @@ class AlmacenN implements Almacen {
    private int aInsertar = 0;
 
    // TODO: declaración de los semáforos necesarios
+   //3 semaphores: producers, consumer and inner for items stored:
+   private volatile Semaphore producerSem;
+   private volatile Semaphore consumerSem;
+   private volatile Semaphore storageSem;
 
    public AlmacenN(int n) {
       capacidad = n;
@@ -27,12 +30,17 @@ class AlmacenN implements Almacen {
       aInsertar = 0;
 
       // TODO: inicialización de los semáforos
+      producerSem = new Semaphore (1);
+      consumerSem = new Semaphore (0);
+      storageSem = new Semaphore (1);
    }
 
    public void almacenar(Producto producto) {
       // TODO: protocolo de acceso a la sección crítica y código de
       // sincronización para poder almacenar.
-
+	   producerSem.await();
+	   storageSem.await();
+	   
       // Sección crítica
       almacenado[aInsertar] = producto;
       nDatos++;
@@ -41,6 +49,9 @@ class AlmacenN implements Almacen {
 
       // TODO: protocolo de salida de la sección crítica y código de
       // sincronización para poder extraer.
+      storageSem.signal();
+      consumerSem.signal();
+      producerSem.signal();
    }
 
    public Producto extraer() {
@@ -48,6 +59,8 @@ class AlmacenN implements Almacen {
 
       // TODO: protocolo de acceso a la sección crítica y código de
       // sincronización para poder extraer.
+      consumerSem.await();
+      storageSem.await();
 
       // Sección crítica
       result = almacenado[aExtraer];
@@ -58,7 +71,9 @@ class AlmacenN implements Almacen {
 
       // TODO: protocolo de salida de la sección crítica y código de
       // sincronización para poder almacenar.
-
+      storageSem.signal();
+      producerSem.signal();
+      
       return result;
    }
 }
