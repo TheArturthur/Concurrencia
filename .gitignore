@@ -1,9 +1,6 @@
-.idea/Concurrencia.iml
-.idea/encodings.xml
-.idea/modules.xml
-.idea/misc.xml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/libraries/cclib.xml
+/.idea/
 /bin/
 /.metadata/
+.classpath
+.project
+org.eclipse.core.resources.prefs
