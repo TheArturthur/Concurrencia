@@ -1,3 +1,6 @@
+/*
+package src;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,16 +11,22 @@ import org.jcsp.lang.Channel;
 import org.jcsp.lang.Guard;
 import org.jcsp.lang.One2OneChannel;
 
-/** 
+*/
+/**
  * Enclavamiento implementation using CSP. 
  *
- */ 
+ *//*
+
 public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
-  /** WRAPPER IMPLEMENTATION */
-  /**
+  */
+/** WRAPPER IMPLEMENTATION *//*
+
+  */
+/**
    *  Channel for receiving external request for each method
-   */
+   *//*
+
   private static final Any2OneChannel channel = Channel.any2one();
 
   @Override
@@ -37,7 +46,9 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
   }
 
-  /** notice that the exception can be thrown outside the server */
+  */
+/** notice that the exception can be thrown outside the server *//*
+
   @Override
   public Control.Color leerCambioSemaforo(int i, Control.Color color) {
     if (i == 0 )
@@ -54,10 +65,14 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
   }
 
 
-  /** SERVER IMPLEMENTATION */
-  /**
+  */
+/** SERVER IMPLEMENTATION *//*
+
+  */
+/**
    * Constants representing the method presented in the API
-   */
+   *//*
+
 
   public EnclavamientoCSPTemplate() {
   }
@@ -73,7 +88,9 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
   @Override
   public void run() {
 
-    /** One entry for each method */
+    */
+/** One entry for each method *//*
+
     Guard[] guards = {
 
     };
@@ -113,10 +130,12 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
       }
 
 
-      /*
+      */
+/*
        * Unblocking code
        * Must always process all request which is associated CPRE holds
-       */
+       *//*
+
       boolean anyResumed;
       do{
         anyResumed = false;
@@ -128,4 +147,4 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
   } // end run
 
 
-}
+}*/
