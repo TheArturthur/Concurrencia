@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/QuePasa/QuePasa.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Control.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/practicas.pdf" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="27" selection-start-column="27" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>LINEA</find>
+      <find>INIT</find>
+      <find>train</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ejercicios-cortos/CC_03_MutexEA.todo.java" />
+        <option value="$PROJECT_DIR$/ejercicios-cortos/AlmacenN.java" />
+        <option value="$PROJECT_DIR$/ejercicios-cortos/.gitignore" />
+        <option value="$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.todo.java" />
+        <option value="$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenJCSP.todo.java" />
+        <option value="$PROJECT_DIR$/ejercicios-cortos/CC_10_PmultiCJCSP.java" />
+        <option value="$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCLocks.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/EnclavamientoMonitor.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitorTemplate.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/Control.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/Cruce.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/enclavamiento/Cruce.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Concurrencia" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Concurrencia" type="462c0819:PsiDirectoryNode" />
+              <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Concurrencia" type="462c0819:PsiDirectoryNode" />
+              <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552862888271" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuePasa" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Universidad\Concurrencia\enclavamiento" />
+      <recent name="C:\Universidad\Concurrencia\ejercicios-cortos\excluded" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="javac -c CC_01_Threads.java" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Cruce (2)">
+    <configuration name="CC_04_MutexSem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CC_04_MutexSem" />
+      <module name="Concurrencia" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CC_06_PNCSem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CC_06_PNCSem" />
+      <module name="Concurrencia" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Cruce (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Cruce" />
+      <module name="Concurrencia" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Cruce (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Cruce" />
+      <module name="enclavamiento" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Cruce" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Cruce" />
+      <module name="Concurrencia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value=".*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Cruce (2)" />
+        <item itemvalue="Application.Cruce (1)" />
+        <item itemvalue="Application.Cruce" />
+        <item itemvalue="Application.CC_06_PNCSem" />
+        <item itemvalue="Application.CC_04_MutexSem" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="" />
+      <created>1549302006503</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1549302006503</updated>
+      <workItem from="1549302027791" duration="1324000" />
+      <workItem from="1551086377966" duration="3855000" />
+      <workItem from="1551623154223" duration="48000" />
+      <workItem from="1551623466332" duration="2597000" />
+      <workItem from="1551630164090" duration="49000" />
+      <workItem from="1551630226370" duration="251000" />
+      <workItem from="1551631811256" duration="538000" />
+      <workItem from="1551966389731" duration="63000" />
+      <workItem from="1552862766787" duration="133000" />
+      <workItem from="1555238858571" duration="2561000" />
+      <workItem from="1555525580857" duration="30000" />
+      <workItem from="1555713819944" duration="524000" />
+      <workItem from="1557056314587" duration="296000" />
+      <workItem from="1557056678996" duration="2218000" />
+      <workItem from="1557073930057" duration="3321000" />
+      <workItem from="1557133259402" duration="2355000" />
+      <workItem from="1557151808951" duration="9077000" />
+      <workItem from="1557228685396" duration="6422000" />
+      <workItem from="1557244701268" duration="4755000" />
+      <workItem from="1557318416478" duration="3991000" />
+      <workItem from="1557323536379" duration="1253000" />
+      <workItem from="1557324807951" duration="63000" />
+      <workItem from="1557324919621" duration="1135000" />
+      <workItem from="1557326484210" duration="974000" />
+      <workItem from="1557327707427" duration="708000" />
+    </task>
+    <task id="LOCAL-00001" summary="Comentarios">
+      <created>1551624725910</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1551624725910</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="48541000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18003026" />
+      <window_info id="Designer" order="1" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Learn" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.3289689" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.7299509" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50075644" side_tool="true" weight="0.7152209" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.21931261" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3289689" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Structure" order="1" weight="0.1301059" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Comentarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comentarios" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_01_Threads.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_02_Carrera.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/bin/CC_04_MutexSem.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/Almacen1.todo.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/AlmacenN.todo.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_06_PNCSem.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_07_Puente.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_08_PmultiCSync.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_09_PmultiCLocks.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_10_PmultiCJCSP.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_09_PmultiCMon.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_05_P1CSem.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_03_MutexEA.todo.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/MultiAlmacenJCSP.todo.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.todo.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenJCSP.todo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_10_PmultiCJCSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="25" lean-forward="true" selection-end-line="80" />
+          <folding>
+            <element signature="e#0#2233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCLocks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="34" lean-forward="true" selection-end-line="74" />
+          <folding>
+            <element signature="e#0#2081#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_06_PNCSem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/AlmacenN.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoJCSP.java" />
+    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/Practica.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/QuePasaCSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoJCSP.java" />
+    <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoCSP.java" />
+    <entry file="file://$PROJECT_DIR$/enclavamiento/ControlSimulado.java" />
+    <entry file="file://$PROJECT_DIR$/enclavamiento/Control.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCMon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenMon.todo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-765" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../JavaLib/cclib.jar!/es/upm/babel/cclib/Monitor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../JavaLib/cclib.jar!/es/upm/babel/cclib/Monitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="54" lean-forward="true" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/QuePasaMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3502">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/QuePasaMonitor1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1938">
+          <folding>
+            <element signature="e#0#8771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/PreconditionFailedException.java" />
+    <entry file="file://$PROJECT_DIR$/../Arqui/consultas7-5.bin">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce1.java" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/consideraciones.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/SimulateQuePasaCSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/Cruce.java" />
+    <entry file="file://$PROJECT_DIR$/enclavamiento/Enclavamiento.java" />
+    <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoMonitor.java" />
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="16" selection-end-line="148" />
+          <folding>
+            <element signature="e#0#2728#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/enclavamiento.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="27" selection-start-column="27" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>QuePasa</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>cclib</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

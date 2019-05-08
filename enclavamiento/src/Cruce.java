@@ -1,5 +1,3 @@
-package src;
-
 public class Cruce {
   private static Control dispositivos = new ControlSimulado();
 

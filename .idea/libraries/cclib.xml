@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="cclib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../JavaLib/cclib.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="http://babel.upm.es/teaching/concurrencia/material/cclib-doc/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

@@ -1,5 +1,3 @@
-package src;
-
 import es.upm.babel.cclib.ConcIO;
 import es.upm.babel.cclib.Semaphore;
 

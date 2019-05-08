@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file:///production/Concurrencia" />
+    <output-test url="file:///test/Concurrencia" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Slides" />
+      <excludeFolder url="file://$MODULE_DIR$/ejercicios-cortos/excluded" />
+      <excludeFolder url="file://$MODULE_DIR$/fiwiki" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="cclib" level="project" />
+    <orderEntry type="library" name="aedlib" level="project" />
+  </component>
+</module>
