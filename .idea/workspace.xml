@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuePasa/QuePasa.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Control.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/practicas.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/.gitignore" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            <state relative-caret-position="31">
+              <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -90,6 +80,7 @@
         <option value="$PROJECT_DIR$/enclavamiento/Cruce.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/.gitignore" />
       </list>
     </option>
   </component>
@@ -106,8 +97,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -130,6 +119,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -138,7 +129,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552862888271" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuePasa" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -258,6 +249,8 @@
       <workItem from="1557324919621" duration="1135000" />
       <workItem from="1557326484210" duration="974000" />
       <workItem from="1557327707427" duration="708000" />
+      <workItem from="1557484963679" duration="27000" />
+      <workItem from="1557506628757" duration="763000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -270,7 +263,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48541000" />
+    <option name="totallyTimeSpent" value="49331000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -282,10 +275,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1" y="24" width="1368" height="745" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18003026" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18504532" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -302,7 +294,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.7299509" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50075644" side_tool="true" weight="0.7152209" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.21931261" />
+      <window_info anchor="bottom" id="Messages" order="10" visible="true" weight="0.40191388" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -419,13 +411,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/../JavaLib/cclib.jar!/es/upm/babel/cclib/Monitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="54" lean-forward="true" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$PROJECT_DIR$/../JavaLib/cclib.jar!/es/upm/babel/cclib/Monitor.java" />
     <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/QuePasaMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3502">
@@ -495,10 +481,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="31">
+          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
         </state>
       </provider>
     </entry>
