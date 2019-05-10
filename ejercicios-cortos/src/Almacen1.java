@@ -1,3 +1,5 @@
+package src;
+
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.Semaphore;
 import es.upm.babel.cclib.Almacen;

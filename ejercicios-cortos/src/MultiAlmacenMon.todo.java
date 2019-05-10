@@ -1,7 +1,12 @@
+package src;
+
 import es.upm.babel.cclib.Producto;
 import es.upm.babel.cclib.MultiAlmacen;
 
-class MultiAlmacenSync implements MultiAlmacen {
+// importar la librería de monitores
+
+
+class MultiAlmacenMon implements MultiAlmacen {
     private int capacidad = 0;
     private Producto almacenado[] = null;
     private int aExtraer = 0;
@@ -9,13 +14,15 @@ class MultiAlmacenSync implements MultiAlmacen {
     private int nDatos = 0;
 
    // TODO: declaración de atributos extras necesarios
+   // para exclusión mutua y sincronización por condición
+
 
    // Para evitar la construcción de almacenes sin inicializar la
    // capacidad 
-   private MultiAlmacenSync() {
+   private MultiAlmacenMon() {
    }
 
-   public MultiAlmacenSync(int n) {
+   public MultiAlmacenMon(int n) {
       almacenado = new Producto[n];
       aExtraer = 0;
       aInsertar = 0;
@@ -33,9 +40,10 @@ class MultiAlmacenSync implements MultiAlmacen {
       return capacidad - nDatos;
    }
 
-   synchronized public void almacenar(Producto[] productos) {
-      // TODO: implementación de código de bloqueo para sincronización
-      // condicional 
+   public void almacenar(Producto[] productos) {
+
+      // TODO: implementación de código de bloqueo para 
+      // exclusión muytua y sincronización condicional 
 
       // Sección crítica
       for (int i = 0; i < productos.length; i++) {
@@ -46,14 +54,14 @@ class MultiAlmacenSync implements MultiAlmacen {
       }
 
       // TODO: implementación de código de desbloqueo para
-      // sincronización condicional 
+      // sincronización condicional y liberación de la exclusión mutua  
    }
 
-   synchronized public Producto[] extraer(int n) {
+   public Producto[] extraer(int n) {
       Producto[] result = new Producto[n];
 
-      // TODO: implementación de código de bloqueo para sincronización
-      // condicional 
+      // TODO: implementación de código de bloqueo para exclusión
+      // mutua y sincronización condicional 
 
       // Sección crítica
       for (int i = 0; i < result.length; i++) {
@@ -65,7 +73,7 @@ class MultiAlmacenSync implements MultiAlmacen {
       }
 
       // TODO: implementación de código de desbloqueo para
-      // sincronización condicional 
+      // sincronización condicional y liberación de la exclusión mutua  
 
       return result;
    }

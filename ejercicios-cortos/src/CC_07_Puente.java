@@ -1,4 +1,4 @@
-
+package src;
 
 /**
  * Programa concurrente para el control del acceso al puente de un

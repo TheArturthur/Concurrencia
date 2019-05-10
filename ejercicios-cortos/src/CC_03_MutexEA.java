@@ -1,4 +1,4 @@
-// Exclusión mutua con espera activa.
+package src;// Exclusión mutua con espera activa.
 //
 // Intentar garantizar la exclusión mutua en sc_inc y sc_dec sin
 // utilizar más mecanismo de concurrencia que el de la espera activa

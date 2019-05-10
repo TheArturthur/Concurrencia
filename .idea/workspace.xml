@@ -2,15 +2,66 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuePasa/QuePasa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/QuePasa/QuePasa.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/Almacen1.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/Almacen1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/Almacen1.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/Almacen1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/AlmacenN.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/AlmacenN.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/AlmacenN.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/AlmacenN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_03_MutexEA$Decrementador.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_03_MutexEA$Decrementador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_03_MutexEA$Incrementador.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_03_MutexEA$Incrementador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_03_MutexEA.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_03_MutexEA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_03_MutexEA.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_03_MutexEA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem$Contador.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_04_MutexSem$Contador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem$Decrementador.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_04_MutexSem$Decrementador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem$Incrementador.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_04_MutexSem$Incrementador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_04_MutexSem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_04_MutexSem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_05_P1CSem.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_05_P1CSem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_05_P1CSem.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_05_P1CSem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_06_PNCSem.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_06_PNCSem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_06_PNCSem.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_06_PNCSem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_07_Puente$AvisoSalida.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_07_Puente$AvisoSalida.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_07_Puente$ControlEntrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_07_Puente$ControlEntrada.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_07_Puente.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_07_Puente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_07_Puente.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_07_Puente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_08_PmultiCSync.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_08_PmultiCSync.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_08_PmultiCSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_08_PmultiCSync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCLocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_09_PmultiCLocks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCMon.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_09_PmultiCMon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCMon.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_09_PmultiCMon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/CC_10_PmultiCJCSP.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/CC_10_PmultiCJCSP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ControlAccesoPuente.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ControlAccesoPuente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ControlAccesoPuente.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ControlAccesoPuente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenJCSP.todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenJCSP.todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenMon.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenMon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenMon.todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenMon.todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenSync.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenSync.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenSync.todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenSync.todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/Puente$Entrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/Puente$Entrada.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/Puente$Salida.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/Puente$Salida.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/Puente.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/Puente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/Puente.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/Puente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.aux" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.log" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.out" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.tex" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.toc" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-cortos/src/ejercicios-cortos1.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="CLEAR_OUTPUT_DIRECTORY" value="false" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -33,8 +84,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+            <state relative-caret-position="1440">
+              <caret line="96" column="11" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+              <folding>
+                <element signature="e#241#242#0" expanded="true" />
+                <element signature="e#282#283#0" expanded="true" />
+                <element signature="e#721#722#0" expanded="true" />
+                <element signature="e#762#763#0" expanded="true" />
+                <element signature="e#1295#1296#0" expanded="true" />
+                <element signature="e#1336#1337#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,11 +135,11 @@
         <option value="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/Cruce.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/enclavamiento/Cruce.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/.gitignore" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -102,16 +161,10 @@
           <expand>
             <path>
               <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Concurrencia" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Concurrencia" type="462c0819:PsiDirectoryNode" />
               <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Concurrencia" type="462c0819:PsiDirectoryNode" />
               <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -119,8 +172,23 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
+          <expand>
+            <path>
+              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -131,16 +199,17 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552862888271" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ejercicios-cortos/src" />
       <recent name="C:\Universidad\Concurrencia\enclavamiento" />
       <recent name="C:\Universidad\Concurrencia\ejercicios-cortos\excluded" />
     </key>
@@ -162,7 +231,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Cruce (2)">
+  <component name="RunManager" selected="Application.Cruce">
     <configuration name="CC_04_MutexSem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CC_04_MutexSem" />
       <module name="Concurrencia" />
@@ -251,6 +320,7 @@
       <workItem from="1557327707427" duration="708000" />
       <workItem from="1557484963679" duration="27000" />
       <workItem from="1557506628757" duration="763000" />
+      <workItem from="1557509225022" duration="1795000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -263,7 +333,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49331000" />
+    <option name="totallyTimeSpent" value="51126000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -276,8 +346,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="24" width="1368" height="745" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18504532" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18731117" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -294,7 +365,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.7299509" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50075644" side_tool="true" weight="0.7152209" />
-      <window_info anchor="bottom" id="Messages" order="10" visible="true" weight="0.40191388" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.40191388" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -317,13 +388,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Comentarios" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_01_Threads.java" />
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_02_Carrera.java" />
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/.gitignore" />
     <entry file="file://$PROJECT_DIR$/bin/CC_04_MutexSem.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.java" />
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/CC_04_MutexSem.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/Almacen1.todo.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/AlmacenN.todo.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_06_PNCSem.java" />
@@ -336,14 +404,14 @@
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_03_MutexEA.todo.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/MultiAlmacenJCSP.todo.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_04_MutexSem.todo.java" />
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenJCSP.todo.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenJCSP.todo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-end-line="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_10_PmultiCJCSP.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/CC_10_PmultiCJCSP.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="25" lean-forward="true" selection-end-line="80" />
@@ -353,7 +421,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCLocks.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/CC_09_PmultiCLocks.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="34" lean-forward="true" selection-end-line="74" />
@@ -363,14 +431,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_06_PNCSem.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/CC_06_PNCSem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/AlmacenN.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/AlmacenN.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
@@ -392,14 +460,14 @@
     <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoCSP.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/ControlSimulado.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/Control.java" />
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/CC_09_PmultiCMon.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/CC_09_PmultiCMon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-253">
           <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/MultiAlmacenMon.todo.java">
+    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenMon.todo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-765" />
       </provider>
@@ -437,18 +505,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce1.java" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/consideraciones.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-612" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/SimulateQuePasaCSP.java">
@@ -474,6 +536,7 @@
     <entry file="file://$PROJECT_DIR$/enclavamiento/enclavamiento.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/.gitignore" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -481,13 +544,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/.gitignore">
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="46" lean-forward="true" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+        <state relative-caret-position="1440">
+          <caret line="96" column="11" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+          <folding>
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#721#722#0" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#1295#1296#0" expanded="true" />
+            <element signature="e#1336#1337#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -543,12 +635,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>QuePasa</last-edited>
+          <last-edited>enclavamiento</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

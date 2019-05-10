@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Interfaz de control de acceso al puente de un solo sentido.
  *

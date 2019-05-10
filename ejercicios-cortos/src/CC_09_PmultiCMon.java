@@ -1,45 +1,47 @@
+package src;
 
-
-import es.upm.babel.cclib.Almacen;
-import es.upm.babel.cclib.Productor;
-import es.upm.babel.cclib.Consumidor;
-import es.upm.babel.cclib.Consumo;
-import es.upm.babel.cclib.Fabrica;
+import es.upm.babel.cclib.MultiAlmacen;
+import es.upm.babel.cclib.MultiProductor;
+import es.upm.babel.cclib.MultiConsumidor;
 
 /**
- * Programa concurrente para productor-buffer-consumidor con almacen
- * de tamaño 1 implementado con semáforos (Almacen1).
+ * Programa concurrente para productor-buffer-consumidor con multialmacen
+ * de capacidad N implementado con monitores (MultiAlmacenMon).
  */
-class CC_05_P1CSem {
+class CC_09_PmultiCMon {
     public static final void main(final String[] args)
-       throws InterruptedException
-    {
+        throws InterruptedException {
+
+        // Capacidad del multialmacen
+        final int N = 10;
+
         // Número de productores y consumidores
         final int N_PRODS = 2;
         final int N_CONSS = 2;
 
-        Consumo.establecerTiempoMedioCons(100);
-        Fabrica.establecerTiempoMedioProd(100);
+        // Máxima cantidad de productos por paquete para producir y consumir
+        final int MAX_PROD = N / 2;
+        final int MAX_CONS = N / 2;
 
         // Almacen compartido
-        Almacen almac = new Almacen1();
+        MultiAlmacen almac = new MultiAlmacenMon(N);
 
         // Declaración de los arrays de productores y consumidores
-        Productor[] productores;
-        Consumidor[] consumidores;
+        MultiProductor[] productores;
+        MultiConsumidor[] consumidores;
 
         // Creación de los arrays
-        productores = new Productor[N_PRODS];
-        consumidores = new Consumidor[N_CONSS];
+        productores = new MultiProductor[N_PRODS];
+        consumidores = new MultiConsumidor[N_CONSS];
 
         // Creación de los productores
         for (int i = 0; i < N_PRODS; i++) {
-            productores[i] = new Productor(almac);
+            productores[i] = new MultiProductor(almac,MAX_PROD);
         }
 
         // Creación de los consumidores
         for (int i = 0; i < N_CONSS; i++) {
-            consumidores[i] = new Consumidor(almac);
+            consumidores[i] = new MultiConsumidor(almac,MAX_CONS);
         }
 
         // Lanzamiento de los productores

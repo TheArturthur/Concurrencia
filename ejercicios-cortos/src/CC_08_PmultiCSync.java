@@ -1,4 +1,4 @@
-
+package src;
 
 import es.upm.babel.cclib.MultiAlmacen;
 import es.upm.babel.cclib.MultiProductor;
@@ -6,12 +6,12 @@ import es.upm.babel.cclib.MultiConsumidor;
 
 /**
  * Programa concurrente para productor-buffer-consumidor con multialmacen
- * de capacidad N implementado con monitores (MultiAlmacenMon).
+ * de capacidad N implementado con métodos synchronized (MultiAlmacenSync).
  */
-class CC_09_PmultiCMon {
+class CC_08_PmultiCSync {
     public static final void main(final String[] args)
-        throws InterruptedException {
-
+        throws InterruptedException
+    {
         // Capacidad del multialmacen
         final int N = 10;
 
@@ -19,12 +19,13 @@ class CC_09_PmultiCMon {
         final int N_PRODS = 2;
         final int N_CONSS = 2;
 
-        // Máxima cantidad de productos por paquete para producir y consumir
+        // Máxima cantidad de productos por paquete para producir y
+        // consumir
         final int MAX_PROD = N / 2;
         final int MAX_CONS = N / 2;
 
         // Almacen compartido
-        MultiAlmacen almac = new MultiAlmacenMon(N);
+        MultiAlmacen almac = new MultiAlmacenSync(N);
 
         // Declaración de los arrays de productores y consumidores
         MultiProductor[] productores;

@@ -1,3 +1,5 @@
+package src;
+
 import es.upm.babel.cclib.Semaphore;
 
 class CC_04_MutexSem {
