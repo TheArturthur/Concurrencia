@@ -19,21 +19,29 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // Array to save the conditions of each brake change individually:
     private Monitor.Cond[] cLeerFreno = new Monitor.Cond[nSegments + 1];
 
+    // read by:     leerCambioBarrera, leerCambioFreno
+    // written by:  avisarPresencia, leerCambioBarrera, leerCambioFreno, avisarPasoPorBaliza
     private int[] trains;
     // a '0' would mean there's no train on the segment
     // whereas a '1' would mean there's in fact a train in that segment
 
     // colors shwon by the Semaphores' lights
+    // read by:     leerCambioSemaforo
+    // written by:  leerCambioSemaforo, avisarPresencia
     private Control.Color[] colors = new Control.Color[nSegments + 1];
 
     // current colors (that should be changed in the semaphores)
+    // read by:     leerCambioSemaforo
+    // written by:  leerCambioSemaforo, avisarPresencia
     private Control.Color[] current = new Control.Color[nSegments + 1];
 
     // boolean to check if there's a train in a certain segment
+    // read by:     leerCambioFreno
+    // written by:  avisarPresencia
     private boolean presence;
 
     // Invariant (whatever happens, this mustn't be true):
-    private boolean invariant;
+    //private boolean invariant;
 
     /**
      * Sets the initial state of the railway:
@@ -62,7 +70,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // There are no trains in any of the segments of the railway:
         this.trains = new int[]{0,0,0,0};
 
-        this.invariant = trains[1] >= 0 && trains[2] >= 0 && coloresCorrectos(); // Needed??
+        //this.invariant = trains[1] >= 0 && trains[2] >= 0 && coloresCorrectos(); // Needed??
     }
 
     /**
@@ -86,6 +94,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         coloresCorrectos();
 
         // unlocking code: as there's no lock, there's no unlock
+        // unlocks: leerCambioBarrera, leerCambioFreno, leerCambioSemaforo
         boolean unlocked = false;
         for (int i = 0; i < cLeerSemaforo.length && !unlocked; i++) {
             if (cLeerSemaforo[i].waiting() > 0 && colors[i] != current[i]) {
@@ -95,7 +104,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         for (int i = 0; i < cLeerFreno.length && !unlocked; i++) {
-            if (cLeerFreno[i].waiting() > 0 && /*CPRE FRENO*/) {
+            if (cLeerFreno[i].waiting() > 0 /*&& CPRE FRENO*/) {
                 cLeerFreno[i].signal();
                 unlocked = true;
             }
