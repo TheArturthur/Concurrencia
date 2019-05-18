@@ -1,6 +1,6 @@
 import es.upm.babel.cclib.*;
 
-import java.time.Month;
+
 
 public class EnclavamientoMonitor implements Enclavamiento {
 
@@ -16,8 +16,11 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // Array to save the conditions of each semaphore individually:
     private Monitor.Cond[] cLeerSemaforo =  new Monitor.Cond[nSegments + 1];
 
-    // Array to save the conditions of each brake change individually:
-    private Monitor.Cond[] cLeerFreno = new Monitor.Cond[nSegments + 1];
+    // Condition for brake change:
+    private Monitor.Cond cLeerFreno;
+
+    // Condition for barrier change:
+    private Monitor.Cond cCambioBarrera;
 
     // read by:     leerCambioBarrera, leerCambioFreno
     // written by:  avisarPresencia, leerCambioBarrera, leerCambioFreno, avisarPasoPorBaliza
@@ -40,9 +43,6 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // written by:  avisarPresencia
     private boolean presence;
 
-    // Invariant (whatever happens, this mustn't be true):
-    //private boolean invariant;
-
     /**
      * Sets the initial state of the railway:
      *      All semaphore colors to VERDE,
@@ -59,18 +59,18 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // This way, if there's a change in the number of segments (and the number of semaphores), it's changed automatically.
         for (int i = 0; i <= nSegments; i++) {
             this.cLeerSemaforo[i] = mutex.newCond();
-            this.cLeerFreno[i] = mutex.newCond();
             this.colors[i] = Control.Color.VERDE;
             this.current[i] = Control.Color.VERDE;
         }
+
+        this.cLeerFreno = mutex.newCond();
+        this.cCambioBarrera = mutex.newCond();
 
         // There's no car crossing the railway:
         this.presence = false;
 
         // There are no trains in any of the segments of the railway:
         this.trains = new int[]{0,0,0,0};
-
-        //this.invariant = trains[1] >= 0 && trains[2] >= 0 && coloresCorrectos(); // Needed??
     }
 
     /**
@@ -93,22 +93,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
         this.presence = presence;
         coloresCorrectos();
 
-        // unlocking code: as there's no lock, there's no unlock
-        // unlocks: leerCambioBarrera, leerCambioFreno, leerCambioSemaforo
-        boolean unlocked = false;
-        for (int i = 0; i < cLeerSemaforo.length && !unlocked; i++) {
-            if (cLeerSemaforo[i].waiting() > 0 && colors[i] != current[i]) {
-                cLeerSemaforo[i].signal();
-                unlocked = true;
-            }
-        }
-
-        for (int i = 0; i < cLeerFreno.length && !unlocked; i++) {
-            if (cLeerFreno[i].waiting() > 0 /*&& CPRE FRENO*/) {
-                cLeerFreno[i].signal();
-                unlocked = true;
-            }
-        }
+        // unlock code:
+        unlock();
 
         mutex.leave();
     }
@@ -131,18 +117,14 @@ public class EnclavamientoMonitor implements Enclavamiento {
         if (actual == (trains[1] + trains[2] == 0)) {
             // CPRE will be satisfied when there's no train in segment 1 nor in 2.
             // if CPRE is not satisfied (there's a train in at least one of those segments), we lock the method:
-
-            Monitor.Cond cond = mutex.newCond();
-            // Add cond into conditions list.
-            cond.await();
+            cCambioBarrera.await();
         }
         // implementation of POST
         trains[1] = 0;
         trains[2] = 0;
 
         // unlock code:
-        // if the CPRE is now satisfied and there's a method waiting, we shall now unlock:
-            // unlock CambioSemaforo
+        unlock();
 
         mutex.leave();
         return true;
@@ -166,13 +148,21 @@ public class EnclavamientoMonitor implements Enclavamiento {
     public boolean leerCambioFreno(boolean actual) {
         mutex.enter();
         // checking of CPRE and lock:
+        if (actual == (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence)) {
+            cLeerFreno.await();
+        }
 
         // implementation of POST:
+        boolean result = false;
+        if(this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence) {
+            result = true;
+        }
 
         // unlocking code:
+        unlock();
 
         mutex.leave();
-        return false;
+        return result;
     }
 
     /**
@@ -204,12 +194,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         colors[i] = actual;
 
         // codigo de desbloqueo
-        for (int j = 0; j < cLeerSemaforo.length; j++) {
-            if (cLeerSemaforo[j].waiting() > 0 && colors[j] != current[j]) {
-                cLeerSemaforo[j].signal();
-                break;
-            }
-        }
+        unlock();
 
         mutex.leave();
         return colors[i];
@@ -246,7 +231,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         coloresCorrectos();
 
         // codigo de desbloqueo
-        // unlock leerCambioBarrera (
+        unlock();
 
         mutex.leave();
     }
@@ -297,4 +282,32 @@ public class EnclavamientoMonitor implements Enclavamiento {
         current[3] = Control.Color.VERDE;
         return true;
     }
+
+    /**
+     * Searches for a sleeping thread that's waiting.
+     */
+    private void unlock() {
+        boolean signaled = false;
+
+        // check cLeerSemaforo
+        for (int i = 0; i < cLeerSemaforo.length && !signaled; i++) {
+            if (cLeerSemaforo[i].waiting() > 0 && colors[i] != current[i]) {
+                cLeerSemaforo[i].signal();
+                signaled = true;
+            }
+        }
+
+        // check cLeerFreno
+        if (!signaled && cLeerFreno.waiting() > 0 /*&& CPRE Freno*/) {
+            cLeerFreno.signal();
+            signaled = true;
+        }
+
+        // check cambioBarrera
+        if (!signaled && cCambioBarrera.waiting() > 0 /*&& CPRE CambioBarrera*/) {
+            cCambioBarrera.signal();
+            signaled = true;
+        }
+    }
+
 }
