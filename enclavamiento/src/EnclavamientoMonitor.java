@@ -106,7 +106,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
      *
      * @param actual    Defines the actual state of the barrier
      * @return esperado Will be true when there are no trains in segments 1 or 2,
-     *                  which would mean the barrier needs to be down so no car cross the railway.
+     *                  which would mean the barrier needs to be closed so no car cross the railway.
+     *                  Will be false otherwise, opening the barrier.
      */
     @Override
     public boolean leerCambioBarrera(boolean actual) {
@@ -119,15 +120,15 @@ public class EnclavamientoMonitor implements Enclavamiento {
             // if CPRE is not satisfied (there's a train in at least one of those segments), we lock the method:
             cCambioBarrera.await();
         }
-        // implementation of POST
-        trains[1] = 0;
-        trains[2] = 0;
+        // implementation of POST:
+        // implementation in return.
 
-        // unlock code:
+        // unlock code: will call the next method to execute once this one leaves the Monitor
         unlock();
 
         mutex.leave();
-        return true;
+        // will return the true if there are no trains in segments 1 and 2, false otherwise:
+        return trains[1] + trains[2] == 0;
     }
 
     /**
@@ -141,8 +142,6 @@ public class EnclavamientoMonitor implements Enclavamiento {
      *                        self.train(2) > 1 |
      *                        self.train(2) = 1 &
      *                        self.presencia)
-     *
-     *
      */
     @Override
     public boolean leerCambioFreno(boolean actual) {
@@ -211,8 +210,6 @@ public class EnclavamientoMonitor implements Enclavamiento {
      *          coloresCorrectos
      *
      * @param i the index of the segment the train is passing through
-     *
-     * This method shall signal a semaphore (if there's one waiting) to change its colors
      */
     @Override
     public void avisarPasoPorBaliza(int i) {
@@ -240,7 +237,6 @@ public class EnclavamientoMonitor implements Enclavamiento {
      * Assigns the correct colors depending on the values of the state of the railway
      *
      * coloresCorrectos()
-     *
      */
     private boolean /*void*/ coloresCorrectos() {
         if (trains[1] > 0) {
@@ -284,7 +280,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
     }
 
     /**
-     * Searches for a sleeping thread that's waiting.
+     * Searches for a sleeping thread that's waiting and signals it.
      */
     private void unlock() {
         boolean signaled = false;

@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c09213dd-2ac6-470e-a667-5794001234e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/aedlib1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/cclib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/aedlib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/aedlib1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/aedlib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/cclib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/cclib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Control$Color.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Control.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ControlSimulado.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$ControladorBarrera.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$ControladorFreno.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$ControladorSemaforo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$DetectorBaliza.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$DetectorPresencia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enclavamiento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnclavamientoMonitor.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnclavamientoMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PreconditionFailedException.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/src/" />
@@ -25,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EnclavamientoMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="441">
+              <caret line="163" column="22" lean-forward="true" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -34,6 +45,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
@@ -42,12 +54,6 @@
         <option value="$PROJECT_DIR$/src/EnclavamientoMonitor.java" />
       </list>
     </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="676" />
@@ -60,6 +66,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -70,14 +78,17 @@
             <path>
               <item name="enclavamiento" type="b2602c69:ProjectViewProjectNode" />
               <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="enclavamiento" type="b2602c69:ProjectViewProjectNode" />
+              <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -85,7 +96,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/cclib.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JavaLib/cclib.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -133,24 +144,18 @@
       <workItem from="1557512091336" duration="12000" />
       <workItem from="1557512150377" duration="1515000" />
       <workItem from="1558006674893" duration="2512000" />
-      <workItem from="1558197245014" duration="4830000" />
+      <workItem from="1558177833695" duration="1883000" />
+      <workItem from="1558347876526" duration="5557000" />
+      <workItem from="1558361918099" duration="1039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9867000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="13516000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1360" height="741" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="Image Layers" order="1" />
@@ -158,21 +163,21 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.14350453" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.19482496" />
+      <window_info content_ui="combo" id="Project" order="6" weight="0.1580938" />
       <window_info id="Learn" order="7" weight="0.32930514" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50152206" side_tool="true" weight="0.32954547" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Database Changes" order="3" />
       <window_info anchor="bottom" id="Version Control" order="4" />
-      <window_info anchor="bottom" id="Messages" order="5" weight="0.32792208" />
+      <window_info anchor="bottom" id="Messages" order="5" weight="0.32854864" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.49847794" weight="0.39935064" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="11" weight="0.32954547" />
-      <window_info anchor="right" id="Maven" order="0" weight="0.32952815" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="right" id="Maven" order="0" />
       <window_info anchor="right" id="Palette" order="1" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
       <window_info anchor="right" id="Database" order="3" />
@@ -181,17 +186,22 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
-      <window_info anchor="right" id="Run" order="9" weight="0.32724506" />
+      <window_info anchor="right" id="Run" order="9" weight="0.32779455" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/results/18-05.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/EnclavamientoMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="441">
+          <caret line="163" column="22" lean-forward="true" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -270,7 +280,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>aedlib1</last-edited>
+          <last-edited>cclib</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

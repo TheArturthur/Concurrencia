@@ -2,8 +2,11 @@
   <library name="cclib">
     <CLASSES>
       <root url="jar://$USER_HOME$/JavaLib/cclib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../JavaLib/cclib.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../JavaLib/cclib.jar!/" />
+    </SOURCES>
   </library>
 </component>
