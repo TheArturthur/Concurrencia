@@ -1,4 +1,4 @@
-import es.upm.babel.cclib.*;
+import es.upm.babel.cclib.Monitor;
 
 
 
@@ -42,6 +42,14 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // read by:     leerCambioFreno
     // written by:  avisarPresencia
     private boolean presence;
+
+
+    // VARIABLES TO CONSIDER CPRE's UNLOCK:
+    // Saves the argument of leerCambioBarrera when it's locked:
+    private boolean barrierState;
+
+    // Saves the argument of leerCambioFreno when it's locked:
+    private boolean brakeState;
 
     /**
      * Sets the initial state of the railway:
@@ -118,6 +126,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         if (actual == (trains[1] + trains[2] == 0)) {
             // CPRE will be satisfied when there's no train in segment 1 nor in 2.
             // if CPRE is not satisfied (there's a train in at least one of those segments), we lock the method:
+            barrierState = actual;
             cCambioBarrera.await();
         }
         // implementation of POST:
@@ -148,6 +157,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         mutex.enter();
         // checking of CPRE and lock:
         if (actual == (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence)) {
+            brakeState = actual;
             cLeerFreno.await();
         }
 
@@ -172,7 +182,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
      *          esperado = self.color(i)
      *
      * @param i the index of the semaphore to change in the array
-     * @param actual the actual color to which the semaphore must change
+     * @param actual the old color from which the semaphore must change
      * @return the new color of the semaphore
      */
     @Override
@@ -186,11 +196,14 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
         // checking of the CPRE and posible lock
         if (colors[i] == actual) {
+            // Save the 'old' color to check if this semaphore can be unlocked later
+            current[i] = actual;
+            // Put it on stop:
             cLeerSemaforo[i].await();
         }
 
         // implementacion de la POST
-        colors[i] = actual;
+        // in return
 
         // codigo de desbloqueo
         unlock();
@@ -240,7 +253,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
      */
     private boolean /*void*/ coloresCorrectos() {
         if (trains[1] > 0) {
-            current[1] = Control.Color.ROJO;
+            colors[1] = Control.Color.ROJO;
         } else if (colors[1] == Control.Color.ROJO) {
             trains[1] = 1;
         }
@@ -250,7 +263,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
             trains[2] = 1;
             presence = true;
         } else if (trains[1] == 0 && (trains[2] > 0 || presence)) {
-            current[1] = Control.Color.AMARILLO;
+            colors[1] = Control.Color.AMARILLO;
         }
 
         if (colors[1] == Control.Color.VERDE) {
@@ -258,24 +271,24 @@ public class EnclavamientoMonitor implements Enclavamiento {
             trains[2] = 0;
             presence = false;
         } else if (trains[1] == 0 && trains[2] == 0 && !presence) {
-            current[1] = Control.Color.VERDE;
+            colors[1] = Control.Color.VERDE;
         }
 
         if (colors[2] == Control.Color.ROJO) {
             trains[2] = 1;
             presence = true;
         } else if (trains[2] > 0 || presence) {
-            current[2] = Control.Color.ROJO;
+            colors[2] = Control.Color.ROJO;
         }
 
         if (colors[2] == Control.Color.VERDE) {
             trains[2] = 0;
             presence = false;
         } else if (trains[2] == 0 && !presence) {
-            current[2] = Control.Color.VERDE;
+            colors[2] = Control.Color.VERDE;
         }
 
-        current[3] = Control.Color.VERDE;
+        colors[3] = Control.Color.VERDE;
         return true;
     }
 
@@ -294,13 +307,13 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         // check cLeerFreno
-        if (!signaled && cLeerFreno.waiting() > 0 /*&& CPRE Freno*/) {
+        if (!signaled && cLeerFreno.waiting() > 0 && brakeState != (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence)) {
             cLeerFreno.signal();
             signaled = true;
         }
 
         // check cambioBarrera
-        if (!signaled && cCambioBarrera.waiting() > 0 /*&& CPRE CambioBarrera*/) {
+        if (!signaled && cCambioBarrera.waiting() > 0 && (barrierState != (trains[1] + trains[2] == 0))) {
             cCambioBarrera.signal();
             signaled = true;
         }
