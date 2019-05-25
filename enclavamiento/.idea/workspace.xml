@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c09213dd-2ac6-470e-a667-5794001234e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/results/22-05-bis.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/22-05.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jcsp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Control$Color.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Control.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ControlSimulado.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$ControladorBarrera.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$ControladorFreno.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$ControladorSemaforo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$DetectorBaliza.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce$DetectorPresencia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cruce.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enclavamiento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnclavamientoMonitor.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnclavamientoMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PreconditionFailedException.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/src/" />
@@ -18,21 +30,51 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EnclavamientoMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="276" selection-start-line="276" selection-end-line="277" />
+            <state relative-caret-position="45">
+              <caret line="143" column="46" lean-forward="true" selection-start-line="143" selection-start-column="46" selection-end-line="143" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/results/22-05-bis.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4515">
+              <caret line="301" selection-start-line="301" selection-end-line="301" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -48,8 +90,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/results/22-05.txt" />
-        <option value="$PROJECT_DIR$/src/EnclavamientoMonitor.java" />
         <option value="$PROJECT_DIR$/results/22-05-bis" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoMonitor.java" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java" />
+        <option value="$PROJECT_DIR$/src/25-05.txt" />
       </list>
     </option>
   </component>
@@ -70,6 +115,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -91,7 +137,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -100,13 +145,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/jcsp.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/results" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -153,11 +203,14 @@
       <workItem from="1558361918099" duration="1039000" />
       <workItem from="1558550914301" duration="3283000" />
       <workItem from="1558555280764" duration="1627000" />
+      <workItem from="1558631853594" duration="866000" />
+      <workItem from="1558806457858" duration="901000" />
+      <workItem from="1558807389192" duration="30000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18426000" />
+    <option name="totallyTimeSpent" value="20223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1360" height="741" extended-state="6" />
@@ -169,7 +222,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.14350453" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.3246951" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.1867378" />
       <window_info id="Learn" order="7" weight="0.32930514" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.4992378" weight="0.3275862" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
@@ -186,7 +239,7 @@
       <window_info anchor="right" id="Maven" order="0" />
       <window_info anchor="right" id="Palette" order="1" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Database" order="3" weight="0.3292683" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
@@ -225,17 +278,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PreconditionFailedException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Enclavamiento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1970">
+          <caret line="241" column="14" selection-start-line="241" selection-start-column="14" selection-end-line="241" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1586#1587#0" expanded="true" />
+            <element signature="e#1642#1643#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2228#2229#0" expanded="true" />
+            <element signature="e#2284#2285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/results/22-05-bis.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
+        <state relative-caret-position="4515">
           <caret line="301" selection-start-line="301" selection-end-line="301" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/25-05.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="381" selection-start-line="381" selection-end-line="381" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EnclavamientoMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="276" selection-start-line="276" selection-end-line="277" />
+        <state relative-caret-position="45">
+          <caret line="143" column="46" lean-forward="true" selection-start-line="143" selection-start-column="46" selection-end-line="143" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -314,7 +412,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>cclib</last-edited>
+          <last-edited>jcsp</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

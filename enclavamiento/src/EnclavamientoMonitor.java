@@ -307,7 +307,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         // check cLeerFreno
-        if (!signaled && cLeerFreno.waiting() > 0 && brakeState != (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence)) {
+        if (!signaled && cLeerFreno.waiting() > 0 &&
+                brakeState != (this.trains[1] > 1 || (this.trains[2] > 1 || (this.trains[2] == 1 && this.presence)))) {
             cLeerFreno.signal();
             signaled = true;
         }
