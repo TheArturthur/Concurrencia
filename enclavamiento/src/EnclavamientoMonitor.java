@@ -123,11 +123,11 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // checking of PRE
         // there's no PRE
         // checking of CPRE:
-        if (actual == (trains[1] + trains[2] == 0)) {
+        if (actual == (this.trains[1] + this.trains[2] == 0)) {
             // CPRE will be satisfied when there's no train in segment 1 nor in 2.
             // if CPRE is not satisfied (there's a train in at least one of those segments), we lock the method:
-            barrierState = actual;
-            cCambioBarrera.await();
+            this.barrierState = actual;
+            this.cCambioBarrera.await();
         }
         // implementation of POST:
         // implementation in return.
@@ -137,7 +137,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
         mutex.leave();
         // will return the true if there are no trains in segments 1 and 2, false otherwise:
-        return trains[1] + trains[2] == 0;
+        return this.trains[1] + this.trains[2] == 0;
     }
 
     /**
@@ -157,8 +157,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
         mutex.enter();
         // checking of CPRE and lock:
         if (actual == (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence)) {
-            brakeState = actual;
-            cLeerFreno.await();
+            this.brakeState = actual;
+            this.cLeerFreno.await();
         }
 
         // implementation of POST:
@@ -191,15 +191,16 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // checking PRE: if i = 0 => we throw an exception as there's no Semaphore 0.
         // 'Semaphore 0' is just for simplifying the array code
         if (i == 0) {
+            mutex.leave();
             throw  new PreconditionFailedException();
         }
 
         // checking of the CPRE and posible lock
-        if (colors[i] == actual) {
+        if (this.colors[i] == actual) {
             // Save the 'old' color to check if this semaphore can be unlocked later
-            current[i] = actual;
+            this.current[i] = actual;
             // Put it on stop:
-            cLeerSemaforo[i].await();
+            this.cLeerSemaforo[i].await();
         }
 
         // implementacion de la POST
@@ -209,7 +210,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         unlock();
 
         mutex.leave();
-        return colors[i];
+        return this.colors[i];
     }
 
     /**
@@ -230,14 +231,15 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
         // chequeo de la PRE
         if(i == 0){
+            mutex.leave();
             throw new PreconditionFailedException();
         }
 
         // there's no CPRE, so there's no lock
 
         // implementacion de la POST
-        trains[i - 1]--;
-        trains[i]++;
+        this.trains[i - 1]--;
+        this.trains[i]++;
         coloresCorrectos();
 
         // codigo de desbloqueo
@@ -252,43 +254,43 @@ public class EnclavamientoMonitor implements Enclavamiento {
      * coloresCorrectos()
      */
     private boolean /*void*/ coloresCorrectos() {
-        if (trains[1] > 0) {
-            colors[1] = Control.Color.ROJO;
-        } else if (colors[1] == Control.Color.ROJO) {
-            trains[1] = 1;
+        if (this.trains[1] > 0) {
+            this.colors[1] = Control.Color.ROJO;
+        } else if (this.colors[1] == Control.Color.ROJO) {
+            this.trains[1] = 1;
         }
 
-        if (colors[1] == Control.Color.AMARILLO) {
-            trains[1] = 0;
-            trains[2] = 1;
-            presence = true;
+        if (this.colors[1] == Control.Color.AMARILLO) {
+            this.trains[1] = 0;
+            this.trains[2] = 1;
+            this.presence = true;
         } else if (trains[1] == 0 && (trains[2] > 0 || presence)) {
-            colors[1] = Control.Color.AMARILLO;
+            this.colors[1] = Control.Color.AMARILLO;
         }
 
-        if (colors[1] == Control.Color.VERDE) {
-            trains[1] = 0;
-            trains[2] = 0;
-            presence = false;
-        } else if (trains[1] == 0 && trains[2] == 0 && !presence) {
-            colors[1] = Control.Color.VERDE;
+        if (this.colors[1] == Control.Color.VERDE) {
+            this.trains[1] = 0;
+            this.trains[2] = 0;
+            this.presence = false;
+        } else if (this.trains[1] == 0 && this.trains[2] == 0 && !this.presence) {
+            this.colors[1] = Control.Color.VERDE;
         }
 
-        if (colors[2] == Control.Color.ROJO) {
-            trains[2] = 1;
-            presence = true;
-        } else if (trains[2] > 0 || presence) {
-            colors[2] = Control.Color.ROJO;
+        if (this.colors[2] == Control.Color.ROJO) {
+            this.trains[2] = 1;
+            this.presence = true;
+        } else if (this.trains[2] > 0 || this.presence) {
+            this.colors[2] = Control.Color.ROJO;
         }
 
-        if (colors[2] == Control.Color.VERDE) {
-            trains[2] = 0;
-            presence = false;
-        } else if (trains[2] == 0 && !presence) {
-            colors[2] = Control.Color.VERDE;
+        if (this.colors[2] == Control.Color.VERDE) {
+            this.trains[2] = 0;
+            this.presence = false;
+        } else if (this.trains[2] == 0 && !this.presence) {
+            this.colors[2] = Control.Color.VERDE;
         }
 
-        colors[3] = Control.Color.VERDE;
+        this.colors[3] = Control.Color.VERDE;
         return true;
     }
 
@@ -299,25 +301,44 @@ public class EnclavamientoMonitor implements Enclavamiento {
         boolean signaled = false;
 
         // check cLeerSemaforo
-        for (int i = 0; i < cLeerSemaforo.length && !signaled; i++) {
-            if (cLeerSemaforo[i].waiting() > 0 && colors[i] != current[i]) {
-                cLeerSemaforo[i].signal();
+        for (int i = 0; i < this.cLeerSemaforo.length && !signaled; i++) {
+            if (this.cLeerSemaforo[i].waiting() > 0 && this.colors[i] != this.current[i]) {
+                this.cLeerSemaforo[i].signal();
                 signaled = true;
             }
         }
 
         // check cLeerFreno
-        if (!signaled && cLeerFreno.waiting() > 0 &&
-                brakeState != (this.trains[1] > 1 || (this.trains[2] > 1 || (this.trains[2] == 1 && this.presence)))) {
-            cLeerFreno.signal();
+        if (!signaled && this.cLeerFreno.waiting() > 0 &&
+                this.brakeState != (this.trains[1] > 1 || (this.trains[2] > 1 || (this.trains[2] == 1 && this.presence)))) {
+            this.cLeerFreno.signal();
             signaled = true;
         }
 
         // check cambioBarrera
-        if (!signaled && cCambioBarrera.waiting() > 0 && (barrierState != (trains[1] + trains[2] == 0))) {
-            cCambioBarrera.signal();
+        if (!signaled && this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
+            this.cCambioBarrera.signal();
             signaled = true;
         }
+    }
+
+    public boolean areBarrierConditionsLocked(){
+        return this.cCambioBarrera.waiting() > 0;
+    }
+
+    public boolean areSemaphoreConditionsLocked(){
+        boolean result = false;
+
+        for (int i = 0; i < cLeerSemaforo.length; i++) {
+            if (cLeerSemaforo[i].waiting() > 0){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public boolean areBrakeConditionsLocked(){
+        return this.cLeerFreno.waiting() > 0;
     }
 
 }
