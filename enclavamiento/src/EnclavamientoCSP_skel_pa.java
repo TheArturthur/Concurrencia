@@ -1,263 +1,245 @@
-/*
-// TODO : importar estructuras de datos, si os hace falta
 import org.jcsp.lang.Alternative;
-import org.jcsp.lang.Any2OneChannel;
+import org.jcsp.lang.AltingChannelInput;
 import org.jcsp.lang.CSProcess;
-import org.jcsp.lang.ProcessManager;
 import org.jcsp.lang.Channel;
 import org.jcsp.lang.Guard;
 import org.jcsp.lang.One2OneChannel;
+import org.jcsp.lang.ProcessManager;
 
-*/
+
 /**
- * Implementation using CSP (Mixed).
- * Técnica de peticiones aplazadas
- * excepto en las ops. de aviso (no bloqueantes)
- *
- * @author rul0
- *//*
+ * Implementation using channel replication
+ */
+public class EnclavamientoCSP_skel_pa implements CSProcess, Enclavamiento {
 
-public class EnclavamientoCSP implements CSProcess, Enclavamiento {
+    /** WRAPPER IMPLEMENTATION */
+    /**
+     * Channels for receiving external requests
+     * just one channel for nonblocking requests
+     */
+    private final One2OneChannel chAvisarPresencia     = Channel.one2one();
+    private final One2OneChannel chAvisarPasoPorBaliza = Channel.one2one();
+    // leerCambioBarrera blocks depending on a boolean parameter
+    private final One2OneChannel chLeerCambioBarreraT  = Channel.one2one();
+    private final One2OneChannel chLeerCambioBarreraF  = Channel.one2one();
+    // leerCambioFreno blocks depending on a boolean parameter
+    private final One2OneChannel chLeerCambioFrenoT    = Channel.one2one();
+    private final One2OneChannel chLeerCambioFrenoF    = Channel.one2one();
+    // leerCambioSemaforo blocks depending on a semaphore id and a colour
+    private final One2OneChannel[][] chLeerCambioSemaforo =
+            new One2OneChannel[3][3];
 
-  */
-/** WRAPPER IMPLEMENTATION *//*
 
-  //** Channels for receiving external requests
-  // Un canal por op. del recurso
-  private final Any2OneChannel chAvisarPresencia     = Channel.any2one();
-  private final Any2OneChannel chLeerCambioBarrera   = Channel.any2one();
-  private final Any2OneChannel chLeerCambioFreno     = Channel.any2one();
-  private final Any2OneChannel chLeerCambioSemaforo  = Channel.any2one();
-  private final Any2OneChannel chAvisarPasoPorBaliza = Channel.any2one();
-
-  public EnclavamientoCSP() {
-    new ProcessManager(this).start();
-  }
-
-  // Clases auxiliares para las peticiones que se envían al servidor
-  public static class PeticionLeerCambioBarrera{
-    protected One2OneChannel channel;
-    protected boolean value;
-
-    public PeticionLeerCambioBarrera(One2OneChannel channel, boolean value) {
-      this.channel = channel;
-      this.value = value;
+    public EnclavamientoCSP_skel_pa () {
+        // pending initializations
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                chLeerCambioSemaforo[i][j] = Channel.one2one();
+            }
+        }
+        new ProcessManager(this).start();
     }
-  }
 
-  public static class PeticionLeerCambioFreno{
-    protected One2OneChannel channel;
-    protected boolean value;
-
-    public PeticionLeerCambioFreno(One2OneChannel channel, boolean value) {
-      this.channel = channel;
-      this.value = value;
+    @Override
+    public void avisarPresencia(boolean presencia) {
+        chAvisarPresencia.out().write(presencia);
     }
-  }
 
-  public static class PeticionLeerCambioSemaforo{
-    protected One2OneChannel channel;
-    protected Control.Color color;
-    protected int index;
+    @Override
+    public void avisarPasoPorBaliza(int i) {
+        if (i == 0 )
+            throw new PreconditionFailedException("Baliza 0 no existe");
 
-    public PeticionLeerCambioSemaforo(One2OneChannel channel,
-                                      Control.Color color,
-                                      int index) {
-      this.channel = channel;
-      this.color = color;
-      this.index = index;
+        chAvisarPasoPorBaliza.out().write(i);
     }
-  }
 
-  // Implementación de la interfaz Enclavamiento
-  @Override
-  public void avisarPresencia(boolean presencia) {
-    chAvisarPresencia.out().write(presencia);
-  }
+    @Override
+    public boolean leerCambioBarrera(boolean abierta) {
+        One2OneChannel chreply = Channel.one2one();
+        if (abierta) {
+            chLeerCambioBarreraT.out().write(chreply);
+        } else {
+            chLeerCambioBarreraF.out().write(chreply);
+        }
+        return (Boolean) chreply.in().read();
+    }
 
-  @Override
-  public boolean leerCambioBarrera(boolean abierta) {
-    One2OneChannel ch = Channel.one2one();
-    chLeerCambioBarrera.out().write(new PeticionLeerCambioBarrera(ch, abierta));
+    @Override
+    public boolean leerCambioFreno(boolean accionado) {
+        One2OneChannel chreply = Channel.one2one();
+        if (accionado) {
+            chLeerCambioFrenoT.out().write(chreply);
+        } else {
+            chLeerCambioFrenoF.out().write(chreply);
+        }
+        return (Boolean) chreply.in().read();
+    }
 
-    return (Boolean) ch.in().read();
-  }
+    /** notice that the exception must be thrown outside the server */
+    @Override
+    public Control.Color leerCambioSemaforo (int i, Control.Color color) {
+        if (i == 0 || i > 3)
+            throw new PreconditionFailedException("Semaforo 0 no existe");
 
-  @Override
-  public boolean leerCambioFreno(boolean accionado) {
-    One2OneChannel ch = Channel.one2one();
-    chLeerCambioFreno.out().write(new PeticionLeerCambioFreno(ch, accionado));
+        One2OneChannel chreply = Channel.one2one();
 
-    return (Boolean) ch.in().read();
-  }
+        chLeerCambioSemaforo[i-1][color.ordinal()].out().write(chreply);
 
-  */
-/** notice that exceptions can be thrown outside the server *//*
+        return (Control.Color) chreply.in().read();
+    }
 
-  @Override
-  public Control.Color leerCambioSemaforo(int i, Control.Color color) {
-    if (i == 0 )
-      throw new PreconditionFailedException("Semaforo 0 no existe");
-
-    One2OneChannel ch = Channel.one2one();
-    chLeerCambioSemaforo.out().write(new PeticionLeerCambioSemaforo(ch, color, i));
-
-    return (Control.Color) ch.in().read();
-  }
-
-  @Override
-  public void avisarPasoPorBaliza(int i) {
-    if (i == 0 )
-      throw new PreconditionFailedException("Baliza 0 no existe");
-
-    chAvisarPasoPorBaliza.out().write(i);
-  }
-
-
-  */
-/** SERVER IMPLEMENTATION *//*
-
-  static final int AVISAR_PRESENCIA = 0;
-  static final int LEER_CAMBIO_BARRERA = 1;
-  static final int LEER_CAMBIO_FRENO  = 2;
-  static final int LEER_CAMBIO_SEMAFORO  = 3;
-  static final int AVISAR_PASO_POR_BALIZA = 4;
-
-  @Override
-  public void run() {
-    // TODO : Declarar aquí el estado del recurso:
-    //        presencia, tren y color
-    //
-    // TODO : inicialización del estado del recurso
-    //
-    //
-    //
-    //
-
-    // TODO : Declarar estructuras auxiliares para guardar
-    //        las peticiones aplazadas en el servidor
-    //
-    //
-    //
-    //
-    //
-    //
-
-    // Construcción de la recepción alternativa
-    Guard[] inputs = {
-        chAvisarPresencia.in(),
-        chLeerCambioBarrera.in(),
-        chLeerCambioFreno.in(),
-        chLeerCambioSemaforo.in(),
-        chAvisarPasoPorBaliza.in()
-    };
-
-    Alternative services = new Alternative(inputs);
-    int chosenService = 0;
-
-    // Bucle de servicio
-    while (true){
-      chosenService = services.fairSelect();
-
-      switch (chosenService) {
-
-      case AVISAR_PRESENCIA:
-        //@ assume pre && cpre
-        // TODO : leer petición del canal
-        // TODO : actualizar estado del recurso
+    /** SERVER IMPLEMENTATION */
+    @Override
+    public void run() {
+        // resource state is kept in the server
+        // TODO : Declarar el estado del recurso
+        // TODO : presencia
         //
-        break;
+        // TODO : tren
+        //
+        // TODO : color
+        //
 
-      case LEER_CAMBIO_BARRERA:
-        //@ assume pre
-        // TODO : leer petición del canal
-        // TODO : guardar la petición tal cual
-        break;
-
-      case LEER_CAMBIO_FRENO:
-        //@ assume pre
-        // TODO : leer petición del canal
-        // TODO : guardar la petición tal cual
-        break;
-
-      case LEER_CAMBIO_SEMAFORO:
-        //@ assume pre
-        // TODO : leer petición del canal
-        // TODO : guardar la petición tal cual
-        break;
-
-      case AVISAR_PASO_POR_BALIZA:
-        //@ assume pre && cpre
-        // TODO : leer petición del canal
-        // TODO : actualizar estado del recurso
+        // state initialization
+        // TODO : inicializar vuestra representaciÃ³n del estado del recurso
         //
         //
         //
-        break;
-      } // switch
+        //
+        //
+        //
+        //
 
-      // Código de desbloqueo
-      // TODO : código que recorre vuestras peticiones aplazadas
-      //        procesando aquellas cuya CPRE se cumple,
-      //        hasta que no quede ninguna
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-    } // end bucle servicio
-  } // end run method
+        // mapping request numbers to channels and vice versa
+        // 0 <--> chAvisarPresencia
+        // 1 <--> chAvisarPasoPorBaliza
+        // 2 <--> chLeerCambioBarreraT
+        // 3 <--> chLeerCambioBarreraF
+        // 4 <--> chLeerCambioFrenoT
+        // 5 <--> chLeerCambioFrenoF
+        // 6 + (3*(i-1)) + j <--> chLeerCambioSemaforo[i][j]
+        Guard[] inputs = new AltingChannelInput[15];
+        inputs[0] = chAvisarPresencia.in();
+        inputs[1] = chAvisarPasoPorBaliza.in();
+        inputs[2] = chLeerCambioBarreraT.in();
+        inputs[3] = chLeerCambioBarreraF.in();
+        inputs[4] = chLeerCambioFrenoT.in();
+        inputs[5] = chLeerCambioFrenoF.in();
+        for (int i = 6; i < 15; i++) {
+            inputs[i] = chLeerCambioSemaforo[(i-6) / 3][(i-6) % 3].in();
+        };
 
-  // TODO : meted aquí vuestros métodos auxiliares para
-  //        ajustar luces, cálculo de CPREs, etc.
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
+        Alternative services = new Alternative(inputs);
+        int chosenService = 0;
+
+        // conditional sincronization
+        boolean[] sincCond = new boolean[15];
+        // algunas condiciones de recepciÃ³n no varÃ­an durante
+        // la ejecuciÃ³n del programa
+        // sincCond[0] = ...;
+        // sincCond[1] = ...;
+
+        while (true){
+            // actualizar sincronizaciÃ³n condicional
+            // TODO : actualizar los demÃ¡s elementos de sincCond
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+
+
+            // esperar peticiÃ³n
+            chosenService = services.fairSelect(sincCond);
+            One2OneChannel chreply; // lo usamos para contestar a los clientes
+
+            switch(chosenService){
+                case 0: // avisarPresencia
+                    //@ assume inv & pre && cpre of operation;
+                    // TODO : leer mensaje del canal
+                    // TODO : actualizar estado del recurso
+                    break;
+                case 1: // avisarPasoPorBaliza
+                    //@ assume inv & pre && cpre of operation;
+                    // TODO : leer mensaje del canal
+                    // TODO : actualizar estado del recurso
+                    //
+                    //
+                    //
+                    break;
+                case 2: // leerCambioBarrera(true)
+                    //@ assume inv & pre && cpre of operation;
+                    // TODO : leer mensaje del canal y procesar peticion
+                    //
+                    // TODO : calcular valor a devolver al cliente
+                    //
+                    // TODO : contestar al cliente
+                    break;
+                case 3: // leerCambioBarrera(false)
+                    //@ assume inv & pre && cpre of operation;
+                    // TODO : leer mensaje del canal y procesar peticion
+                    //
+                    // TODO : calcular valor a devolver al cliente
+                    //
+                    // TODO : contestar al cliente
+                    break;
+                case 4: // leerCambioFreno(true)
+                    //@ assume inv & pre && cpre of operation;
+                    // TODO : leer mensaje del canal y procesar peticion
+                    //
+                    // TODO : calcular valor a devolver al cliente
+                    //
+                    // TODO : contestar al cliente
+                    break;
+                case 5: // leerCambioFreno(false)
+                    //@ assume inv & pre && cpre of operation;
+                    // TODO : leer mensaje del canal y procesar peticion
+                    //
+                    // TODO : calcular valor a devolver al cliente
+                    //
+                    // TODO : contestar al cliente
+                    break;
+                default: // leerCambioSemaforo(queSemaforo,queColor)
+                    // TODO : decodificar nÃºmero de semÃ¡foro y color a partir del
+                    //        valor de chosenService
+                    //
+                    //
+                    // TODO : leer mensaje del canal
+                    //
+                    // TODO : contestar al cliente
+                    break;
+            } // SWITCH
+        } // SERVER LOOP
+    } // run()
+
+    // mÃ©todos auxiliares varios
+    // TODO : coloca aquÃ­ aquellos mÃ©todos que hayais
+    //        usado en la otra prÃ¡ctica para ajustar
+    //        luces de semaforos, evaluar CPREs, etc.
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
 
 } // end CLASS
-*/

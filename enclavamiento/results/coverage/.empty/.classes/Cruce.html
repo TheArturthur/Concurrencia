@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Cruce</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">&lt;empty package name&gt;</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Cruce (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Cruce</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Cruce$ControladorBarrera</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Cruce$ControladorFreno</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Cruce$ControladorSemaforo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Cruce$DetectorBaliza</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Cruce$DetectorPresencia</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71,4%
+  </span>
+  <span class="absValue">
+    (5/ 7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95,8%
+  </span>
+  <span class="absValue">
+    (46/ 48)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><b class="fc"><i>1</i>&nbsp;public class Cruce {</b>
+<b class="fc"><i>2</i>&nbsp;    private static Control dispositivos = new ControlSimulado();</b>
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;    public static class DetectorPresencia extends Thread {
+<i>5</i>&nbsp;        private Enclavamiento enclavamiento;
+<b class="fc"><i>6</i>&nbsp;        public DetectorPresencia(Enclavamiento e) {</b>
+<b class="fc"><i>7</i>&nbsp;            enclavamiento = e;</b>
+<b class="fc"><i>8</i>&nbsp;        }</b>
+<i>9</i>&nbsp;        public void run() {
+<b class="fc"><i>10</i>&nbsp;            boolean presencia = true;</b>
+<i>11</i>&nbsp;            while (true) {
+<b class="fc"><i>12</i>&nbsp;                dispositivos.detectarPresencia(presencia);</b>
+<b class="nc"><i>13</i>&nbsp;                enclavamiento.avisarPresencia(presencia);</b>
+<b class="nc"><i>14</i>&nbsp;                presencia = !presencia;</b>
+<i>15</i>&nbsp;            }
+<i>16</i>&nbsp;        }
+<i>17</i>&nbsp;    }
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public static class ControladorBarrera extends Thread {
+<i>20</i>&nbsp;        private Enclavamiento enclavamiento;
+<b class="fc"><i>21</i>&nbsp;        public ControladorBarrera(Enclavamiento e) {</b>
+<b class="fc"><i>22</i>&nbsp;            enclavamiento = e;</b>
+<b class="fc"><i>23</i>&nbsp;        }</b>
+<i>24</i>&nbsp;        public void run() {
+<b class="fc"><i>25</i>&nbsp;            boolean abierta = true;</b>
+<i>26</i>&nbsp;            while (true) {
+<b class="fc"><i>27</i>&nbsp;                if (abierta) {</b>
+<b class="fc"><i>28</i>&nbsp;                    dispositivos.abrirBarrera();</b>
+<i>29</i>&nbsp;                }
+<i>30</i>&nbsp;                else {
+<b class="fc"><i>31</i>&nbsp;                    dispositivos.cerrarBarrera();</b>
+<i>32</i>&nbsp;                }
+<b class="fc"><i>33</i>&nbsp;                abierta = enclavamiento.leerCambioBarrera(abierta);</b>
+<i>34</i>&nbsp;            }
+<i>35</i>&nbsp;        }
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public static class ControladorFreno extends Thread {
+<i>39</i>&nbsp;        private Enclavamiento enclavamiento;
+<b class="fc"><i>40</i>&nbsp;        public ControladorFreno(Enclavamiento e) {</b>
+<b class="fc"><i>41</i>&nbsp;            enclavamiento = e;</b>
+<b class="fc"><i>42</i>&nbsp;        }</b>
+<i>43</i>&nbsp;        public void run() {
+<b class="fc"><i>44</i>&nbsp;            boolean accionado = false;</b>
+<i>45</i>&nbsp;            while (true) {
+<b class="fc"><i>46</i>&nbsp;                dispositivos.accionarFreno(accionado);</b>
+<b class="fc"><i>47</i>&nbsp;                enclavamiento.leerCambioFreno(accionado);</b>
+<b class="fc"><i>48</i>&nbsp;                accionado = !accionado;</b>
+<i>49</i>&nbsp;            }
+<i>50</i>&nbsp;        }
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    public static class ControladorSemaforo extends Thread {
+<i>54</i>&nbsp;        private int i;
+<i>55</i>&nbsp;        private Enclavamiento enclavamiento;
+<i>56</i>&nbsp;        public ControladorSemaforo(int i,
+<b class="fc"><i>57</i>&nbsp;                                   Enclavamiento e) {</b>
+<b class="fc"><i>58</i>&nbsp;            this.i = i;</b>
+<b class="fc"><i>59</i>&nbsp;            enclavamiento = e;</b>
+<b class="fc"><i>60</i>&nbsp;        }</b>
+<i>61</i>&nbsp;        public void run() {
+<b class="fc"><i>62</i>&nbsp;            Control.Color color = Control.Color.ROJO;</b>
+<i>63</i>&nbsp;            while (true) {
+<b class="fc"><i>64</i>&nbsp;                dispositivos.encenderSemaforo(i, color);</b>
+<b class="fc"><i>65</i>&nbsp;                color = enclavamiento.leerCambioSemaforo(i, color);</b>
+<i>66</i>&nbsp;            }
+<i>67</i>&nbsp;        }
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public static class DetectorBaliza extends Thread {
+<i>71</i>&nbsp;        private int i;
+<i>72</i>&nbsp;        private Enclavamiento enclavamiento;
+<i>73</i>&nbsp;        public DetectorBaliza(int i,
+<b class="fc"><i>74</i>&nbsp;                              Enclavamiento e) {</b>
+<b class="fc"><i>75</i>&nbsp;            this.i = i;</b>
+<b class="fc"><i>76</i>&nbsp;            enclavamiento = e;</b>
+<b class="fc"><i>77</i>&nbsp;        }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;        public void run() {
+<i>80</i>&nbsp;            while (true) {
+<b class="fc"><i>81</i>&nbsp;                dispositivos.detectarTren(i);</b>
+<b class="fc"><i>82</i>&nbsp;                enclavamiento.avisarPasoPorBaliza(i);</b>
+<i>83</i>&nbsp;            }
+<i>84</i>&nbsp;        }
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    public static void main(String[] args) {
+<i>88</i>&nbsp;        Enclavamiento enclavamiento;
+<i>89</i>&nbsp;
+<b class="fc"><i>90</i>&nbsp;        enclavamiento = new EnclavamientoMonitor();</b>
+<i>91</i>&nbsp;        //enclavamiento = new EnclavamientoCSP();
+<i>92</i>&nbsp;
+<b class="fc"><i>93</i>&nbsp;        new DetectorPresencia(enclavamiento).start();</b>
+<b class="fc"><i>94</i>&nbsp;        new ControladorBarrera(enclavamiento).start();</b>
+<b class="fc"><i>95</i>&nbsp;        new ControladorFreno(enclavamiento).start();</b>
+<b class="fc"><i>96</i>&nbsp;        new ControladorSemaforo(1, enclavamiento).start();</b>
+<b class="fc"><i>97</i>&nbsp;        new ControladorSemaforo(2, enclavamiento).start();</b>
+<b class="fc"><i>98</i>&nbsp;        new ControladorSemaforo(3, enclavamiento).start();</b>
+<b class="fc"><i>99</i>&nbsp;        new DetectorBaliza(1, enclavamiento).start();</b>
+<b class="fc"><i>100</i>&nbsp;        new DetectorBaliza(2, enclavamiento).start();</b>
+<b class="fc"><i>101</i>&nbsp;        new DetectorBaliza(3, enclavamiento).start();</b>
+<b class="fc"><i>102</i>&nbsp;    }</b>
+<i>103</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-05 20:14</div>
+</div>
+</body>
+</html>

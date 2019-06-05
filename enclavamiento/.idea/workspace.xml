@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c09213dd-2ac6-470e-a667-5794001234e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/EnclavamientoMonitorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_4_13_beta_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/aedlib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/aedlib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/cclib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/cclib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ControlSimulado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ControlSimulado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cruce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cruce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnclavamientoCSP.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnclavamientoMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnclavamientoMonitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnclavamientoMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/EnclavamientoMonitorTest.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/src/" />
@@ -20,6 +26,12 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="202" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -38,13 +50,17 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/results/coverage" />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EnclavamientoMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="199" column="47" selection-start-line="199" selection-start-column="47" selection-end-line="199" selection-end-column="47" />
+            <state relative-caret-position="336">
+              <caret line="101" column="27" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -54,8 +70,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -63,6 +79,7 @@
     <findStrings>
       <find>detec</find>
       <find>detectarPresencia</find>
+      <find>semIndex</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,12 +94,14 @@
         <option value="$PROJECT_DIR$/src/25-05.txt" />
         <option value="$PROJECT_DIR$/test/testEnclavamientoMonitor.java" />
         <option value="$PROJECT_DIR$/test/TestEnclavamientoMonitor.java" />
-        <option value="$PROJECT_DIR$/src/EnclavamientoMonitor.java" />
         <option value="$PROJECT_DIR$/test/EnclavamientoMonitorTest.java" />
         <option value="$PROJECT_DIR$/test/CruceTest.java" />
-        <option value="$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java" />
-        <option value="$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java" />
         <option value="$PROJECT_DIR$/src/Cruce.java" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoCSPTemplate.java" />
+        <option value="$PROJECT_DIR$/src/Tryer.java" />
+        <option value="$PROJECT_DIR$/src/EnclavamientoMonitor.java" />
       </list>
     </option>
   </component>
@@ -90,6 +109,12 @@
     <layout place="tools.popupGrunt">
       <scroll-view-position x="0" y="0" />
     </layout>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="680" />
@@ -103,8 +128,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -112,27 +135,19 @@
               <item name="enclavamiento" type="b2602c69:ProjectViewProjectNode" />
               <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="enclavamiento" type="b2602c69:ProjectViewProjectNode" />
-              <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="enclavamiento" type="b2602c69:ProjectViewProjectNode" />
-              <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="Downloaded.Files.Path" value="C:\Universidad\JavaLib" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
-    <property name="Repository.Attach.Annotations" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -140,13 +155,13 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/jcsp.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/results" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -187,6 +202,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Tryer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tryer" />
+      <module name="enclavamiento" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CruceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="enclavamiento" />
       <option name="PACKAGE_NAME" value="" />
@@ -209,6 +231,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EnclavamientoMonitorTest" type="JUnit" factoryName="JUnit">
+      <module name="enclavamiento" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="enclavamiento" />
       <option name="MAIN_CLASS_NAME" value="" />
@@ -224,10 +257,12 @@
       <item itemvalue="Application.TestEnclavamientoMonitor" />
       <item itemvalue="JUnit.EnclavamientoMonitorTest" />
       <item itemvalue="JUnit.CruceTest" />
+      <item itemvalue="Application.Tryer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Cruce" />
+        <item itemvalue="Application.Tryer" />
         <item itemvalue="JUnit.EnclavamientoMonitorTest" />
         <item itemvalue="JUnit.CruceTest" />
         <item itemvalue="Application.TestEnclavamientoMonitor" />
@@ -258,16 +293,13 @@
       <workItem from="1558807389192" duration="30000" />
       <workItem from="1559120430621" duration="11920000" />
       <workItem from="1559152335896" duration="588000" />
+      <workItem from="1559671699822" duration="12000" />
+      <workItem from="1559733905228" duration="5256000" />
+      <workItem from="1559754409581" duration="4232000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CruceTest - 2019.05.29 at 15h 13m 34s.xml">
-      <configuration name="CruceTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CruceTest - 2019.05.29 at 15h 14m 23s.xml">
-      <configuration name="CruceTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="CruceTest - 2019.05.29 at 15h 14m 40s.xml">
       <configuration name="CruceTest" configurationId="JUnit" />
     </history-entry>
@@ -292,35 +324,40 @@
     <history-entry file="EnclavamientoMonitorTest - 2019.05.29 at 15h 22m 14s.xml">
       <configuration name="EnclavamientoMonitorTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="EnclavamientoMonitor_java - 2019.06.05 at 19h 07m 42s.xml">
+      <configuration name="EnclavamientoMonitor.java" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EnclavamientoMonitorTest - 2019.06.05 at 19h 08m 33s.xml">
+      <configuration name="EnclavamientoMonitorTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32731000" />
+    <option name="totallyTimeSpent" value="42231000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="27" width="1360" height="741" extended-state="6" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info id="Structure" order="5" side_tool="true" weight="0.14350453" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.19213313" />
+      <window_info id="Structure" order="5" sideWeight="0.50162864" side_tool="true" weight="0.19817074" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" sideWeight="0.49837133" visible="true" weight="0.20121951" />
       <window_info id="Learn" order="7" weight="0.32930514" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.4992378" weight="0.3275862" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5007622" side_tool="true" weight="0.3260188" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5007622" side_tool="true" weight="0.3257329" />
       <window_info anchor="bottom" id="Database Changes" order="3" />
       <window_info anchor="bottom" id="Version Control" order="4" />
-      <window_info anchor="bottom" id="Messages" order="5" weight="0.32569557" />
+      <window_info anchor="bottom" id="Messages" order="5" weight="0.32247558" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info anchor="right" id="Maven" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Coverage" sideWeight="0.50162864" side_tool="true" visible="true" weight="0.46189025" />
+      <window_info anchor="right" id="Maven" order="0" weight="0.3292683" />
       <window_info anchor="right" id="Palette" order="1" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
       <window_info anchor="right" id="Database" order="3" weight="0.3292683" />
@@ -329,11 +366,15 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
-      <window_info anchor="right" id="Run" order="9" weight="0.607413" />
+      <window_info anchor="right" id="Run" order="9" sideWeight="0.49837133" weight="0.46189025" />
+      <window_info anchor="right" id="Debug" order="10" sideWeight="0.49837133" weight="0.3285061" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/enclavamiento$Cruce.ic" NAME="Cruce Coverage Results" MODIFIED="1559758353019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/results/18-05.txt">
@@ -342,13 +383,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/results/22-05.txt" />
-    <entry file="file://$PROJECT_DIR$/src/PreconditionFailedException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Enclavamiento.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -384,63 +418,107 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/TestEnclavamientoMonitor.java" />
-    <entry file="file://$PROJECT_DIR$/test/EnclavamientoMonitorTest.java">
+    <entry file="file://$PROJECT_DIR$/test/CruceTest.java" />
+    <entry file="file://$PROJECT_DIR$/test/EnclavamientoMonitorTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/ControlSimulado.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+        <state relative-caret-position="225">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/JavaLib/cclib.jar!/es/upm/babel/cclib/Tryer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/jdk1.8.0_212/src.zip!/java/net/SocketInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1575">
+          <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/CruceTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/ControlSimulado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="28" column="14" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSP_skel_pa.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="19" column="31" selection-end-line="263" />
+        <state relative-caret-position="480">
+          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
           <folding>
-            <element signature="e#0#6049#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSP_skel_rc.java">
+    <entry file="file://$PROJECT_DIR$/src/PreconditionFailedException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" selection-end-line="255" />
+        <state relative-caret-position="15">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
           <folding>
-            <element signature="e#0#6813#0" expanded="true" />
+            <element signature="e#191#192#0" expanded="true" />
+            <element signature="e#212#213#0" expanded="true" />
+            <element signature="e#253#254#0" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EnclavamientoCSPTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="48" column="16" lean-forward="true" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/jdk1.8.0_212/jre/lib/rt.jar!/sun/misc/Unsafe.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="353" column="23" selection-start-line="353" selection-start-column="23" selection-end-line="353" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Cruce.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="90" column="6" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
-          <folding>
-            <element signature="e#229#230#0" expanded="true" />
-            <element signature="e#260#261#0" expanded="true" />
-            <element signature="e#637#638#0" expanded="true" />
-            <element signature="e#668#669#0" expanded="true" />
-            <element signature="e#1103#1104#0" expanded="true" />
-            <element signature="e#1134#1135#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-325">
+          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tryer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="45" lean-forward="true" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/coverage/.img/arrowUp.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/EnclavamientoMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="199" column="47" selection-start-line="199" selection-start-column="47" selection-end-line="199" selection-end-column="47" />
+        <state relative-caret-position="336">
+          <caret line="101" column="27" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -483,6 +561,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -499,7 +578,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -519,7 +597,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>jcsp</last-edited>
+          <last-edited>junit-4.13-beta-3</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

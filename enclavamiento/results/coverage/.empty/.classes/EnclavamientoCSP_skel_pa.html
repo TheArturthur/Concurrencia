@@ -1,0 +1,328 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EnclavamientoCSP_skel_pa</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">&lt;empty package name&gt;</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EnclavamientoCSP_skel_pa (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnclavamientoCSP_skel_pa</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;import org.jcsp.lang.Alternative;
+<i>2</i>&nbsp;import org.jcsp.lang.AltingChannelInput;
+<i>3</i>&nbsp;import org.jcsp.lang.CSProcess;
+<i>4</i>&nbsp;import org.jcsp.lang.Channel;
+<i>5</i>&nbsp;import org.jcsp.lang.Guard;
+<i>6</i>&nbsp;import org.jcsp.lang.One2OneChannel;
+<i>7</i>&nbsp;import org.jcsp.lang.ProcessManager;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Implementation using channel replication
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public class EnclavamientoCSP_skel_pa implements CSProcess, Enclavamiento {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /** WRAPPER IMPLEMENTATION */
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * Channels for receiving external requests
+<i>18</i>&nbsp;     * just one channel for nonblocking requests
+<i>19</i>&nbsp;     */
+<b class="nc"><i>20</i>&nbsp;    private final One2OneChannel chAvisarPresencia     = Channel.one2one();</b>
+<b class="nc"><i>21</i>&nbsp;    private final One2OneChannel chAvisarPasoPorBaliza = Channel.one2one();</b>
+<i>22</i>&nbsp;    // leerCambioBarrera blocks depending on a boolean parameter
+<b class="nc"><i>23</i>&nbsp;    private final One2OneChannel chLeerCambioBarreraT  = Channel.one2one();</b>
+<b class="nc"><i>24</i>&nbsp;    private final One2OneChannel chLeerCambioBarreraF  = Channel.one2one();</b>
+<i>25</i>&nbsp;    // leerCambioFreno blocks depending on a boolean parameter
+<b class="nc"><i>26</i>&nbsp;    private final One2OneChannel chLeerCambioFrenoT    = Channel.one2one();</b>
+<b class="nc"><i>27</i>&nbsp;    private final One2OneChannel chLeerCambioFrenoF    = Channel.one2one();</b>
+<i>28</i>&nbsp;    // leerCambioSemaforo blocks depending on a semaphore id and a colour
+<b class="nc"><i>29</i>&nbsp;    private final One2OneChannel[][] chLeerCambioSemaforo =</b>
+<i>30</i>&nbsp;            new One2OneChannel[3][3];
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;
+<b class="nc"><i>33</i>&nbsp;    public EnclavamientoCSP_skel_pa () {</b>
+<i>34</i>&nbsp;        // pending initializations
+<b class="nc"><i>35</i>&nbsp;        for (int i = 0; i &lt; 3; i++) {</b>
+<b class="nc"><i>36</i>&nbsp;            for (int j = 0; j &lt; 3; j++) {</b>
+<b class="nc"><i>37</i>&nbsp;                chLeerCambioSemaforo[i][j] = Channel.one2one();</b>
+<i>38</i>&nbsp;            }
+<i>39</i>&nbsp;        }
+<b class="nc"><i>40</i>&nbsp;        new ProcessManager(this).start();</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    @Override
+<i>44</i>&nbsp;    public void avisarPresencia(boolean presencia) {
+<b class="nc"><i>45</i>&nbsp;        chAvisarPresencia.out().write(presencia);</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    @Override
+<i>49</i>&nbsp;    public void avisarPasoPorBaliza(int i) {
+<b class="nc"><i>50</i>&nbsp;        if (i == 0 )</b>
+<b class="nc"><i>51</i>&nbsp;            throw new PreconditionFailedException(&quot;Baliza 0 no existe&quot;);</b>
+<i>52</i>&nbsp;
+<b class="nc"><i>53</i>&nbsp;        chAvisarPasoPorBaliza.out().write(i);</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    @Override
+<i>57</i>&nbsp;    public boolean leerCambioBarrera(boolean abierta) {
+<b class="nc"><i>58</i>&nbsp;        One2OneChannel chreply = Channel.one2one();</b>
+<b class="nc"><i>59</i>&nbsp;        if (abierta) {</b>
+<b class="nc"><i>60</i>&nbsp;            chLeerCambioBarreraT.out().write(chreply);</b>
+<i>61</i>&nbsp;        } else {
+<b class="nc"><i>62</i>&nbsp;            chLeerCambioBarreraF.out().write(chreply);</b>
+<i>63</i>&nbsp;        }
+<b class="nc"><i>64</i>&nbsp;        return (Boolean) chreply.in().read();</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    @Override
+<i>68</i>&nbsp;    public boolean leerCambioFreno(boolean accionado) {
+<b class="nc"><i>69</i>&nbsp;        One2OneChannel chreply = Channel.one2one();</b>
+<b class="nc"><i>70</i>&nbsp;        if (accionado) {</b>
+<b class="nc"><i>71</i>&nbsp;            chLeerCambioFrenoT.out().write(chreply);</b>
+<i>72</i>&nbsp;        } else {
+<b class="nc"><i>73</i>&nbsp;            chLeerCambioFrenoF.out().write(chreply);</b>
+<i>74</i>&nbsp;        }
+<b class="nc"><i>75</i>&nbsp;        return (Boolean) chreply.in().read();</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    /** notice that the exception must be thrown outside the server */
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public Control.Color leerCambioSemaforo (int i, Control.Color color) {
+<b class="nc"><i>81</i>&nbsp;        if (i == 0 || i &gt; 3)</b>
+<b class="nc"><i>82</i>&nbsp;            throw new PreconditionFailedException(&quot;Semaforo 0 no existe&quot;);</b>
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;        One2OneChannel chreply = Channel.one2one();</b>
+<i>85</i>&nbsp;
+<b class="nc"><i>86</i>&nbsp;        chLeerCambioSemaforo[i-1][color.ordinal()].out().write(chreply);</b>
+<i>87</i>&nbsp;
+<b class="nc"><i>88</i>&nbsp;        return (Control.Color) chreply.in().read();</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    /** SERVER IMPLEMENTATION */
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public void run() {
+<i>94</i>&nbsp;        // resource state is kept in the server
+<i>95</i>&nbsp;        // TODO : Declarar el estado del recurso
+<i>96</i>&nbsp;        // TODO : presencia
+<i>97</i>&nbsp;        //
+<i>98</i>&nbsp;        // TODO : tren
+<i>99</i>&nbsp;        //
+<i>100</i>&nbsp;        // TODO : color
+<i>101</i>&nbsp;        //
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;        // state initialization
+<i>104</i>&nbsp;        // TODO : inicializar vuestra representaciÃ³n del estado del recurso
+<i>105</i>&nbsp;        //
+<i>106</i>&nbsp;        //
+<i>107</i>&nbsp;        //
+<i>108</i>&nbsp;        //
+<i>109</i>&nbsp;        //
+<i>110</i>&nbsp;        //
+<i>111</i>&nbsp;        //
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;        // mapping request numbers to channels and vice versa
+<i>114</i>&nbsp;        // 0 &lt;--&gt; chAvisarPresencia
+<i>115</i>&nbsp;        // 1 &lt;--&gt; chAvisarPasoPorBaliza
+<i>116</i>&nbsp;        // 2 &lt;--&gt; chLeerCambioBarreraT
+<i>117</i>&nbsp;        // 3 &lt;--&gt; chLeerCambioBarreraF
+<i>118</i>&nbsp;        // 4 &lt;--&gt; chLeerCambioFrenoT
+<i>119</i>&nbsp;        // 5 &lt;--&gt; chLeerCambioFrenoF
+<i>120</i>&nbsp;        // 6 + (3*(i-1)) + j &lt;--&gt; chLeerCambioSemaforo[i][j]
+<b class="nc"><i>121</i>&nbsp;        Guard[] inputs = new AltingChannelInput[15];</b>
+<b class="nc"><i>122</i>&nbsp;        inputs[0] = chAvisarPresencia.in();</b>
+<b class="nc"><i>123</i>&nbsp;        inputs[1] = chAvisarPasoPorBaliza.in();</b>
+<b class="nc"><i>124</i>&nbsp;        inputs[2] = chLeerCambioBarreraT.in();</b>
+<b class="nc"><i>125</i>&nbsp;        inputs[3] = chLeerCambioBarreraF.in();</b>
+<b class="nc"><i>126</i>&nbsp;        inputs[4] = chLeerCambioFrenoT.in();</b>
+<b class="nc"><i>127</i>&nbsp;        inputs[5] = chLeerCambioFrenoF.in();</b>
+<b class="nc"><i>128</i>&nbsp;        for (int i = 6; i &lt; 15; i++) {</b>
+<b class="nc"><i>129</i>&nbsp;            inputs[i] = chLeerCambioSemaforo[(i-6) / 3][(i-6) % 3].in();</b>
+<i>130</i>&nbsp;        };
+<i>131</i>&nbsp;
+<b class="nc"><i>132</i>&nbsp;        Alternative services = new Alternative(inputs);</b>
+<b class="nc"><i>133</i>&nbsp;        int chosenService = 0;</b>
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;        // conditional sincronization
+<b class="nc"><i>136</i>&nbsp;        boolean[] sincCond = new boolean[15];</b>
+<i>137</i>&nbsp;        // algunas condiciones de recepciÃ³n no varÃ­an durante
+<i>138</i>&nbsp;        // la ejecuciÃ³n del programa
+<i>139</i>&nbsp;        // sincCond[0] = ...;
+<i>140</i>&nbsp;        // sincCond[1] = ...;
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;        while (true){
+<i>143</i>&nbsp;            // actualizar sincronizaciÃ³n condicional
+<i>144</i>&nbsp;            // TODO : actualizar los demÃ¡s elementos de sincCond
+<i>145</i>&nbsp;            //
+<i>146</i>&nbsp;            //
+<i>147</i>&nbsp;            //
+<i>148</i>&nbsp;            //
+<i>149</i>&nbsp;            //
+<i>150</i>&nbsp;            //
+<i>151</i>&nbsp;            //
+<i>152</i>&nbsp;            //
+<i>153</i>&nbsp;            //
+<i>154</i>&nbsp;            //
+<i>155</i>&nbsp;            //
+<i>156</i>&nbsp;            //
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;            // esperar peticiÃ³n
+<b class="nc"><i>160</i>&nbsp;            chosenService = services.fairSelect(sincCond);</b>
+<i>161</i>&nbsp;            One2OneChannel chreply; // lo usamos para contestar a los clientes
+<i>162</i>&nbsp;
+<b class="nc"><i>163</i>&nbsp;            switch(chosenService){</b>
+<i>164</i>&nbsp;                case 0: // avisarPresencia
+<i>165</i>&nbsp;                    //@ assume inv &amp; pre &amp;&amp; cpre of operation;
+<i>166</i>&nbsp;                    // TODO : leer mensaje del canal
+<i>167</i>&nbsp;                    // TODO : actualizar estado del recurso
+<b class="nc"><i>168</i>&nbsp;                    break;</b>
+<i>169</i>&nbsp;                case 1: // avisarPasoPorBaliza
+<i>170</i>&nbsp;                    //@ assume inv &amp; pre &amp;&amp; cpre of operation;
+<i>171</i>&nbsp;                    // TODO : leer mensaje del canal
+<i>172</i>&nbsp;                    // TODO : actualizar estado del recurso
+<i>173</i>&nbsp;                    //
+<i>174</i>&nbsp;                    //
+<i>175</i>&nbsp;                    //
+<b class="nc"><i>176</i>&nbsp;                    break;</b>
+<i>177</i>&nbsp;                case 2: // leerCambioBarrera(true)
+<i>178</i>&nbsp;                    //@ assume inv &amp; pre &amp;&amp; cpre of operation;
+<i>179</i>&nbsp;                    // TODO : leer mensaje del canal y procesar peticion
+<i>180</i>&nbsp;                    //
+<i>181</i>&nbsp;                    // TODO : calcular valor a devolver al cliente
+<i>182</i>&nbsp;                    //
+<i>183</i>&nbsp;                    // TODO : contestar al cliente
+<b class="nc"><i>184</i>&nbsp;                    break;</b>
+<i>185</i>&nbsp;                case 3: // leerCambioBarrera(false)
+<i>186</i>&nbsp;                    //@ assume inv &amp; pre &amp;&amp; cpre of operation;
+<i>187</i>&nbsp;                    // TODO : leer mensaje del canal y procesar peticion
+<i>188</i>&nbsp;                    //
+<i>189</i>&nbsp;                    // TODO : calcular valor a devolver al cliente
+<i>190</i>&nbsp;                    //
+<i>191</i>&nbsp;                    // TODO : contestar al cliente
+<b class="nc"><i>192</i>&nbsp;                    break;</b>
+<i>193</i>&nbsp;                case 4: // leerCambioFreno(true)
+<i>194</i>&nbsp;                    //@ assume inv &amp; pre &amp;&amp; cpre of operation;
+<i>195</i>&nbsp;                    // TODO : leer mensaje del canal y procesar peticion
+<i>196</i>&nbsp;                    //
+<i>197</i>&nbsp;                    // TODO : calcular valor a devolver al cliente
+<i>198</i>&nbsp;                    //
+<i>199</i>&nbsp;                    // TODO : contestar al cliente
+<b class="nc"><i>200</i>&nbsp;                    break;</b>
+<i>201</i>&nbsp;                case 5: // leerCambioFreno(false)
+<i>202</i>&nbsp;                    //@ assume inv &amp; pre &amp;&amp; cpre of operation;
+<i>203</i>&nbsp;                    // TODO : leer mensaje del canal y procesar peticion
+<i>204</i>&nbsp;                    //
+<i>205</i>&nbsp;                    // TODO : calcular valor a devolver al cliente
+<i>206</i>&nbsp;                    //
+<i>207</i>&nbsp;                    // TODO : contestar al cliente
+<b class="nc"><i>208</i>&nbsp;                    break;</b>
+<i>209</i>&nbsp;                default: // leerCambioSemaforo(queSemaforo,queColor)
+<i>210</i>&nbsp;                    // TODO : decodificar nÃºmero de semÃ¡foro y color a partir del
+<i>211</i>&nbsp;                    //        valor de chosenService
+<i>212</i>&nbsp;                    //
+<i>213</i>&nbsp;                    //
+<i>214</i>&nbsp;                    // TODO : leer mensaje del canal
+<i>215</i>&nbsp;                    //
+<i>216</i>&nbsp;                    // TODO : contestar al cliente
+<b class="nc"><i>217</i>&nbsp;                    break;</b>
+<i>218</i>&nbsp;            } // SWITCH
+<i>219</i>&nbsp;        } // SERVER LOOP
+<i>220</i>&nbsp;    } // run()
+<i>221</i>&nbsp;
+<i>222</i>&nbsp;    // mÃ©todos auxiliares varios
+<i>223</i>&nbsp;    // TODO : coloca aquÃ­ aquellos mÃ©todos que hayais
+<i>224</i>&nbsp;    //        usado en la otra prÃ¡ctica para ajustar
+<i>225</i>&nbsp;    //        luces de semaforos, evaluar CPREs, etc.
+<i>226</i>&nbsp;    //
+<i>227</i>&nbsp;    //
+<i>228</i>&nbsp;    //
+<i>229</i>&nbsp;    //
+<i>230</i>&nbsp;    //
+<i>231</i>&nbsp;    //
+<i>232</i>&nbsp;    //
+<i>233</i>&nbsp;    //
+<i>234</i>&nbsp;    //
+<i>235</i>&nbsp;    //
+<i>236</i>&nbsp;    //
+<i>237</i>&nbsp;    //
+<i>238</i>&nbsp;    //
+<i>239</i>&nbsp;    //
+<i>240</i>&nbsp;    //
+<i>241</i>&nbsp;    //
+<i>242</i>&nbsp;    //
+<i>243</i>&nbsp;    //
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;} // end CLASS
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-05 20:14</div>
+</div>
+</body>
+</html>

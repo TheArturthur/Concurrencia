@@ -26,7 +26,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // written by:  avisarPresencia, leerCambioBarrera, leerCambioFreno, avisarPasoPorBaliza
     private int[] trains;
     // a '0' would mean there's no train on the segment
-    // whereas a '1' would mean there's in fact a train in that segment
+    // whereas a '1' would mean there's in fact a train in that segment, and so on...
 
     // colors shwon by the Semaphores' lights
     // read by:     leerCambioSemaforo
@@ -130,14 +130,14 @@ public class EnclavamientoMonitor implements Enclavamiento {
             this.cCambioBarrera.await();
         }
         // implementation of POST:
-        // implementation in return.
+        boolean result = this.trains[1] + this.trains[2] == 0;
 
         // unlock code: will call the next method to execute once this one leaves the Monitor
         unlock();
 
         mutex.leave();
         // will return the true if there are no trains in segments 1 and 2, false otherwise:
-        return this.trains[1] + this.trains[2] == 0;
+        return result;
     }
 
     /**
@@ -162,10 +162,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         // implementation of POST:
-        boolean result = false;
-        if(this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence) {
-            result = true;
-        }
+        boolean result = this.trains[1] > 1 || this.trains[2] > 1 || (this.trains[2] == 1 && this.presence);
 
         // unlocking code:
         unlock();
@@ -204,13 +201,13 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         // implementacion de la POST
-        // in return
+        Control.Color result = this.colors[i];
 
         // codigo de desbloqueo
         unlock();
 
         mutex.leave();
-        return this.colors[i];
+        return result;
     }
 
     /**
@@ -250,10 +247,10 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
     /**
      * Assigns the correct colors depending on the values of the state of the railway
-     *
+     * EL ERROR ESTÁ AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      * coloresCorrectos()
      */
-    private boolean /*void*/ coloresCorrectos() {
+    private void coloresCorrectos() {
         if (this.trains[1] > 0) {
             this.colors[1] = Control.Color.ROJO;
         } else if (this.colors[1] == Control.Color.ROJO) {
@@ -291,7 +288,6 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         this.colors[3] = Control.Color.VERDE;
-        return true;
     }
 
     /**
@@ -301,44 +297,24 @@ public class EnclavamientoMonitor implements Enclavamiento {
         boolean signaled = false;
 
         // check cLeerSemaforo
-        for (int i = 0; i < this.cLeerSemaforo.length && !signaled; i++) {
-            if (this.cLeerSemaforo[i].waiting() > 0 && this.colors[i] != this.current[i]) {
-                this.cLeerSemaforo[i].signal();
+        for (int i = 0; i < cLeerSemaforo.length && !signaled; i++) {
+            if (cLeerSemaforo[i].waiting() > 0 && !this.colors[i].equals(current[i])) {
+                cLeerSemaforo[i].signal();
                 signaled = true;
             }
         }
 
         // check cLeerFreno
-        if (!signaled && this.cLeerFreno.waiting() > 0 &&
-                this.brakeState != (this.trains[1] > 1 || (this.trains[2] > 1 || (this.trains[2] == 1 && this.presence)))) {
+        if (this.cLeerFreno.waiting() > 0 &&
+                this.brakeState != (this.trains[1] > 1 || this.trains[2] > 1 || (this.trains[2] == 1 && this.presence))) {
             this.cLeerFreno.signal();
-            signaled = true;
+            return;
         }
 
         // check cambioBarrera
-        if (!signaled && this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
+        if (this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
             this.cCambioBarrera.signal();
-            signaled = true;
+            //return;
         }
     }
-
-    public boolean areBarrierConditionsLocked(){
-        return this.cCambioBarrera.waiting() > 0;
-    }
-
-    public boolean areSemaphoreConditionsLocked(){
-        boolean result = false;
-
-        for (int i = 0; i < cLeerSemaforo.length; i++) {
-            if (cLeerSemaforo[i].waiting() > 0){
-                result = true;
-            }
-        }
-        return result;
-    }
-
-    public boolean areBrakeConditionsLocked(){
-        return this.cLeerFreno.waiting() > 0;
-    }
-
 }

@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ControlSimulado</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">&lt;empty package name&gt;</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ControlSimulado (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ControlSimulado</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92,7%
+  </span>
+  <span class="absValue">
+    (38/ 41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;import es.upm.babel.cclib.ConcIO;
+<i>2</i>&nbsp;import es.upm.babel.cclib.Semaphore;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;public class ControlSimulado implements Control {
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;    //  private final static int HORA = 60000;
+<i>7</i>&nbsp;    private final static int HORA = 2000;
+<i>8</i>&nbsp;    //  private final static int MINUTO = 1000;
+<i>9</i>&nbsp;    private final static int MINUTO = 5000;
+<i>10</i>&nbsp;    private final static int SEGUNDO = 17;
+<i>11</i>&nbsp;
+<b class="fc"><i>12</i>&nbsp;    private Semaphore[] segmento = {</b>
+<i>13</i>&nbsp;            null,
+<i>14</i>&nbsp;            new Semaphore(0),
+<i>15</i>&nbsp;            new Semaphore(0),
+<i>16</i>&nbsp;            new Semaphore(0)
+<i>17</i>&nbsp;    };
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    //  private Semaphore mutex = new Semaphore(1);
+<b class="fc"><i>20</i>&nbsp;    private volatile boolean abierta = true;</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    private void sleep(int ms) {
+<b class="fc"><i>23</i>&nbsp;        try {Thread.sleep(ms);} catch (InterruptedException e) {};</b>
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;    public ControlSimulado() {</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public void detectarTren(int n)
+<i>30</i>&nbsp;    {
+<b class="fc"><i>31</i>&nbsp;        switch (n) {</b>
+<i>32</i>&nbsp;            case 1:
+<b class="fc"><i>33</i>&nbsp;                sleep(1 * HORA);</b>
+<b class="fc"><i>34</i>&nbsp;                segmento[1].signal();</b>
+<b class="fc"><i>35</i>&nbsp;                break;</b>
+<i>36</i>&nbsp;            case 2:
+<b class="fc"><i>37</i>&nbsp;                segmento[1].await();</b>
+<b class="fc"><i>38</i>&nbsp;                sleep(30 * SEGUNDO);</b>
+<b class="fc"><i>39</i>&nbsp;                segmento[2].signal();</b>
+<b class="fc"><i>40</i>&nbsp;                break;</b>
+<i>41</i>&nbsp;            case 3:
+<b class="fc"><i>42</i>&nbsp;                segmento[2].await();</b>
+<b class="fc"><i>43</i>&nbsp;                sleep(30 * SEGUNDO);</b>
+<b class="fc"><i>44</i>&nbsp;                segmento[3].signal();</b>
+<b class="fc"><i>45</i>&nbsp;                break;</b>
+<i>46</i>&nbsp;            default:
+<b class="nc"><i>47</i>&nbsp;                throw new IllegalArgumentException();</b>
+<i>48</i>&nbsp;        }
+<b class="fc"><i>49</i>&nbsp;        ConcIO.printfnl(&quot;Tren pasando baliza &quot; + n);</b>
+<b class="fc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public void encenderSemaforo(int n, Color color)
+<i>53</i>&nbsp;    {
+<b class="fc"><i>54</i>&nbsp;        ConcIO.printfnl(&quot;Semáforo &quot; + n + &quot; &quot; + color);</b>
+<b class="fc"><i>55</i>&nbsp;    }</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public void detectarPresencia(boolean presencia)
+<i>58</i>&nbsp;    {
+<i>59</i>&nbsp;        do {
+<b class="fc"><i>60</i>&nbsp;            sleep(1 * MINUTO);</b>
+<i>61</i>&nbsp;        }
+<b class="fc"><i>62</i>&nbsp;        while (!abierta &amp;&amp; presencia);</b>
+<b class="nc"><i>63</i>&nbsp;        ConcIO.printfnl(&quot;Detectando presencia: %s&quot;,</b>
+<i>64</i>&nbsp;                presencia ? &quot;COCHE DETECTADO&quot; : &quot;NO HAY COCHES&quot;);
+<b class="nc"><i>65</i>&nbsp;    }</b>
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public void abrirBarrera()
+<i>68</i>&nbsp;    {
+<b class="fc"><i>69</i>&nbsp;        ConcIO.printfnl(&quot;Abriendo barrera&quot;);</b>
+<b class="fc"><i>70</i>&nbsp;        sleep(5 * SEGUNDO);</b>
+<b class="fc"><i>71</i>&nbsp;        ConcIO.printfnl(&quot;Barrera abierta&quot;);</b>
+<b class="fc"><i>72</i>&nbsp;        abierta = true;</b>
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public void cerrarBarrera()
+<i>76</i>&nbsp;    {
+<b class="fc"><i>77</i>&nbsp;        ConcIO.printfnl(&quot;Cerrando barrera&quot;);</b>
+<b class="fc"><i>78</i>&nbsp;        sleep(5 * SEGUNDO);</b>
+<b class="fc"><i>79</i>&nbsp;        ConcIO.printfnl(&quot;Barrera cerrada&quot;);</b>
+<b class="fc"><i>80</i>&nbsp;        abierta = false;</b>
+<b class="fc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public void accionarFreno(boolean activo)
+<i>84</i>&nbsp;    {
+<b class="fc"><i>85</i>&nbsp;        if (activo) {</b>
+<b class="fc"><i>86</i>&nbsp;            ConcIO.printfnl(&quot;Freno accionado&quot;);</b>
+<i>87</i>&nbsp;        }
+<i>88</i>&nbsp;        else {
+<b class="fc"><i>89</i>&nbsp;            ConcIO.printfnl(&quot;Freno no accionado&quot;);</b>
+<i>90</i>&nbsp;        }
+<b class="fc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-05 20:14</div>
+</div>
+</body>
+</html>

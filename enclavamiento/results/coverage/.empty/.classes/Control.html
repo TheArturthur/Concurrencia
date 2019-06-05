@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Control</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">&lt;empty package name&gt;</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Control (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">Control$Color</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;
+<i>2</i>&nbsp;public interface Control {
+<i>3</i>&nbsp;  /**
+<i>4</i>&nbsp;   * Operación bloqueante, el proceso que la llama se queda bloqueado
+<i>5</i>&nbsp;   * hasta que un tren pasa sobre la baliza n.
+<i>6</i>&nbsp;  */
+<i>7</i>&nbsp;  void detectarTren(int n);
+<i>8</i>&nbsp;  /**
+<i>9</i>&nbsp;   * Enumerado para los colores de los semáforos.
+<i>10</i>&nbsp;   */
+<b class="fc"><i>11</i>&nbsp;  public static enum Color {ROJO, AMARILLO, VERDE}</b>
+<i>12</i>&nbsp;  /**
+<i>13</i>&nbsp;   * Operación no bloqueante, rápida, enciende la luz indicada en el
+<i>14</i>&nbsp;   * semáforo n.
+<i>15</i>&nbsp;   */
+<i>16</i>&nbsp;  void encenderSemaforo(int n, Color color);
+<i>17</i>&nbsp;  /**
+<i>18</i>&nbsp;   * Operación bloqueante, el proceso que la invoca se queda bloqueado
+<i>19</i>&nbsp;   * hasta que el detector de presencia detecta un cambio con respecto
+<i>20</i>&nbsp;   * a la presencia indicada.  Por ejempo, si se invoca con
+<i>21</i>&nbsp;   * detectarPresencia(true) se bloquea hasta que haya un coche en el
+<i>22</i>&nbsp;   * cruce, si se invoca con detectarPresencia(false) se bloquea hasta
+<i>23</i>&nbsp;   * detectar que no hay ningún coche en el cruce.
+<i>24</i>&nbsp;   */
+<i>25</i>&nbsp;  void detectarPresencia(boolean presencia);
+<i>26</i>&nbsp;  /**
+<i>27</i>&nbsp;   * Operación lenta, el proceso que las invoca queda bloqueado hasta
+<i>28</i>&nbsp;   * que la barrera está abierta.
+<i>29</i>&nbsp;   */
+<i>30</i>&nbsp;  void abrirBarrera();
+<i>31</i>&nbsp;  /**
+<i>32</i>&nbsp;   * Operación lenta, el proceso que las invoca queda bloqueado hasta
+<i>33</i>&nbsp;   * que la barrera está cerrada.
+<i>34</i>&nbsp;   */
+<i>35</i>&nbsp;  void cerrarBarrera();
+<i>36</i>&nbsp;  /**
+<i>37</i>&nbsp;   * Operación no bloqueante, rápida, envía una señal al tren para
+<i>38</i>&nbsp;   * accionar o desactivar el freno de cualquier tren entre la baliza
+<i>39</i>&nbsp;   * 2 y 3
+<i>40</i>&nbsp;   */
+<i>41</i>&nbsp;  void accionarFreno(boolean activo);
+<i>42</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-05 20:14</div>
+</div>
+</body>
+</html>
