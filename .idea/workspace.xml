@@ -3,39 +3,18 @@
   <component name="AutomaticModuleUnloader">
     <loaded-modules>
       <module name="enclavamiento" />
+      <module name="Slides" />
     </loaded-modules>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jcsp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/enclavamiento/.idea/libraries/junit_4_13_beta_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/aedlib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/aedlib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/cclib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/cclib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Slides/Slides.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuePasa/QuePasa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/QuePasa/QuePasa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.idea/libraries/aedlib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.idea/libraries/aedlib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.idea/libraries/cclib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.idea/libraries/cclib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/enclavamiento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/enclavamiento.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Control$Color.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Control$Color.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Control.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Control.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorBarrera.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorBarrera.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorFreno.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorFreno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorSemaforo.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorSemaforo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$DetectorBaliza.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce$DetectorBaliza.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$DetectorPresencia.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce$DetectorPresencia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_rc.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_rc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/test/EnclavamientoMonitorTest.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,12 +41,12 @@
     <favorites_list name="Concurrencia" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1370">
-              <caret line="139" column="21" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
+            <state relative-caret-position="378">
+              <caret line="267" column="45" selection-start-line="267" selection-start-column="45" selection-end-line="267" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -130,22 +109,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
-          <expand>
-            <path>
-              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -162,6 +125,22 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
+          <expand>
+            <path>
+              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -171,9 +150,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552862888271" />
-    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/jcsp.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Slides" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -259,6 +238,7 @@
       <workItem from="1557509225022" duration="1795000" />
       <workItem from="1557512110307" duration="39000" />
       <workItem from="1559758656211" duration="2469000" />
+      <workItem from="1559809408798" duration="1003000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -271,7 +251,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53634000" />
+    <option name="totallyTimeSpent" value="54637000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -283,9 +263,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1360" height="741" extended-state="6" />
+    <frame x="-1" y="24" width="1368" height="745" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.19283536" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.22205438" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -301,10 +282,9 @@
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.7296417" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.7149837" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.40065145" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.40031898" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32736155" />
-      <window_info anchor="right" id="Coverage" sideWeight="0.50162864" side_tool="true" weight="0.41082317" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Structure" order="1" weight="0.1301059" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -315,7 +295,8 @@
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Run" order="10" sideWeight="0.49837133" weight="0.41082317" />
+      <window_info anchor="right" id="Run" order="10" sideWeight="0.49837133" weight="0.41012084" />
+      <window_info anchor="right" id="Coverage" order="11" sideWeight="0.50162864" side_tool="true" weight="0.41082317" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +323,6 @@
     <SUITE FILE_PATH="coverage/Concurrencia$Cruce.ic" NAME="Cruce Coverage Results" MODIFIED="1559759117403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_07_Puente.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_08_PmultiCSync.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_09_PmultiCLocks.java" />
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/excluded/CC_10_PmultiCJCSP.java" />
@@ -537,10 +517,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_rc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1370">
-          <caret line="139" column="21" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
+        <state relative-caret-position="378">
+          <caret line="267" column="45" selection-start-line="267" selection-start-column="45" selection-end-line="267" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -596,7 +586,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>enclavamiento</last-edited>
+          <last-edited>Slides</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -253,37 +253,15 @@ public class EnclavamientoMonitor implements Enclavamiento {
     private void coloresCorrectos() {
         if (this.trains[1] > 0) {
             this.colors[1] = Control.Color.ROJO;
-        } else if (this.colors[1] == Control.Color.ROJO) {
-            this.trains[1] = 1;
-        }
-
-        if (this.colors[1] == Control.Color.AMARILLO) {
-            this.trains[1] = 0;
-            this.trains[2] = 1;
-            this.presence = true;
-        } else if (trains[1] == 0 && (trains[2] > 0 || presence)) {
+        } else if (this.trains[2] > 0 || this.presence) {
             this.colors[1] = Control.Color.AMARILLO;
-        }
-
-        if (this.colors[1] == Control.Color.VERDE) {
-            this.trains[1] = 0;
-            this.trains[2] = 0;
-            this.presence = false;
-        } else if (this.trains[1] == 0 && this.trains[2] == 0 && !this.presence) {
+        } else {
             this.colors[1] = Control.Color.VERDE;
         }
 
-        if (this.colors[2] == Control.Color.ROJO) {
-            this.trains[2] = 1;
-            this.presence = true;
-        } else if (this.trains[2] > 0 || this.presence) {
+        if (this.trains[2] > 0 && this.presence) {
             this.colors[2] = Control.Color.ROJO;
-        }
-
-        if (this.colors[2] == Control.Color.VERDE) {
-            this.trains[2] = 0;
-            this.presence = false;
-        } else if (this.trains[2] == 0 && !this.presence) {
+        } else {
             this.colors[2] = Control.Color.VERDE;
         }
 
