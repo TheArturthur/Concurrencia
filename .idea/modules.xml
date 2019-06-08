@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/Esqueletos Segundo Parcial.iml" filepath="$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/Esqueletos Segundo Parcial.iml" />
       <module fileurl="file://$PROJECT_DIR$/QuePasa/QuePasa.iml" filepath="$PROJECT_DIR$/QuePasa/QuePasa.iml" />
       <module fileurl="file://$PROJECT_DIR$/Slides/Slides.iml" filepath="$PROJECT_DIR$/Slides/Slides.iml" />
       <module fileurl="file://$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.iml" filepath="$PROJECT_DIR$/ejercicios-cortos/ejercicios-cortos.iml" />

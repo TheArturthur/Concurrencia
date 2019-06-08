@@ -1,4 +1,5 @@
 import es.upm.babel.cclib.Monitor;
+import es.upm.aedlib.fifo.*;
 
 
 
@@ -13,8 +14,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
     // In the following arrays, position 0 is never used for data. It just clarifies the rest of the array.
 
-    // Array to save the conditions of each semaphore individually:
-    private Monitor.Cond[] cLeerSemaforo =  new Monitor.Cond[nSegments + 1];
+    // FIFO List to save the conditions of each semaphore individually in order:
+    private FIFOList<CondEnclavamiento> cLeerSemaforo;
 
     // Condition for brake change:
     private Monitor.Cond cLeerFreno;
@@ -66,11 +67,11 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // and put each semaphore color to VERDE, along with the current colors (later on they will be changed):
         // This way, if there's a change in the number of segments (and the number of semaphores), it's changed automatically.
         for (int i = 0; i <= nSegments; i++) {
-            this.cLeerSemaforo[i] = mutex.newCond();
             this.colors[i] = Control.Color.VERDE;
             this.current[i] = Control.Color.VERDE;
         }
 
+        this.cLeerSemaforo = new FIFOList<CondEnclavamiento>();
         this.cLeerFreno = mutex.newCond();
         this.cCambioBarrera = mutex.newCond();
 
@@ -197,7 +198,9 @@ public class EnclavamientoMonitor implements Enclavamiento {
             // Save the 'old' color to check if this semaphore can be unlocked later
             this.current[i] = actual;
             // Put it on stop:
-            this.cLeerSemaforo[i].await();
+            Monitor.Cond condSemaphore = mutex.newCond();
+            cLeerSemaforo.enqueue(new CondEnclavamiento(i, condSemaphore));
+            condSemaphore.await();
         }
 
         // implementacion de la POST
@@ -247,7 +250,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
     /**
      * Assigns the correct colors depending on the values of the state of the railway
-     * EL ERROR ESTÁ AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     *
      * coloresCorrectos()
      */
     private void coloresCorrectos() {
@@ -275,24 +278,47 @@ public class EnclavamientoMonitor implements Enclavamiento {
         boolean signaled = false;
 
         // check cLeerSemaforo
-        for (int i = 0; i < cLeerSemaforo.length && !signaled; i++) {
-            if (cLeerSemaforo[i].waiting() > 0 && !this.colors[i].equals(current[i])) {
-                cLeerSemaforo[i].signal();
+        for (int i = 0; i < cLeerSemaforo.size() && !signaled; i++) {
+            CondEnclavamiento condition = cLeerSemaforo.first();
+            cLeerSemaforo.dequeue();
+
+            if (!this.colors[i].equals(current[i])) {
+                condition.getCondition().signal();
                 signaled = true;
+            } else {
+                cLeerSemaforo.enqueue(condition);
             }
         }
 
         // check cLeerFreno
-        if (this.cLeerFreno.waiting() > 0 &&
+        if (!signaled && this.cLeerFreno.waiting() > 0 &&
                 this.brakeState != (this.trains[1] > 1 || this.trains[2] > 1 || (this.trains[2] == 1 && this.presence))) {
             this.cLeerFreno.signal();
             return;
         }
 
         // check cambioBarrera
-        if (this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
+        if (!signaled && this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
             this.cCambioBarrera.signal();
             //return;
+        }
+    }
+
+    private static class CondEnclavamiento {
+        private int id;
+        private Monitor.Cond condition;
+
+        public int getId() {
+            return id;
+        }
+
+        public Monitor.Cond getCondition() {
+            return condition;
+        }
+
+        public CondEnclavamiento(int id, Monitor.Cond condition){
+            this.id = id;
+            this.condition = condition;
         }
     }
 }
