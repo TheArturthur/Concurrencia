@@ -32,12 +32,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // colors shwon by the Semaphores' lights
     // read by:     leerCambioSemaforo
     // written by:  leerCambioSemaforo, avisarPresencia
-    private Control.Color[] colors = new Control.Color[nSegments + 1];
-
-    // current colors (that should be changed in the semaphores)
-    // read by:     leerCambioSemaforo
-    // written by:  leerCambioSemaforo, avisarPresencia
-    private Control.Color[] current = new Control.Color[nSegments + 1];
+    private Control.Color[] colors;
 
     // boolean to check if there's a train in a certain segment
     // read by:     leerCambioFreno
@@ -66,9 +61,10 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // Loop to create a Condition for each Semaphore in the railway at the rate of 1 semaphore per segment,
         // and put each semaphore color to VERDE, along with the current colors (later on they will be changed):
         // This way, if there's a change in the number of segments (and the number of semaphores), it's changed automatically.
-        for (int i = 0; i <= nSegments; i++) {
+        this.colors = new Control.Color[nSegments + 1];
+
+        for (int i = 1; i < nSegments + 1; i++) {
             this.colors[i] = Control.Color.VERDE;
-            this.current[i] = Control.Color.VERDE;
         }
 
         this.cLeerSemaforo = new FIFOList<CondEnclavamiento>();
@@ -186,6 +182,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
     @Override
     public Control.Color leerCambioSemaforo(int i, Control.Color actual) {
         mutex.enter();
+
         // checking PRE: if i = 0 => we throw an exception as there's no Semaphore 0.
         // 'Semaphore 0' is just for simplifying the array code
         if (i == 0) {
@@ -194,12 +191,10 @@ public class EnclavamientoMonitor implements Enclavamiento {
         }
 
         // checking of the CPRE and posible lock
-        if (this.colors[i] == actual) {
-            // Save the 'old' color to check if this semaphore can be unlocked later
-            this.current[i] = actual;
+        if (this.colors[i].equals(actual)) {
             // Put it on stop:
             Monitor.Cond condSemaphore = mutex.newCond();
-            cLeerSemaforo.enqueue(new CondEnclavamiento(i, condSemaphore));
+            cLeerSemaforo.enqueue(new CondEnclavamiento(i, actual, condSemaphore));
             condSemaphore.await();
         }
 
@@ -238,8 +233,14 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // there's no CPRE, so there's no lock
 
         // implementacion de la POST
-        this.trains[i - 1]--;
-        this.trains[i]++;
+        // if the segment in which the train is passing through is the first one, there's no need in decrementing the
+        // "segment 0"
+        if (i == 1) {
+            this.trains[1]++;
+        }else {
+            this.trains[i - 1]--;
+            this.trains[i]++;
+        }
         coloresCorrectos();
 
         // codigo de desbloqueo
@@ -278,11 +279,12 @@ public class EnclavamientoMonitor implements Enclavamiento {
         boolean signaled = false;
 
         // check cLeerSemaforo
-        for (int i = 0; i < cLeerSemaforo.size() && !signaled; i++) {
+        int n = cLeerSemaforo.size();
+        for (int i = 0; i < n && !signaled; i++) {
             CondEnclavamiento condition = cLeerSemaforo.first();
             cLeerSemaforo.dequeue();
 
-            if (!this.colors[i].equals(current[i])) {
+            if (!this.colors[condition.getId()].equals(condition.actual)) {
                 condition.getCondition().signal();
                 signaled = true;
             } else {
@@ -294,18 +296,18 @@ public class EnclavamientoMonitor implements Enclavamiento {
         if (!signaled && this.cLeerFreno.waiting() > 0 &&
                 this.brakeState != (this.trains[1] > 1 || this.trains[2] > 1 || (this.trains[2] == 1 && this.presence))) {
             this.cLeerFreno.signal();
-            return;
+            signaled = true;
         }
 
         // check cambioBarrera
         if (!signaled && this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
             this.cCambioBarrera.signal();
-            //return;
         }
     }
 
     private static class CondEnclavamiento {
         private int id;
+        private Control.Color actual;
         private Monitor.Cond condition;
 
         public int getId() {
@@ -316,8 +318,9 @@ public class EnclavamientoMonitor implements Enclavamiento {
             return condition;
         }
 
-        public CondEnclavamiento(int id, Monitor.Cond condition){
+        public CondEnclavamiento(int id, Control.Color actual, Monitor.Cond condition){
             this.id = id;
+            this.actual = actual;
             this.condition = condition;
         }
     }
