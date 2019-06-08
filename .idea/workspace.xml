@@ -6,28 +6,7 @@
     </loaded-modules>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/enclavamiento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/enclavamiento.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Control$Color.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Control.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorBarrera.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorFreno.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$ControladorSemaforo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$DetectorBaliza.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce$DetectorPresencia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSPTemplate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_rc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor$CondEnclavamiento.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitorTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.class" beforeDir="false" />
-    </list>
+    <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="78" column="5" lean-forward="true" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+            <state relative-caret-position="330">
+              <caret line="71" column="46" lean-forward="true" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+            <state relative-caret-position="365">
+              <caret line="92" column="8" lean-forward="true" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="8" />
               <folding>
                 <element signature="e#241#242#0" expanded="true" />
                 <element signature="e#282#283#0" expanded="true" />
@@ -120,13 +99,13 @@
         <option value="$PROJECT_DIR$/enclavamiento/src/ControlSimulado.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/Enclavamiento.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/PreconditionFailedException.java" />
-        <option value="$PROJECT_DIR$/enclavamiento/src/Cruce.java" />
         <option value="$PROJECT_DIR$/enclavamiento/Cruce.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/.gitignore" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/enclavamiento/results/06-06.txt" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/Cruce.java" />
       </list>
     </option>
   </component>
@@ -329,7 +308,7 @@
       <workItem from="1559838470342" duration="1853000" />
       <workItem from="1559841021455" duration="2230000" />
       <workItem from="1559989671584" duration="777000" />
-      <workItem from="1559990466028" duration="7270000" />
+      <workItem from="1559990466028" duration="7951000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -338,11 +317,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551624725910</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Commit">
+      <created>1560007815278</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1560007815278</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66767000" />
+    <option name="totallyTimeSpent" value="67448000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -357,7 +343,7 @@
     <frame x="0" y="27" width="1360" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.23704268" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.23704268" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -401,7 +387,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Comentarios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comentarios" />
+    <MESSAGE value="Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -630,21 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="e#241#242#0" expanded="true" />
-            <element signature="e#282#283#0" expanded="true" />
-            <element signature="e#721#722#0" expanded="true" />
-            <element signature="e#762#763#0" expanded="true" />
-            <element signature="e#1295#1296#0" expanded="true" />
-            <element signature="e#1336#1337#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/Monitores/Esquema 5 - Indexación Parámetros.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-505" />
@@ -659,10 +631,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="78" column="5" lean-forward="true" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+        <state relative-caret-position="330">
+          <caret line="71" column="46" lean-forward="true" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="92" column="8" lean-forward="true" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="8" />
+          <folding>
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#721#722#0" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#1295#1296#0" expanded="true" />
+            <element signature="e#1336#1337#0" expanded="true" />
           </folding>
         </state>
       </provider>
