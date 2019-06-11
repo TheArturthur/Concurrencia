@@ -6,13 +6,12 @@ import org.jcsp.lang.Guard;
 import org.jcsp.lang.One2OneChannel;
 import org.jcsp.lang.ProcessManager;
 
-
 /**
  * Implementation using channel replication
  */
-public class EnclavamientoCSP_skel_pa implements CSProcess, Enclavamiento {
+public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
-    /** WRAPPER IMPLEMENTATION */
+    /* WRAPPER IMPLEMENTATION */
     /**
      * Channels for receiving external requests
      * just one channel for nonblocking requests
@@ -30,7 +29,7 @@ public class EnclavamientoCSP_skel_pa implements CSProcess, Enclavamiento {
             new One2OneChannel[3][3];
 
 
-    public EnclavamientoCSP_skel_pa () {
+    public EnclavamientoCSP () {
         // pending initializations
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

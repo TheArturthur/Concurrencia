@@ -87,8 +87,8 @@ public class Cruce {
     public static void main(String[] args) {
         Enclavamiento enclavamiento;
 
-        enclavamiento = new EnclavamientoMonitor();
-        //enclavamiento = new EnclavamientoCSP();
+        //enclavamiento = new EnclavamientoMonitor();
+        enclavamiento = new EnclavamientoCSP();
 
         new DetectorPresencia(enclavamiento).start();
         new ControladorBarrera(enclavamiento).start();
@@ -99,5 +99,46 @@ public class Cruce {
         new DetectorBaliza(1, enclavamiento).start();
         new DetectorBaliza(2, enclavamiento).start();
         new DetectorBaliza(3, enclavamiento).start();
+
+        /*
+        System.out.println("hola");
+        new Thread( new Runnable() {
+            @Override
+            public void run() {
+                enclavamiento.leerCambioBarrera(true);
+                System.out.println("hola barrera");
+            }
+        }).start();
+
+        new Thread( new Runnable() {
+            @Override
+            public void run() {
+                enclavamiento.leerCambioFreno(false);
+                System.out.println("hola freno");
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                enclavamiento.leerCambioSemaforo(1, Control.Color.VERDE);
+                System.out.println("Hola 1");
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                enclavamiento.leerCambioSemaforo(2, Control.Color.VERDE);
+                System.out.println("Hola 2");
+            }
+        }).start();
+
+        try {
+            Thread.sleep(1000);
+        }catch (Exception e){}
+        enclavamiento.avisarPasoPorBaliza(1);
+        enclavamiento.avisarPasoPorBaliza(2);
+        */
     }
 }

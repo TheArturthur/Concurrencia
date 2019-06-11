@@ -15,7 +15,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
     // In the following arrays, position 0 is never used for data. It just clarifies the rest of the array.
 
     // FIFO List to save the conditions of each semaphore individually in order:
-    private FIFOList<CondEnclavamiento> cLeerSemaforo;
+    private FIFOList<CondSemaphore> cLeerSemaforo;
 
     // Condition for brake change:
     private Monitor.Cond cLeerFreno;
@@ -67,7 +67,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
             this.colors[i] = Control.Color.VERDE;
         }
 
-        this.cLeerSemaforo = new FIFOList<CondEnclavamiento>();
+        // Initialization of the
+        this.cLeerSemaforo = new FIFOList<CondSemaphore>();
         this.cLeerFreno = mutex.newCond();
         this.cCambioBarrera = mutex.newCond();
 
@@ -96,6 +97,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
         // implementation of POST
         this.presence = presence;
+
+        // Set the correct colors after changing the state:
         coloresCorrectos();
 
         // unlock code:
@@ -120,20 +123,20 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // checking of PRE
         // there's no PRE
         // checking of CPRE:
-        if (actual == (this.trains[1] + this.trains[2] == 0)) {
+        if (!checkBarrierCPRE(actual)) {
             // CPRE will be satisfied when there's no train in segment 1 nor in 2.
             // if CPRE is not satisfied (there's a train in at least one of those segments), we lock the method:
             this.barrierState = actual;
             this.cCambioBarrera.await();
         }
-        // implementation of POST:
+        // implementation of POST: true if there are no trains in segments 1 and 2, false otherwise:
         boolean result = this.trains[1] + this.trains[2] == 0;
 
         // unlock code: will call the next method to execute once this one leaves the Monitor
         unlock();
 
+        // leave the Monitor and return the result:
         mutex.leave();
-        // will return the true if there are no trains in segments 1 and 2, false otherwise:
         return result;
     }
 
@@ -153,7 +156,8 @@ public class EnclavamientoMonitor implements Enclavamiento {
     public boolean leerCambioFreno(boolean actual) {
         mutex.enter();
         // checking of CPRE and lock:
-        if (actual == (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence)) {
+        if (!checkBrakeCPRE(actual)) {
+            // if CPRE is not satisfied, save the actual value and lock the method:
             this.brakeState = actual;
             this.cLeerFreno.await();
         }
@@ -164,6 +168,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         // unlocking code:
         unlock();
 
+        // leave the Monitor and return the result value:
         mutex.leave();
         return result;
     }
@@ -181,29 +186,32 @@ public class EnclavamientoMonitor implements Enclavamiento {
      */
     @Override
     public Control.Color leerCambioSemaforo(int i, Control.Color actual) {
-        mutex.enter();
 
         // checking PRE: if i = 0 => we throw an exception as there's no Semaphore 0.
         // 'Semaphore 0' is just for simplifying the array code
         if (i == 0) {
-            mutex.leave();
-            throw  new PreconditionFailedException();
+            throw new PreconditionFailedException();
         }
 
-        // checking of the CPRE and posible lock
-        if (this.colors[i].equals(actual)) {
-            // Put it on stop:
+        // Enter the Monitor:
+        mutex.enter();
+
+        // checking of the CPRE and posible lock: if the color of the semaphore is the same, lock.
+        if (checkSemaphoreCPRE(i, actual)) {
+            // Create a new condition, saving it in the FIFO List
             Monitor.Cond condSemaphore = mutex.newCond();
-            cLeerSemaforo.enqueue(new CondEnclavamiento(i, actual, condSemaphore));
+            cLeerSemaforo.enqueue(new CondSemaphore(i, actual, condSemaphore));
+            // Send it to wait:
             condSemaphore.await();
         }
 
-        // implementacion de la POST
+        // implementacion de la POST: return new color
         Control.Color result = this.colors[i];
 
-        // codigo de desbloqueo
+        // unlocking code
         unlock();
 
+        // leave the Monitor and return the color
         mutex.leave();
         return result;
     }
@@ -222,17 +230,18 @@ public class EnclavamientoMonitor implements Enclavamiento {
      */
     @Override
     public void avisarPasoPorBaliza(int i) {
-        mutex.enter();
 
-        // chequeo de la PRE
+        // Checking of PRE before entering the Monitor, as it depends on the value passed:
         if(i == 0){
-            mutex.leave();
             throw new PreconditionFailedException();
         }
 
+        // Entering the Monitor
+        mutex.enter();
+
         // there's no CPRE, so there's no lock
 
-        // implementacion de la POST
+        // implementation of the POST:
         // if the segment in which the train is passing through is the first one, there's no need in decrementing the
         // "segment 0"
         if (i == 1) {
@@ -241,11 +250,14 @@ public class EnclavamientoMonitor implements Enclavamiento {
             this.trains[i - 1]--;
             this.trains[i]++;
         }
+
+        // Set the correct colors after changing the state:
         coloresCorrectos();
 
-        // codigo de desbloqueo
+        // unlocking code:
         unlock();
 
+        // leave the Monitor:
         mutex.leave();
     }
 
@@ -255,20 +267,30 @@ public class EnclavamientoMonitor implements Enclavamiento {
      * coloresCorrectos()
      */
     private void coloresCorrectos() {
+        // About the first semaphore:
         if (this.trains[1] > 0) {
+            // If there's at least one train in the first segment, we put the first semaphore to RED.
             this.colors[1] = Control.Color.ROJO;
         } else if (this.trains[2] > 0 || this.presence) {
+            // If there's at least one train in the second segment or there's a car,
+            // we put the first semaphore to YELLOW.
             this.colors[1] = Control.Color.AMARILLO;
         } else {
+            // Else, we put it GREEN.
             this.colors[1] = Control.Color.VERDE;
         }
 
-        if (this.trains[2] > 0 && this.presence) {
+        // About the second semaphore:
+        if (this.trains[2] > 0 || this.presence) {
+            // If there's at least one train in the second segment or there's a car,
+            // we put the second semaphore to RED.
             this.colors[2] = Control.Color.ROJO;
         } else {
+            // If not, we put it to GREEN.
             this.colors[2] = Control.Color.VERDE;
         }
 
+        // The third semaphore will always be GREEN.
         this.colors[3] = Control.Color.VERDE;
     }
 
@@ -276,49 +298,88 @@ public class EnclavamientoMonitor implements Enclavamiento {
      * Searches for a sleeping thread that's waiting and signals it.
      */
     private void unlock() {
+
+        // Variable to take into account if a thread has been signaled:
         boolean signaled = false;
 
         // check cLeerSemaforo
+        // save the size of the FIFO List with the Semaphore conditions:
         int n = cLeerSemaforo.size();
+        // we run through all the List if there's at least one condition in it:
         for (int i = 0; i < n && !signaled; i++) {
-            CondEnclavamiento condition = cLeerSemaforo.first();
+            // get the first condition available and dequeue it from the List:
+            CondSemaphore condition = cLeerSemaforo.first();
             cLeerSemaforo.dequeue();
 
-            if (!this.colors[condition.getId()].equals(condition.actual)) {
+            // If the CPRE of that condition now is true, signal it and set the signaled variable to true, so there's
+            // only one signal:
+            if (!checkSemaphoreCPRE(condition.getId(), condition.getActual())) {
                 condition.getCondition().signal();
                 signaled = true;
             } else {
+                // If the CPRE of that condition is still false, we put the condition back to the List:
                 cLeerSemaforo.enqueue(condition);
             }
         }
 
-        // check cLeerFreno
-        if (!signaled && this.cLeerFreno.waiting() > 0 &&
-                this.brakeState != (this.trains[1] > 1 || this.trains[2] > 1 || (this.trains[2] == 1 && this.presence))) {
+        // check cLeerFreno, only if no semaphore was signaled:
+        // If there is a brake condition waiting and its CPRE is now true:
+        if (!signaled && this.cLeerFreno.waiting() > 0 && checkBrakeCPRE(this.brakeState)) {
+            // signal the condition and set the signaled variable to true, so there's only one signal:
             this.cLeerFreno.signal();
             signaled = true;
         }
 
-        // check cambioBarrera
-        if (!signaled && this.cCambioBarrera.waiting() > 0 && (this.barrierState != (this.trains[1] + this.trains[2] == 0))) {
+        // check cambioBarrera, only if no semaphore nor the brake was signaled:
+        // If there is a barrier condition waiting and its CPRE is now true:
+        if (!signaled && this.cCambioBarrera.waiting() > 0 && checkBarrierCPRE(this.barrierState)) {
+            // signal the condition (now there's no need of setting the signaled variable to true, as there are no more
+            // options
             this.cCambioBarrera.signal();
         }
     }
 
-    private static class CondEnclavamiento {
+    // checks the value of the Semaphore CPRE:
+    private boolean checkSemaphoreCPRE (int index, Control.Color actual) {
+        return this.colors[index].equals(actual);
+    }
+
+    // checks the value of the Brake CPRE:
+    private boolean checkBrakeCPRE (boolean actual) {
+        return actual != (this.trains[1] > 1 || this.trains[2] > 1 || this.trains[2] == 1 && this.presence);
+    }
+
+    // checks the value of the Barrier CPRE:
+    private boolean checkBarrierCPRE (boolean actual) {
+        return actual != (this.trains[1] + this.trains[2] == 0);
+    }
+
+    // Object CondSemaphore to save the values needed to signal the semaphore's conditions:
+    private static class CondSemaphore {
+        // It saves: the semaphore id,
         private int id;
+        //  the actual color from when it was called and locked,
         private Control.Color actual;
+        // and the Monitor condition itself:
         private Monitor.Cond condition;
 
+        // Getter to check the semaphore index:
         public int getId() {
-            return id;
+            return this.id;
         }
 
+        // Getter to signal the condition:
         public Monitor.Cond getCondition() {
-            return condition;
+            return this.condition;
         }
 
-        public CondEnclavamiento(int id, Control.Color actual, Monitor.Cond condition){
+        // Getter to check the semaphore color for the CPRE:
+        public Control.Color getActual() {
+            return this.actual;
+        }
+
+        // Constructor to create the object when creating the condition:
+        public CondSemaphore(int id, Control.Color actual, Monitor.Cond condition){
             this.id = id;
             this.actual = actual;
             this.condition = condition;
