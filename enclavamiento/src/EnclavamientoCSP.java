@@ -16,17 +16,19 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
      * Channels for receiving external requests
      * just one channel for nonblocking requests
      */
-    private final One2OneChannel chAvisarPresencia     = Channel.one2one();
+    private final One2OneChannel chAvisarPresencia = Channel.one2one();
     private final One2OneChannel chAvisarPasoPorBaliza = Channel.one2one();
+
     // leerCambioBarrera blocks depending on a boolean parameter
-    private final One2OneChannel chLeerCambioBarreraT  = Channel.one2one();
-    private final One2OneChannel chLeerCambioBarreraF  = Channel.one2one();
+    private final One2OneChannel chLeerCambioBarreraT = Channel.one2one();
+    private final One2OneChannel chLeerCambioBarreraF = Channel.one2one();
+
     // leerCambioFreno blocks depending on a boolean parameter
-    private final One2OneChannel chLeerCambioFrenoT    = Channel.one2one();
-    private final One2OneChannel chLeerCambioFrenoF    = Channel.one2one();
+    private final One2OneChannel chLeerCambioFrenoT = Channel.one2one();
+    private final One2OneChannel chLeerCambioFrenoF = Channel.one2one();
+
     // leerCambioSemaforo blocks depending on a semaphore id and a colour
-    private final One2OneChannel[][] chLeerCambioSemaforo =
-            new One2OneChannel[3][3];
+    private final One2OneChannel[][] chLeerCambioSemaforo = new One2OneChannel[3][3];
 
 
     public EnclavamientoCSP () {
@@ -91,23 +93,26 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
     @Override
     public void run() {
         // resource state is kept in the server
-        // TODO : Declarar el estado del recurso
-        // TODO : presencia
-        //
-        // TODO : tren
-        //
-        // TODO : color
-        //
+
+        int nSegments = 3;
+
+        boolean presence;
+
+        int[] trains;
+
+        Control.Color[] colors;
 
         // state initialization
-        // TODO : inicializar vuestra representaciÃ³n del estado del recurso
-        //
-        //
-        //
-        //
-        //
-        //
-        //
+        colors = new Control.Color[nSegments + 1];
+
+        for (int i = 0; i < nSegments + 1; i++) {
+            colors[i] = Control.Color.VERDE;
+        }
+
+        presence = false;
+
+        trains = new int[]{0,0,0,0};
+
 
         // mapping request numbers to channels and vice versa
         // 0 <--> chAvisarPresencia
@@ -135,25 +140,19 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         boolean[] sincCond = new boolean[15];
         // algunas condiciones de recepciÃ³n no varÃ­an durante
         // la ejecuciÃ³n del programa
-        // sincCond[0] = ...;
-        // sincCond[1] = ...;
+        sincCond[0] = true;
+        sincCond[1] = true;
 
         while (true){
             // actualizar sincronizaciÃ³n condicional
-            // TODO : actualizar los demÃ¡s elementos de sincCond
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
+            sincCond[2] = checkBarrierCPRE(true, trains);
+            sincCond[3] = checkBarrierCPRE(false, trains);
+            sincCond[4] = checkBrakeCPRE(true, trains, presence);
+            sincCond[5] = checkBrakeCPRE(false, trains, presence);
 
+            for (int i = 6; i < 15; i++) {
+                sincCond[i] = checkSemaphoreCPRE((i-6) / 3, colors[(i-6) % 3], colors);
+            }
 
             // esperar peticiÃ³n
             chosenService = services.fairSelect(sincCond);
@@ -162,83 +161,120 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
             switch(chosenService){
                 case 0: // avisarPresencia
                     //@ assume inv & pre && cpre of operation;
-                    // TODO : leer mensaje del canal
-                    // TODO : actualizar estado del recurso
+
+                    presence = (Boolean) chAvisarPresencia.in().read();
+
+                    coloresCorrectos(trains, colors, presence);
                     break;
                 case 1: // avisarPasoPorBaliza
                     //@ assume inv & pre && cpre of operation;
-                    // TODO : leer mensaje del canal
-                    // TODO : actualizar estado del recurso
-                    //
-                    //
-                    //
+
+                    Integer index = (Integer) chAvisarPasoPorBaliza.in().read();
+
+                    if (index == 1) {
+                        trains[index]++;
+                    }else {
+                        trains[index - 1]--;
+                        trains[index]++;
+                    }
+                    coloresCorrectos(trains, colors, presence);
                     break;
                 case 2: // leerCambioBarrera(true)
                     //@ assume inv & pre && cpre of operation;
-                    // TODO : leer mensaje del canal y procesar peticion
-                    //
-                    // TODO : calcular valor a devolver al cliente
-                    //
-                    // TODO : contestar al cliente
+
+                    Boolean actualT = (Boolean) chLeerCambioBarreraT.in().read();
+
+                    Boolean resultBT = actualT == (trains[1] + trains[2] == 0);
+
+                    chLeerCambioBarreraT.out().write(resultBT);
                     break;
                 case 3: // leerCambioBarrera(false)
                     //@ assume inv & pre && cpre of operation;
-                    // TODO : leer mensaje del canal y procesar peticion
-                    //
-                    // TODO : calcular valor a devolver al cliente
-                    //
-                    // TODO : contestar al cliente
+
+                    Boolean actualF = (Boolean) chLeerCambioBarreraF.in().read();
+
+                    Boolean resultBF = actualF == (trains[1] + trains[2] == 0);
+
+                    chLeerCambioBarreraT.out().write(resultBF);
                     break;
                 case 4: // leerCambioFreno(true)
                     //@ assume inv & pre && cpre of operation;
-                    // TODO : leer mensaje del canal y procesar peticion
-                    //
-                    // TODO : calcular valor a devolver al cliente
-                    //
-                    // TODO : contestar al cliente
+
+                    Boolean frenoT = (Boolean) chLeerCambioFrenoT.in().read();
+
+                    Boolean resultFT = frenoT == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
+
+                    chLeerCambioFrenoT.out().write(resultFT);
                     break;
                 case 5: // leerCambioFreno(false)
                     //@ assume inv & pre && cpre of operation;
-                    // TODO : leer mensaje del canal y procesar peticion
-                    //
-                    // TODO : calcular valor a devolver al cliente
-                    //
-                    // TODO : contestar al cliente
+
+                    Boolean frenoF = (Boolean) chLeerCambioFrenoF.in().read();
+
+                    Boolean resultFF = frenoF == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
+
+                    chLeerCambioFrenoF.out().write(resultFF);
                     break;
                 default: // leerCambioSemaforo(queSemaforo,queColor)
-                    // TODO : decodificar nÃºmero de semÃ¡foro y color a partir del
                     //        valor de chosenService
+                    int queSemaforo = (chosenService-6) / 3;
+                    int queColor = (chosenService-6) % 3;
                     //
-                    //
-                    // TODO : leer mensaje del canal
-                    //
-                    // TODO : contestar al cliente
+
+                    Control.Color color = (Control.Color) chLeerCambioSemaforo[queSemaforo][queColor].in().read();
+
+
+                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(color);
                     break;
             } // SWITCH
         } // SERVER LOOP
     } // run()
 
     // mÃ©todos auxiliares varios
-    // TODO : coloca aquÃ­ aquellos mÃ©todos que hayais
     //        usado en la otra prÃ¡ctica para ajustar
     //        luces de semaforos, evaluar CPREs, etc.
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+
+    private void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {
+        // About the first semaphore:
+        if (trains[1] > 0) {
+            // If there's at least one train in the first segment, we put the first semaphore to RED.
+            colors[1] = Control.Color.ROJO;
+        } else if (trains[2] > 0 || presence) {
+            // If there's at least one train in the second segment or there's a car,
+            // we put the first semaphore to YELLOW.
+            colors[1] = Control.Color.AMARILLO;
+        } else {
+            // Else, we put it GREEN.
+            colors[1] = Control.Color.VERDE;
+        }
+
+        // About the second semaphore:
+        if (trains[2] > 0 || presence) {
+            // If there's at least one train in the second segment or there's a car,
+            // we put the second semaphore to RED.
+            colors[2] = Control.Color.ROJO;
+        } else {
+            // If not, we put it to GREEN.
+            colors[2] = Control.Color.VERDE;
+        }
+
+        // The third semaphore will always be GREEN.
+        colors[3] = Control.Color.VERDE;
+    }
+
+    // checks the value of the Semaphore CPRE:
+    private Boolean checkSemaphoreCPRE (int index, Control.Color actual, Control.Color[] colors) {
+        return colors[index].equals(actual);
+    }
+
+    // checks the value of the Brake CPRE:
+    private Boolean checkBrakeCPRE (boolean actual, int[] trains, boolean presence) {
+        return actual != (trains[1] > 1 || trains[2] > 1 || trains[2] == 1 && presence);
+    }
+
+    // checks the value of the Barrier CPRE:
+    private Boolean checkBarrierCPRE (boolean actual, int[] trains) {
+        return actual != (trains[1] + trains[2] == 0);
+    }
 
 } // end CLASS

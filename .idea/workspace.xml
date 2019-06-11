@@ -9,14 +9,10 @@
     <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/.class/Cruce.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/Cruce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP_skel_pa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP_skel_rc.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP_skel_rc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor$CondEnclavamiento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP_skel_rc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor$CondSemaphore.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor$CondSemaphore.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_rc.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,10 +43,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-162">
-              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+            <state relative-caret-position="1993">
+              <caret line="233" column="53" lean-forward="true" selection-start-line="233" selection-start-column="53" selection-end-line="233" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#10014#10015#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,6 +68,7 @@
       <find>INIT</find>
       <find>train</find>
       <find>for (</find>
+      <find>TODO</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,10 +119,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
+            <path>
+              <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Esqueletos Segundo Parcial" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Esqueletos Segundo Parcial" type="462c0819:PsiDirectoryNode" />
+              <item name="JCSP" type="462c0819:PsiDirectoryNode" />
+            </path>
             <path>
               <item name="Concurrencia" type="b2602c69:ProjectViewProjectNode" />
               <item name="enclavamiento" type="462c0819:PsiDirectoryNode" />
@@ -138,6 +144,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
           <expand>
@@ -309,7 +316,8 @@
       <workItem from="1560163595792" duration="1439000" />
       <workItem from="1560241136405" duration="75000" />
       <workItem from="1560241240244" duration="2151000" />
-      <workItem from="1560245903490" duration="5870000" />
+      <workItem from="1560245903490" duration="5969000" />
+      <workItem from="1560265415603" duration="7345000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -329,7 +337,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76983000" />
+    <option name="totallyTimeSpent" value="84427000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -344,19 +352,19 @@
     <frame x="1919" y="338" width="1368" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" visible="true" weight="0.23640484" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.23942599" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" sideWeight="0.50162864" side_tool="true" weight="0.19283536" />
+      <window_info id="Favorites" order="5" sideWeight="0.50162864" side_tool="true" weight="0.1925982" />
       <window_info id="Learn" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.6205212" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.328" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.336" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="5" weight="0.32736155" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.3264" />
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.7296417" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.7149837" />
@@ -373,7 +381,7 @@
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Run" order="10" sideWeight="0.49674267" weight="0.3942598" />
+      <window_info anchor="right" id="Run" order="10" sideWeight="0.49674267" weight="0.26283988" />
       <window_info anchor="right" id="Coverage" order="11" sideWeight="0.50325733" side_tool="true" weight="0.27286586" />
     </layout>
   </component>
@@ -403,14 +411,21 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Concurrencia$Cruce.ic" NAME="Cruce Coverage Results" MODIFIED="1559839854654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>0%3</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>actual</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/MultiAlmacenJCSP.todo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-end-line="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/CC_10_PmultiCJCSP.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -511,7 +526,6 @@
     <entry file="file://$PROJECT_DIR$/enclavamiento/Cruce.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/Enclavamiento.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoMonitor.java" />
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/enclavamiento.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -604,33 +618,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="346" column="36" selection-start-line="346" selection-start-column="36" selection-end-line="346" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 3 - Peticiones Aplazadas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-505" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 4 - Replicación Canales.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-240">
-          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSPTemplate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-251">
@@ -656,12 +649,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
+    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 1 - Básico.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-162">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="510">
+          <caret line="32" column="59" lean-forward="true" selection-start-line="32" selection-start-column="59" selection-end-line="32" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 4 - Replicación Canales.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="55" column="41" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="353" column="12" selection-start-line="353" selection-start-column="12" selection-end-line="353" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1993">
+          <caret line="233" column="53" lean-forward="true" selection-start-line="233" selection-start-column="53" selection-end-line="233" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10014#10015#0" expanded="true" />
           </folding>
         </state>
       </provider>
