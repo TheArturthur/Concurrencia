@@ -7,11 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jcsp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jcsp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/Cruce.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/Cruce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP_skel_rc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor$CondSemaphore.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor$CondSemaphore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,11 +41,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1993">
-              <caret line="233" column="53" lean-forward="true" selection-start-line="233" selection-start-column="53" selection-end-line="233" selection-end-column="53" />
+            <state relative-caret-position="232">
+              <caret line="92" column="13" lean-forward="true" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#10014#10015#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,10 +101,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2067" />
-    <option name="y" value="371" />
-    <option name="width" value="681" />
-    <option name="height" value="723" />
+    <option name="x" value="170" />
+    <option name="y" value="119" />
+    <option name="width" value="1020" />
+    <option name="height" value="557" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -119,6 +116,27 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
+          <expand>
+            <path>
+              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Escritorio/Concurrencia" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -144,27 +162,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
-          <expand>
-            <path>
-              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="enclavamiento" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="Concurrencia" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Escritorio/Concurrencia" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -175,7 +172,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552862888271" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/enclavamiento/class" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.19625" />
     <property name="project.structure.side.proportion" value="0.18703979" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -318,6 +315,8 @@
       <workItem from="1560241240244" duration="2151000" />
       <workItem from="1560245903490" duration="5969000" />
       <workItem from="1560265415603" duration="7345000" />
+      <workItem from="1560445969183" duration="1568000" />
+      <workItem from="1560787641051" duration="884000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -337,7 +336,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84427000" />
+    <option name="totallyTimeSpent" value="86879000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -349,10 +348,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1919" y="338" width="1368" height="743" extended-state="6" />
+    <frame x="0" y="27" width="1360" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.23942599" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.23932926" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -381,7 +380,7 @@
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Run" order="10" sideWeight="0.49674267" weight="0.26283988" />
+      <window_info anchor="right" id="Run" order="10" sideWeight="0.49674267" weight="0.5640244" />
       <window_info anchor="right" id="Coverage" order="11" sideWeight="0.50325733" side_tool="true" weight="0.27286586" />
     </layout>
   </component>
@@ -673,13 +672,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/JavaLib/jcsp.jar!/org/jcsp/lang/One2OneChannel.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1993">
-          <caret line="233" column="53" lean-forward="true" selection-start-line="233" selection-start-column="53" selection-end-line="233" selection-end-column="53" />
+        <state relative-caret-position="232">
+          <caret line="92" column="13" lean-forward="true" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10014#10015#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -765,7 +770,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.18703979" />
               </list>
             </option>
           </splitter-proportions>

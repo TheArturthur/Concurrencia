@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/JavaLib/jcsp.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="https://www.cs.kent.ac.uk/projects/ofa/jcsp/jcsp-1.1-rc4/jcsp-doc/" />
+    </JAVADOC>
     <SOURCES />
   </library>
 </component>

@@ -134,7 +134,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         };
 
         Alternative services = new Alternative(inputs);
-        int chosenService = 0;
+        int chosenService;
 
         // conditional sincronization
         boolean[] sincCond = new boolean[15];
@@ -156,7 +156,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
             // esperar peticiÃ³n
             chosenService = services.fairSelect(sincCond);
-            One2OneChannel chreply; // lo usamos para contestar a los clientes
+            One2OneChannel chreply = Channel.one2one(); // lo usamos para contestar a los clientes
 
             switch(chosenService){
                 case 0: // avisarPresencia
@@ -165,6 +165,10 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     presence = (Boolean) chAvisarPresencia.in().read();
 
                     coloresCorrectos(trains, colors, presence);
+
+                    chAvisarPresencia.out();
+
+                    chreply.out().write(presence);
                     break;
                 case 1: // avisarPasoPorBaliza
                     //@ assume inv & pre && cpre of operation;
@@ -178,6 +182,8 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                         trains[index]++;
                     }
                     coloresCorrectos(trains, colors, presence);
+
+                    chAvisarPasoPorBaliza.out();
                     break;
                 case 2: // leerCambioBarrera(true)
                     //@ assume inv & pre && cpre of operation;
@@ -187,6 +193,8 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     Boolean resultBT = actualT == (trains[1] + trains[2] == 0);
 
                     chLeerCambioBarreraT.out().write(resultBT);
+
+                    chreply.out().write(resultBT);
                     break;
                 case 3: // leerCambioBarrera(false)
                     //@ assume inv & pre && cpre of operation;
@@ -196,6 +204,8 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     Boolean resultBF = actualF == (trains[1] + trains[2] == 0);
 
                     chLeerCambioBarreraT.out().write(resultBF);
+
+                    chreply.out().write(resultBF);
                     break;
                 case 4: // leerCambioFreno(true)
                     //@ assume inv & pre && cpre of operation;
@@ -205,6 +215,8 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     Boolean resultFT = frenoT == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
 
                     chLeerCambioFrenoT.out().write(resultFT);
+
+                    chreply.out().write(resultFT);
                     break;
                 case 5: // leerCambioFreno(false)
                     //@ assume inv & pre && cpre of operation;
@@ -214,17 +226,20 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     Boolean resultFF = frenoF == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
 
                     chLeerCambioFrenoF.out().write(resultFF);
+
+                    chreply.out().write(resultFF);
                     break;
                 default: // leerCambioSemaforo(queSemaforo,queColor)
-                    //        valor de chosenService
+                    // decodificar numero de semaforo y color a partir del
+                    // valor de chosenService
                     int queSemaforo = (chosenService-6) / 3;
                     int queColor = (chosenService-6) % 3;
-                    //
 
                     Control.Color color = (Control.Color) chLeerCambioSemaforo[queSemaforo][queColor].in().read();
 
+                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(chLeerCambioSemaforo[queSemaforo][queColor].in().read());
 
-                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(color);
+                    chreply.out().write(chLeerCambioSemaforo[queSemaforo][queColor].in().read());
                     break;
             } // SWITCH
         } // SERVER LOOP
