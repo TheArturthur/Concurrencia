@@ -62,7 +62,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         } else {
             chLeerCambioBarreraF.out().write(chreply);
         }
-        return (Boolean) chreply.in().read();
+        return (Boolean) (chreply.in().read());
     }
 
     @Override
@@ -73,7 +73,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         } else {
             chLeerCambioFrenoF.out().write(chreply);
         }
-        return (Boolean) chreply.in().read();
+        return (Boolean) (chreply.in().read());
     }
 
     /** notice that the exception must be thrown outside the server */
@@ -86,7 +86,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
         chLeerCambioSemaforo[i-1][color.ordinal()].out().write(chreply);
 
-        return (Control.Color) chreply.in().read();
+        return (Control.Color) (chreply.in().read());
     }
 
     /** SERVER IMPLEMENTATION */
@@ -162,7 +162,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 0: // avisarPresencia
                     //@ assume inv & pre && cpre of operation;
 
-                    presence = (Boolean) chAvisarPresencia.in().read();
+                    presence = (Boolean) (chAvisarPresencia.in().read());
 
                     coloresCorrectos(trains, colors, presence);
 
@@ -173,7 +173,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 1: // avisarPasoPorBaliza
                     //@ assume inv & pre && cpre of operation;
 
-                    Integer index = (Integer) chAvisarPasoPorBaliza.in().read();
+                    Integer index = (Integer) (chAvisarPasoPorBaliza.in().read());
 
                     if (index == 1) {
                         trains[index]++;
@@ -188,7 +188,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 2: // leerCambioBarrera(true)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean actualT = (Boolean) chLeerCambioBarreraT.in().read();
+                    Boolean actualT = (Boolean) (chLeerCambioBarreraT.in().read());
 
                     Boolean resultBT = actualT == (trains[1] + trains[2] == 0);
 
@@ -199,7 +199,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 3: // leerCambioBarrera(false)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean actualF = (Boolean) chLeerCambioBarreraF.in().read();
+                    Boolean actualF = (Boolean) (chLeerCambioBarreraF.in().read());
 
                     Boolean resultBF = actualF == (trains[1] + trains[2] == 0);
 
@@ -210,7 +210,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 4: // leerCambioFreno(true)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean frenoT = (Boolean) chLeerCambioFrenoT.in().read();
+                    Boolean frenoT = (Boolean) (chLeerCambioFrenoT.in().read());
 
                     Boolean resultFT = frenoT == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
 
@@ -221,7 +221,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 5: // leerCambioFreno(false)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean frenoF = (Boolean) chLeerCambioFrenoF.in().read();
+                    Boolean frenoF = (Boolean) (chLeerCambioFrenoF.in().read());
 
                     Boolean resultFF = frenoF == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
 
@@ -235,11 +235,11 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     int queSemaforo = (chosenService-6) / 3;
                     int queColor = (chosenService-6) % 3;
 
-                    Control.Color color = (Control.Color) chLeerCambioSemaforo[queSemaforo][queColor].in().read();
+                    Control.Color color = (Control.Color) (chLeerCambioSemaforo[queSemaforo][queColor].in().read());
 
-                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(chLeerCambioSemaforo[queSemaforo][queColor].in().read());
+                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(color);
 
-                    chreply.out().write(chLeerCambioSemaforo[queSemaforo][queColor].in().read());
+                    chreply.out().write(color);
                     break;
             } // SWITCH
         } // SERVER LOOP
