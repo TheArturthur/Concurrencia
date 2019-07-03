@@ -162,13 +162,11 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                 case 0: // avisarPresencia
                     //@ assume inv & pre && cpre of operation;
 
-                    presence = (Boolean) (chAvisarPresencia.in().read());
+                    presence = (Boolean) chAvisarPresencia.in().read();
 
                     coloresCorrectos(trains, colors, presence);
 
-                    chAvisarPresencia.out();
-
-                    chreply.out().write(presence);
+                    chAvisarPresencia.out().write(presence);
                     break;
                 case 1: // avisarPasoPorBaliza
                     //@ assume inv & pre && cpre of operation;
@@ -183,51 +181,39 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     }
                     coloresCorrectos(trains, colors, presence);
 
-                    chAvisarPasoPorBaliza.out();
+                    chAvisarPasoPorBaliza.out().write(index);
                     break;
                 case 2: // leerCambioBarrera(true)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean actualT = (Boolean) (chLeerCambioBarreraT.in().read());
-
-                    Boolean resultBT = actualT == (trains[1] + trains[2] == 0);
-
-                    chLeerCambioBarreraT.out().write(resultBT);
+                    Boolean resultBT = (trains[1] + trains[2] == 0);
 
                     chreply.out().write(resultBT);
+                    chLeerCambioBarreraT.out().write(resultBT);
                     break;
                 case 3: // leerCambioBarrera(false)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean actualF = (Boolean) (chLeerCambioBarreraF.in().read());
-
-                    Boolean resultBF = actualF == (trains[1] + trains[2] == 0);
-
-                    chLeerCambioBarreraT.out().write(resultBF);
+                    Boolean resultBF = (trains[1] + trains[2] == 0);
 
                     chreply.out().write(resultBF);
+                    chLeerCambioBarreraF.out().write(resultBF);
                     break;
                 case 4: // leerCambioFreno(true)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean frenoT = (Boolean) (chLeerCambioFrenoT.in().read());
-
-                    Boolean resultFT = frenoT == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
-
-                    chLeerCambioFrenoT.out().write(resultFT);
+                    Boolean resultFT = (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
 
                     chreply.out().write(resultFT);
+                    chLeerCambioFrenoT.out().write(resultFT);
                     break;
                 case 5: // leerCambioFreno(false)
                     //@ assume inv & pre && cpre of operation;
 
-                    Boolean frenoF = (Boolean) (chLeerCambioFrenoF.in().read());
-
-                    Boolean resultFF = frenoF == (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
-
-                    chLeerCambioFrenoF.out().write(resultFF);
+                    Boolean resultFF = (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
 
                     chreply.out().write(resultFF);
+                    chLeerCambioFrenoF.out().write(chreply);
                     break;
                 default: // leerCambioSemaforo(queSemaforo,queColor)
                     // decodificar numero de semaforo y color a partir del
@@ -235,19 +221,17 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     int queSemaforo = (chosenService-6) / 3;
                     int queColor = (chosenService-6) % 3;
 
-                    //Control.Color color = (Control.Color) (chLeerCambioSemaforo[queSemaforo][queColor].in().read());
-                    Object color = chLeerCambioSemaforo[queSemaforo][queColor].in().read();
 
-                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(color);
 
-                    chreply.out().write(color);
+                    chreply.out().write(queColor);
+                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(chreply);
                     break;
             } // SWITCH
         } // SERVER LOOP
     } // run()
 
     // mÃ©todos auxiliares varios
-    //        usado en la otra prÃ¡ctica para ajustar
+    //        usado en la otra practica para ajustar
     //        luces de semaforos, evaluar CPREs, etc.
 
     private void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {

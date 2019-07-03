@@ -2,6 +2,7 @@
   <library name="cclib">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../JavaLib/cclib.jar!/" />
+      <root url="jar://$USER_HOME$/JavaLib/cclib.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="http://babel.upm.es/teaching/concurrencia/material/cclib-doc/" />
