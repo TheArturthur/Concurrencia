@@ -131,7 +131,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         inputs[5] = chLeerCambioFrenoF.in();
         for (int i = 6; i < 15; i++) {
             inputs[i] = chLeerCambioSemaforo[(i-6) / 3][(i-6) % 3].in();
-        };
+        }
 
         Alternative services = new Alternative(inputs);
         int chosenService;
@@ -235,7 +235,8 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     int queSemaforo = (chosenService-6) / 3;
                     int queColor = (chosenService-6) % 3;
 
-                    Control.Color color = (Control.Color) (chLeerCambioSemaforo[queSemaforo][queColor].in().read());
+                    //Control.Color color = (Control.Color) (chLeerCambioSemaforo[queSemaforo][queColor].in().read());
+                    Object color = chLeerCambioSemaforo[queSemaforo][queColor].in().read();
 
                     chLeerCambioSemaforo[queSemaforo][queColor].out().write(color);
 
