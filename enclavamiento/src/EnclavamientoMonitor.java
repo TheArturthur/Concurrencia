@@ -197,7 +197,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
         mutex.enter();
 
         // checking of the CPRE and posible lock: if the color of the semaphore is the same, lock.
-        if (checkSemaphoreCPRE(i, actual)) {
+        if (!checkSemaphoreCPRE(i, actual)) {
             // Create a new condition, saving it in the FIFO List
             Monitor.Cond condSemaphore = mutex.newCond();
             cLeerSemaforo.enqueue(new CondSemaphore(i, actual, condSemaphore));
@@ -341,7 +341,7 @@ public class EnclavamientoMonitor implements Enclavamiento {
 
     // checks the value of the Semaphore CPRE:
     private boolean checkSemaphoreCPRE (int index, Control.Color actual) {
-        return this.colors[index].equals(actual);
+        return !this.colors[index].equals(actual);
     }
 
     // checks the value of the Brake CPRE:

@@ -174,7 +174,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     Integer index = (Integer) (chAvisarPasoPorBaliza.in().read());
 
                     if (index == 1) {
-                        trains[index]++;
+                        trains[1]++;
                     }else {
                         trains[index - 1]--;
                         trains[index]++;
@@ -185,46 +185,50 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
                     break;
                 case 2: // leerCambioBarrera(true)
                     //@ assume inv & pre && cpre of operation;
+                    if (chreply.in().pending()) {
+                        Boolean resultBT = trains[1] + trains[2] == 0;
 
-                    Boolean resultBT = (trains[1] + trains[2] == 0);
-
-                    chreply.out().write(resultBT);
-                    chLeerCambioBarreraT.out().write(resultBT);
+                        chreply.out().write(resultBT);
+                        chLeerCambioBarreraT.out().write(chreply);
+                    }
                     break;
                 case 3: // leerCambioBarrera(false)
                     //@ assume inv & pre && cpre of operation;
+                    if (chreply.in().pending()) {
+                        Boolean resultBF = trains[1] + trains[2] == 0;
 
-                    Boolean resultBF = (trains[1] + trains[2] == 0);
-
-                    chreply.out().write(resultBF);
-                    chLeerCambioBarreraF.out().write(resultBF);
+                        chreply.out().write(resultBF);
+                        chLeerCambioBarreraF.out().write(chreply);
+                    }
                     break;
                 case 4: // leerCambioFreno(true)
                     //@ assume inv & pre && cpre of operation;
+                    if (chreply.in().pending()) {
+                        Boolean resultFT = trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence);
 
-                    Boolean resultFT = (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
-
-                    chreply.out().write(resultFT);
-                    chLeerCambioFrenoT.out().write(resultFT);
+                        chreply.out().write(resultFT);
+                        chLeerCambioFrenoT.out().write(chreply);
+                    }
                     break;
                 case 5: // leerCambioFreno(false)
                     //@ assume inv & pre && cpre of operation;
+                    if (chreply.in().pending()) {
+                        Boolean resultFF = trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence);
 
-                    Boolean resultFF = (trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence));
-
-                    chreply.out().write(resultFF);
-                    chLeerCambioFrenoF.out().write(chreply);
+                        chreply.out().write(resultFF);
+                        chLeerCambioFrenoF.out().write(chreply);
+                    }
                     break;
                 default: // leerCambioSemaforo(queSemaforo,queColor)
                     // decodificar numero de semaforo y color a partir del
                     // valor de chosenService
-                    int queSemaforo = (chosenService-6) / 3;
-                    int queColor = (chosenService-6) % 3;
+                    if (chreply.in().pending()) {
+                        int queSemaforo = (chosenService - 6) / 3;
+                        int queColor = (chosenService - 6) % 3;
 
-
-
-                    chreply.out().write(queColor);
-                    chLeerCambioSemaforo[queSemaforo][queColor].out().write(chreply);
+                        chreply.out().write(queColor);
+                        chLeerCambioSemaforo[queSemaforo][queColor].out().write(chreply);
+                    }
                     break;
             } // SWITCH
         } // SERVER LOOP
@@ -234,7 +238,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
     //        usado en la otra practica para ajustar
     //        luces de semaforos, evaluar CPREs, etc.
 
-    private void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {
+    private static void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {
         // About the first semaphore:
         if (trains[1] > 0) {
             // If there's at least one train in the first segment, we put the first semaphore to RED.
@@ -264,7 +268,7 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
     // checks the value of the Semaphore CPRE:
     private Boolean checkSemaphoreCPRE (int index, Control.Color actual, Control.Color[] colors) {
-        return colors[index].equals(actual);
+        return !colors[index].equals(actual);
     }
 
     // checks the value of the Brake CPRE:

@@ -89,7 +89,7 @@ public class Cruce {
 
         //enclavamiento = new EnclavamientoMonitor();
         enclavamiento = new EnclavamientoCSP();
-
+/*
         new DetectorPresencia(enclavamiento).start();
         new ControladorBarrera(enclavamiento).start();
         new ControladorFreno(enclavamiento).start();
@@ -99,7 +99,8 @@ public class Cruce {
         new DetectorBaliza(1, enclavamiento).start();
         new DetectorBaliza(2, enclavamiento).start();
         new DetectorBaliza(3, enclavamiento).start();
-
+*/
+        // PRUEBAS PARA ENCLAVAMIENTO MONITOR:
         /*
         System.out.println("hola");
         new Thread( new Runnable() {
@@ -140,5 +141,17 @@ public class Cruce {
         enclavamiento.avisarPasoPorBaliza(1);
         enclavamiento.avisarPasoPorBaliza(2);
         */
+
+        // PRUEBAS PARA ENCLAVAMIENTO CSP:
+        System.out.println("hola");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                enclavamiento.leerCambioBarrera(true);
+                System.out.println("barrera bloqueada");
+                enclavamiento.avisarPasoPorBaliza(1);
+                System.out.println("tren pasa 1");
+            }
+        }).start();
     }
 }
