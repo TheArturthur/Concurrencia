@@ -7,12 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bff96efd-39b1-45e7-899b-ee22821ecfa6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_rc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/.class/Cruce.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/Cruce.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoCSP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/.class/EnclavamientoMonitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/Cruce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.class" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_rc.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,63 +41,39 @@
     <favorites_list name="Concurrencia" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="275">
-                  <caret line="270" column="16" selection-start-line="270" selection-start-column="16" selection-end-line="270" selection-end-column="16" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#1594#1595#0" expanded="true" />
-                    <element signature="e#1650#1651#0" expanded="true" />
-                    <element signature="e#10333#10334#0" expanded="true" />
-                    <element signature="e#10394#10395#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2235">
-                  <caret line="155" selection-start-line="155" selection-end-line="155" />
-                  <folding>
-                    <element signature="e#241#242#0" expanded="true" />
-                    <element signature="e#282#283#0" expanded="true" />
-                    <element signature="e#721#722#0" expanded="true" />
-                    <element signature="e#762#763#0" expanded="true" />
-                    <element signature="e#1295#1296#0" expanded="true" />
-                    <element signature="e#1336#1337#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="223">
-                  <caret line="343" column="16" selection-start-line="343" selection-start-column="16" selection-end-line="343" selection-end-column="16" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#12287#12288#0" expanded="true" />
-                    <element signature="e#12343#12344#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="43">
+              <caret line="96" selection-start-line="96" selection-end-line="96" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#11323#11324#0" expanded="true" />
+                <element signature="e#11384#11385#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#241#242#0" expanded="true" />
+                <element signature="e#282#283#0" expanded="true" />
+                <element signature="e#721#722#0" expanded="true" />
+                <element signature="e#762#763#0" expanded="true" />
+                <element signature="e#1295#1296#0" expanded="true" />
+                <element signature="e#1336#1337#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -140,14 +118,13 @@
         <option value="$PROJECT_DIR$/enclavamiento/results/06-06.txt" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_pa.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_skel_rc.java" />
-        <option value="$PROJECT_DIR$/enclavamiento/src/Cruce.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java" />
+        <option value="$PROJECT_DIR$/enclavamiento/src/Cruce.java" />
         <option value="$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="680" />
     <option name="y" value="27" />
     <option name="width" value="680" />
     <option name="height" value="741" />
@@ -162,7 +139,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -189,6 +165,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,7 +328,9 @@
       <workItem from="1562062019203" duration="3556000" />
       <workItem from="1562152552231" duration="163000" />
       <workItem from="1562266558335" duration="3118000" />
-      <workItem from="1562322953424" duration="396000" />
+      <workItem from="1562322953424" duration="497000" />
+      <workItem from="1562438865835" duration="7779000" />
+      <workItem from="1562498596102" duration="2827000" />
     </task>
     <task id="LOCAL-00001" summary="Comentarios">
       <created>1551624725910</created>
@@ -367,11 +346,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560007815278</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed CPRE. Dunno how to make local tests.">
+      <created>1562323444994</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1562323444994</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97519000" />
+    <option name="totallyTimeSpent" value="108226000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -384,9 +370,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1360" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.17911585" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837133" weight="0.2667683" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -394,9 +379,9 @@
       <window_info id="Favorites" order="5" sideWeight="0.50162864" side_tool="true" weight="0.1925982" />
       <window_info id="Learn" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.328" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32736155" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49674267" weight="0.4136808" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43322477" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.7003257" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3264" />
@@ -431,7 +416,218 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Comentarios" />
     <MESSAGE value="Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit" />
+    <MESSAGE value="Fixed CPRE. Dunno how to make local tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed CPRE. Dunno how to make local tests." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/Cruce.java</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>225</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>227</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>229</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>228</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>231</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>232</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>233</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>234</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>238</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>239</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>240</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>243</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>242</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>245</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>244</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>251</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>250</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>252</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>257</line>
+          <properties />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>256</line>
+          <properties />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>255</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>254</line>
+          <properties />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>186</line>
+          <properties />
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>194</line>
+          <properties />
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>178</line>
+          <properties />
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>170</line>
+          <properties />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>162</line>
+          <properties />
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>157</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>295</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>92</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>96</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java</url>
+          <line>98</line>
+          <properties />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Concurrencia$Cruce.ic" NAME="Cruce Coverage Results" MODIFIED="1559839854654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
@@ -451,24 +647,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ejercicios-cortos/src/AlmacenN.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoJCSP.java" />
-    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/Practica.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/QuePasaCSP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoJCSP.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/EnclavamientoCSP.java" />
     <entry file="file://$PROJECT_DIR$/enclavamiento/ControlSimulado.java" />
@@ -550,7 +728,6 @@
     <entry file="file://$PROJECT_DIR$/enclavamiento/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="jar://$USER_HOME$/jdk1.8.0_212/src.zip!/java/net/SocketInputStream.java" />
     <entry file="file://$PROJECT_DIR$/QuePasa/cc/qp/consideraciones.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -617,18 +794,6 @@
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/JavaLib/jcsp.jar!/org/jcsp/lang/One2OneChannel.class" />
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Control.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 3 - Peticiones Aplazadas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-624" />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/jdk1.8.0_212/src.zip!/java/lang/Runnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -643,10 +808,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 4 - Replicación Canales.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="55" column="41" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_rc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="270" column="16" selection-start-line="270" selection-start-column="16" selection-end-line="270" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1594#1595#0" expanded="true" />
+            <element signature="e#1650#1651#0" expanded="true" />
+            <element signature="e#10333#10334#0" expanded="true" />
+            <element signature="e#10394#10395#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP_rc.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 3 - Peticiones Aplazadas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-990" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="165" column="108" selection-start-line="165" selection-start-column="16" selection-end-line="165" selection-end-column="108" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Enclavamiento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/jdk1.8.0_212/src.zip!/java/net/SocketInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/Cruce.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2235">
-          <caret line="155" selection-start-line="155" selection-end-line="155" />
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#241#242#0" expanded="true" />
             <element signature="e#282#283#0" expanded="true" />
@@ -658,35 +876,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fiwiki/Esqueletos Segundo Parcial/JCSP/Esquema 4 - Replicación Canales.java">
+    <entry file="file://$PROJECT_DIR$/enclavamiento/src/Control.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="55" column="41" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
+        <state relative-caret-position="94">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoMonitor.java">
+    <entry file="jar://$USER_HOME$/JavaLib/jcsp.jar!/org/jcsp/lang/Any2OneImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="343" column="16" selection-start-line="343" selection-start-column="16" selection-end-line="343" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12287#12288#0" expanded="true" />
-            <element signature="e#12343#12344#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/enclavamiento/src/EnclavamientoCSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="270" column="16" selection-start-line="270" selection-start-column="16" selection-end-line="270" selection-end-column="16" />
+        <state relative-caret-position="43">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1594#1595#0" expanded="true" />
-            <element signature="e#1650#1651#0" expanded="true" />
-            <element signature="e#10333#10334#0" expanded="true" />
-            <element signature="e#10394#10395#0" expanded="true" />
+            <element signature="e#11323#11324#0" expanded="true" />
+            <element signature="e#11384#11385#0" expanded="true" />
           </folding>
         </state>
       </provider>

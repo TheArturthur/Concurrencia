@@ -1,49 +1,102 @@
+// TODO : importar estructuras de datos, si os hace falta
+import es.upm.aedlib.fifo.FIFOList;
 import org.jcsp.lang.Alternative;
-import org.jcsp.lang.AltingChannelInput;
+import org.jcsp.lang.Any2OneChannel;
 import org.jcsp.lang.CSProcess;
+import org.jcsp.lang.ProcessManager;
 import org.jcsp.lang.Channel;
 import org.jcsp.lang.Guard;
 import org.jcsp.lang.One2OneChannel;
-import org.jcsp.lang.ProcessManager;
 
 /**
- * Implementation using channel replication
+ * Implementation using CSP (Mixed).
+ * TÃ©cnica de peticiones aplazadas
+ * excepto en las ops. de aviso (no bloqueantes)
+ *
+ * @author rul0
  */
 public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
-    /* WRAPPER IMPLEMENTATION */
-    /**
-     * Channels for receiving external requests
-     * just one channel for nonblocking requests
-     */
-    private final One2OneChannel chAvisarPresencia = Channel.one2one();
-    private final One2OneChannel chAvisarPasoPorBaliza = Channel.one2one();
+    /** WRAPPER IMPLEMENTATION */
+    //** Channels for receiving external requests
+    // Un canal por op. del recurso
+    private final Any2OneChannel chAvisarPresencia     = Channel.any2one();
+    private final Any2OneChannel chLeerCambioBarrera   = Channel.any2one();
+    private final Any2OneChannel chLeerCambioFreno     = Channel.any2one();
+    private final Any2OneChannel chLeerCambioSemaforo  = Channel.any2one();
+    private final Any2OneChannel chAvisarPasoPorBaliza = Channel.any2one();
 
-    // leerCambioBarrera blocks depending on a boolean parameter
-    private final One2OneChannel chLeerCambioBarreraT = Channel.one2one();
-    private final One2OneChannel chLeerCambioBarreraF = Channel.one2one();
-
-    // leerCambioFreno blocks depending on a boolean parameter
-    private final One2OneChannel chLeerCambioFrenoT = Channel.one2one();
-    private final One2OneChannel chLeerCambioFrenoF = Channel.one2one();
-
-    // leerCambioSemaforo blocks depending on a semaphore id and a colour
-    private final One2OneChannel[][] chLeerCambioSemaforo = new One2OneChannel[3][3];
-
-
-    public EnclavamientoCSP () {
-        // pending initializations
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                chLeerCambioSemaforo[i][j] = Channel.one2one();
-            }
-        }
+    public EnclavamientoCSP() {
         new ProcessManager(this).start();
     }
 
+    // Clases auxiliares para las peticiones que se envÃ­an al servidor
+    public static class PeticionLeerCambioBarrera{
+        protected One2OneChannel channel;
+        protected boolean value;
+
+        public PeticionLeerCambioBarrera(One2OneChannel channel, boolean value) {
+            this.channel = channel;
+            this.value = value;
+        }
+    }
+
+    public static class PeticionLeerCambioFreno{
+        protected One2OneChannel channel;
+        protected boolean value;
+
+        public PeticionLeerCambioFreno(One2OneChannel channel, boolean value) {
+            this.channel = channel;
+            this.value = value;
+        }
+    }
+
+    public static class PeticionLeerCambioSemaforo{
+        protected One2OneChannel channel;
+        protected Control.Color color;
+        protected int index;
+
+        public PeticionLeerCambioSemaforo(One2OneChannel channel,
+                                          Control.Color color,
+                                          int index) {
+            this.channel = channel;
+            this.color = color;
+            this.index = index;
+        }
+    }
+
+    // ImplementaciÃ³n de la interfaz Enclavamiento
     @Override
     public void avisarPresencia(boolean presencia) {
         chAvisarPresencia.out().write(presencia);
+    }
+
+    @Override
+    public boolean leerCambioBarrera(boolean abierta) {
+        One2OneChannel ch = Channel.one2one();
+        chLeerCambioBarrera.out().write(new PeticionLeerCambioBarrera(ch, abierta));
+
+        return (Boolean) ch.in().read();
+    }
+
+    @Override
+    public boolean leerCambioFreno(boolean accionado) {
+        One2OneChannel ch = Channel.one2one();
+        chLeerCambioFreno.out().write(new PeticionLeerCambioFreno(ch, accionado));
+
+        return (Boolean) ch.in().read();
+    }
+
+    /** notice that exceptions can be thrown outside the server */
+    @Override
+    public Control.Color leerCambioSemaforo(int i, Control.Color color) {
+        if (i == 0 )
+            throw new PreconditionFailedException("Semaforo 0 no existe");
+
+        One2OneChannel ch = Channel.one2one();
+        chLeerCambioSemaforo.out().write(new PeticionLeerCambioSemaforo(ch, color, i));
+
+        return (Control.Color) ch.in().read();
     }
 
     @Override
@@ -54,191 +107,164 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         chAvisarPasoPorBaliza.out().write(i);
     }
 
-    @Override
-    public boolean leerCambioBarrera(boolean abierta) {
-        One2OneChannel chreply = Channel.one2one();
-        if (abierta) {
-            chLeerCambioBarreraT.out().write(chreply);
-        } else {
-            chLeerCambioBarreraF.out().write(chreply);
-        }
-        return (Boolean) (chreply.in().read());
-    }
-
-    @Override
-    public boolean leerCambioFreno(boolean accionado) {
-        One2OneChannel chreply = Channel.one2one();
-        if (accionado) {
-            chLeerCambioFrenoT.out().write(chreply);
-        } else {
-            chLeerCambioFrenoF.out().write(chreply);
-        }
-        return (Boolean) (chreply.in().read());
-    }
-
-    /** notice that the exception must be thrown outside the server */
-    @Override
-    public Control.Color leerCambioSemaforo (int i, Control.Color color) {
-        if (i == 0 || i > 3)
-            throw new PreconditionFailedException("Semaforo 0 no existe");
-
-        One2OneChannel chreply = Channel.one2one();
-
-        chLeerCambioSemaforo[i-1][color.ordinal()].out().write(chreply);
-
-        return (Control.Color) (chreply.in().read());
-    }
 
     /** SERVER IMPLEMENTATION */
+    static final int AVISAR_PRESENCIA = 0;
+    static final int LEER_CAMBIO_BARRERA = 1;
+    static final int LEER_CAMBIO_FRENO  = 2;
+    static final int LEER_CAMBIO_SEMAFORO  = 3;
+    static final int AVISAR_PASO_POR_BALIZA = 4;
+
     @Override
     public void run() {
-        // resource state is kept in the server
-
+        // TODO : Declarar aquÃ­ el estado del recurso:
+        //        presencia, tren y color
         int nSegments = 3;
-
         boolean presence;
-
         int[] trains;
-
         Control.Color[] colors;
-
-        // state initialization
+        //
+        // TODO : inicializaciÃ³n del estado del recurso
+        presence = false;
+        trains = new int[]{0,0,0,0};
         colors = new Control.Color[nSegments + 1];
 
-        for (int i = 0; i < nSegments + 1; i++) {
+        for (int i = 1; i < nSegments + 1; i++) {
             colors[i] = Control.Color.VERDE;
         }
 
-        presence = false;
+        // TODO : Declarar estructuras auxiliares para guardar
+        //        las peticiones aplazadas en el servidor
+        FIFOList<PeticionLeerCambioBarrera> petLeerCambioBarrera = new FIFOList<PeticionLeerCambioBarrera>();
+        FIFOList<PeticionLeerCambioFreno> petLeerCambioFreno = new FIFOList<PeticionLeerCambioFreno>();
+        FIFOList<PeticionLeerCambioSemaforo> petLeerCambioSemaforo = new FIFOList<PeticionLeerCambioSemaforo>();
 
-        trains = new int[]{0,0,0,0};
-
-
-        // mapping request numbers to channels and vice versa
-        // 0 <--> chAvisarPresencia
-        // 1 <--> chAvisarPasoPorBaliza
-        // 2 <--> chLeerCambioBarreraT
-        // 3 <--> chLeerCambioBarreraF
-        // 4 <--> chLeerCambioFrenoT
-        // 5 <--> chLeerCambioFrenoF
-        // 6 + (3*(i-1)) + j <--> chLeerCambioSemaforo[i][j]
-        Guard[] inputs = new AltingChannelInput[15];
-        inputs[0] = chAvisarPresencia.in();
-        inputs[1] = chAvisarPasoPorBaliza.in();
-        inputs[2] = chLeerCambioBarreraT.in();
-        inputs[3] = chLeerCambioBarreraF.in();
-        inputs[4] = chLeerCambioFrenoT.in();
-        inputs[5] = chLeerCambioFrenoF.in();
-        for (int i = 6; i < 15; i++) {
-            inputs[i] = chLeerCambioSemaforo[(i-6) / 3][(i-6) % 3].in();
-        }
+        // ConstrucciÃ³n de la recepciÃ³n alternativa
+        Guard[] inputs = {
+                chAvisarPresencia.in(),
+                chLeerCambioBarrera.in(),
+                chLeerCambioFreno.in(),
+                chLeerCambioSemaforo.in(),
+                chAvisarPasoPorBaliza.in()
+        };
 
         Alternative services = new Alternative(inputs);
-        int chosenService;
+        int chosenService = 0;
 
-        // conditional sincronization
-        boolean[] sincCond = new boolean[15];
-        // algunas condiciones de recepciÃ³n no varÃ­an durante
-        // la ejecuciÃ³n del programa
-        sincCond[0] = true;
-        sincCond[1] = true;
-
+        // Bucle de servicio
         while (true){
-            // actualizar sincronizaciÃ³n condicional
-            sincCond[2] = checkBarrierCPRE(true, trains);
-            sincCond[3] = checkBarrierCPRE(false, trains);
-            sincCond[4] = checkBrakeCPRE(true, trains, presence);
-            sincCond[5] = checkBrakeCPRE(false, trains, presence);
+            chosenService = services.fairSelect();
 
-            for (int i = 6; i < 15; i++) {
-                sincCond[i] = checkSemaphoreCPRE((i-6) / 3, colors[(i-6) % 3], colors);
-            }
+            switch (chosenService) {
 
-            // esperar peticiÃ³n
-            chosenService = services.fairSelect(sincCond);
-            One2OneChannel chreply = Channel.one2one(); // lo usamos para contestar a los clientes
-
-            switch(chosenService){
-                case 0: // avisarPresencia
-                    //@ assume inv & pre && cpre of operation;
-
+                case AVISAR_PRESENCIA:
+                    //@ assume pre && cpre
+                    // TODO : leer peticiÃ³n del canal
                     presence = (Boolean) chAvisarPresencia.in().read();
-
+                    // TODO : actualizar estado del recurso
                     coloresCorrectos(trains, colors, presence);
-
-                    chAvisarPresencia.out().write(presence);
                     break;
-                case 1: // avisarPasoPorBaliza
-                    //@ assume inv & pre && cpre of operation;
 
-                    Integer index = (Integer) (chAvisarPasoPorBaliza.in().read());
+                case LEER_CAMBIO_BARRERA:
+                    //@ assume pre
+                    // TODO : leer peticiÃ³n del canal
+                    PeticionLeerCambioBarrera petBarrera = (PeticionLeerCambioBarrera) chLeerCambioBarrera.in().read();
+                    // TODO : guardar la peticiÃ³n tal cual
+                    petLeerCambioBarrera.enqueue(petBarrera);
+                    break;
 
-                    if (index == 1) {
+                case LEER_CAMBIO_FRENO:
+                    //@ assume pre
+                    // TODO : leer peticiÃ³n del canal
+                    PeticionLeerCambioFreno petFreno = (PeticionLeerCambioFreno) chLeerCambioFreno.in().read();
+                    // TODO : guardar la peticiÃ³n tal cual
+                    petLeerCambioFreno.enqueue(petFreno);
+                    break;
+
+                case LEER_CAMBIO_SEMAFORO:
+                    //@ assume pre
+                    // TODO : leer peticiÃ³n del canal
+                    PeticionLeerCambioSemaforo petSemaforo = (PeticionLeerCambioSemaforo) chLeerCambioSemaforo.in().read();
+                    // TODO : guardar la peticiÃ³n tal cual
+                    petLeerCambioSemaforo.enqueue(petSemaforo);
+                    break;
+
+                case AVISAR_PASO_POR_BALIZA:
+                    //@ assume pre && cpre
+                    // TODO : leer peticiÃ³n del canal
+                    int i = (Integer) chAvisarPasoPorBaliza.in().read();
+                    // TODO : actualizar estado del recurso
+                    if (i == 1) {
                         trains[1]++;
                     }else {
-                        trains[index - 1]--;
-                        trains[index]++;
+                        trains[i - 1]--;
+                        trains[i]++;
                     }
                     coloresCorrectos(trains, colors, presence);
-
-                    chAvisarPasoPorBaliza.out().write(index);
                     break;
-                case 2: // leerCambioBarrera(true)
-                    //@ assume inv & pre && cpre of operation;
-                    if (chreply.in().pending()) {
-                        Boolean resultBT = trains[1] + trains[2] == 0;
+            } // switch
 
-                        chreply.out().write(resultBT);
-                        chLeerCambioBarreraT.out().write(chreply);
+            // CÃ³digo de desbloqueo
+            // TODO : cÃ³digo que recorre vuestras peticiones aplazadas
+            //        procesando aquellas cuya CPRE se cumple,
+            //        hasta que no quede ninguna
+
+            // HOW T'WAS BEFORE:
+            /*
+            int total = petLeerCambioBarrera.size() + petLeerCambioFreno.size() + petLeerCambioSemaforo.size();
+            for (int i = 0; i < total; i++) {
+                ...
+                if (CPRE){
+                    i++;
+                    method call
+                }
+                ...
+            }
+
+             */
+            // YA SURE 'TIS LIKE THIS?:
+            while (!(petLeerCambioBarrera.isEmpty() && petLeerCambioFreno.isEmpty() && petLeerCambioSemaforo.isEmpty())) {
+                // Barrera:
+                if (!petLeerCambioBarrera.isEmpty()) {
+                    PeticionLeerCambioBarrera petBarrera = petLeerCambioBarrera.dequeue();
+                    boolean resBarrera = trains[1] + trains[2] == 0;
+
+                    if (checkBarrierCPRE(petBarrera.value, trains)) {
+                        leerCambioBarrera(resBarrera);
+                    } else {
+                        petLeerCambioBarrera.enqueue(petBarrera);
                     }
-                    break;
-                case 3: // leerCambioBarrera(false)
-                    //@ assume inv & pre && cpre of operation;
-                    if (chreply.in().pending()) {
-                        Boolean resultBF = trains[1] + trains[2] == 0;
+                }
+                // Freno:
+                if (!petLeerCambioFreno.isEmpty()) {
+                    PeticionLeerCambioFreno petFreno = petLeerCambioFreno.dequeue();
+                    boolean resFreno = trains[1] > 1 || trains[2] > 1 || (trains[2] == 1 && presence);
 
-                        chreply.out().write(resultBF);
-                        chLeerCambioBarreraF.out().write(chreply);
+                    if (checkBrakeCPRE(petFreno.value, trains, presence)) {
+                        leerCambioFreno(resFreno);
+                    } else {
+                        petLeerCambioFreno.enqueue(petFreno);
                     }
-                    break;
-                case 4: // leerCambioFreno(true)
-                    //@ assume inv & pre && cpre of operation;
-                    if (chreply.in().pending()) {
-                        Boolean resultFT = trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence);
+                }
 
-                        chreply.out().write(resultFT);
-                        chLeerCambioFrenoT.out().write(chreply);
+                //Semaforo:
+                if (!petLeerCambioSemaforo.isEmpty()) {
+                    PeticionLeerCambioSemaforo petSemaforo = petLeerCambioSemaforo.dequeue();
+                    Control.Color resSemaforo = colors[petSemaforo.index];
+
+                    if (checkSemaphoreCPRE(petSemaforo.index, petSemaforo.color, colors)) {
+                        leerCambioSemaforo(petSemaforo.index, resSemaforo);
+                    } else {
+                        petLeerCambioSemaforo.enqueue(petSemaforo);
                     }
-                    break;
-                case 5: // leerCambioFreno(false)
-                    //@ assume inv & pre && cpre of operation;
-                    if (chreply.in().pending()) {
-                        Boolean resultFF = trains[1] > 1 || trains[2] > 1 || (trains[2] == 0 && presence);
+                }
+            }
+        } // end bucle servicio
+    } // end run method
 
-                        chreply.out().write(resultFF);
-                        chLeerCambioFrenoF.out().write(chreply);
-                    }
-                    break;
-                default: // leerCambioSemaforo(queSemaforo,queColor)
-                    // decodificar numero de semaforo y color a partir del
-                    // valor de chosenService
-                    if (chreply.in().pending()) {
-                        int queSemaforo = (chosenService - 6) / 3;
-                        int queColor = (chosenService - 6) % 3;
-
-                        chreply.out().write(queColor);
-                        chLeerCambioSemaforo[queSemaforo][queColor].out().write(chreply);
-                    }
-                    break;
-            } // SWITCH
-        } // SERVER LOOP
-    } // run()
-
-    // mÃ©todos auxiliares varios
-    //        usado en la otra practica para ajustar
-    //        luces de semaforos, evaluar CPREs, etc.
-
-    private static void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {
+    // TODO : meted aquÃ­ vuestros mÃ©todos auxiliares para
+    //        ajustar luces, cÃ¡lculo de CPREs, etc.
+    private void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {
         // About the first semaphore:
         if (trains[1] > 0) {
             // If there's at least one train in the first segment, we put the first semaphore to RED.
@@ -266,19 +292,19 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         colors[3] = Control.Color.VERDE;
     }
 
-    // checks the value of the Semaphore CPRE:
-    private Boolean checkSemaphoreCPRE (int index, Control.Color actual, Control.Color[] colors) {
+    private boolean checkSemaphoreCPRE (int index, Control.Color actual, Control.Color[] colors) {
         return !colors[index].equals(actual);
     }
 
     // checks the value of the Brake CPRE:
-    private Boolean checkBrakeCPRE (boolean actual, int[] trains, boolean presence) {
+    private boolean checkBrakeCPRE (boolean actual, int[] trains, boolean presence) {
         return actual != (trains[1] > 1 || trains[2] > 1 || trains[2] == 1 && presence);
     }
 
     // checks the value of the Barrier CPRE:
-    private Boolean checkBarrierCPRE (boolean actual, int[] trains) {
+    private boolean checkBarrierCPRE (boolean actual, int[] trains) {
         return actual != (trains[1] + trains[2] == 0);
     }
+
 
 } // end CLASS
