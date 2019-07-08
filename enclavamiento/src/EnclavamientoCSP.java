@@ -1,4 +1,4 @@
-// TODO : importar estructuras de datos, si os hace falta
+// TO-DO : importar estructuras de datos, si os hace falta
 import es.upm.aedlib.fifo.FIFOList;
 import org.jcsp.lang.Alternative;
 import org.jcsp.lang.Any2OneChannel;
@@ -117,29 +117,39 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
 
     @Override
     public void run() {
-        // TODO : Declarar aquÃ­ el estado del recurso:
-        //        presencia, tren y color
+        // LOCAL VARIABLES DECLARATION:
+        // The number of segments present (easier to change in future if needed)
         int nSegments = 3;
-        boolean presence;
-        int[] trains;
-        Control.Color[] colors;
-        //
-        // TODO : inicializaciÃ³n del estado del recurso
-        presence = false;
-        trains = new int[]{0,0,0,0};
-        colors = new Control.Color[nSegments + 1];
 
+        // Indicates whether there's a car crossing the railway or not:
+        boolean presence;
+
+        // Array with the number of trains in the segment (the first value is of no use):
+        int[] trains;
+
+        // Array with the semaphore colors (the first value is NULL, as it's of no use):
+        Control.Color[] colors;
+
+        // LOCAL VARIABLES INITIALIZATION:
+        // At first there are no cars crossing,...
+        presence = false;
+
+        // ... no trains going through,...
+        trains = new int[]{0,0,0,0};
+
+        // ... and the semaphores are all in GREEN (except for the #0, because well, it's useless).
+        colors = new Control.Color[nSegments + 1];
         for (int i = 1; i < nSegments + 1; i++) {
             colors[i] = Control.Color.VERDE;
         }
 
-        // TODO : Declarar estructuras auxiliares para guardar
-        //        las peticiones aplazadas en el servidor
+        // FIFO-typed Lists to save the petitions that are created from the methods above.
+        // There's one FIFO List for each blocking method:
         FIFOList<PeticionLeerCambioBarrera> petLeerCambioBarrera = new FIFOList<PeticionLeerCambioBarrera>();
         FIFOList<PeticionLeerCambioFreno> petLeerCambioFreno = new FIFOList<PeticionLeerCambioFreno>();
         FIFOList<PeticionLeerCambioSemaforo> petLeerCambioSemaforo = new FIFOList<PeticionLeerCambioSemaforo>();
 
-        // ConstrucciÃ³n de la recepciÃ³n alternativa
+        // Building the alternative reception:
         Guard[] inputs = {
                 chAvisarPresencia.in(),
                 chLeerCambioBarrera.in(),
@@ -149,121 +159,153 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         };
 
         Alternative services = new Alternative(inputs);
-        int chosenService = 0;
+        int chosenService;
 
-        // Bucle de servicio
+        // Service loop:
         while (true){
             chosenService = services.fairSelect();
 
             switch (chosenService) {
 
                 case AVISAR_PRESENCIA:
-                    //@ assume pre && cpre
-                    // TODO : leer peticiÃ³n del canal
+                    // We assume the PRE & the CPRE are already satisfied.
+                    // We read the channel and get the value sent in it, which tells us if there's a car crossing,
+                    // so we save it in presence.
                     presence = (Boolean) chAvisarPresencia.in().read();
-                    // TODO : actualizar estado del recurso
+                    // Now we change the semaphore colors according to the presence value we just read:
                     coloresCorrectos(trains, colors, presence);
+                    // And exit:
                     break;
 
                 case LEER_CAMBIO_BARRERA:
-                    //@ assume pre
-                    // TODO : leer peticiÃ³n del canal
-                    PeticionLeerCambioBarrera petBarrera = (PeticionLeerCambioBarrera) chLeerCambioBarrera.in().read();
-                    // TODO : guardar la peticiÃ³n tal cual
-                    petLeerCambioBarrera.enqueue(petBarrera);
+                    // We assume the PRE is already satisfied.
+                    // We read the channel and the value sent, which is the Petition created above for the BARRIER:
+                    PeticionLeerCambioBarrera petBarrier = (PeticionLeerCambioBarrera) chLeerCambioBarrera.in().read();
+                    // We now save straight away that petition, as we'll unlock it later.
+                    petLeerCambioBarrera.enqueue(petBarrier);
+                    // And exit:
                     break;
 
                 case LEER_CAMBIO_FRENO:
-                    //@ assume pre
-                    // TODO : leer peticiÃ³n del canal
-                    PeticionLeerCambioFreno petFreno = (PeticionLeerCambioFreno) chLeerCambioFreno.in().read();
-                    // TODO : guardar la peticiÃ³n tal cual
-                    petLeerCambioFreno.enqueue(petFreno);
+                    // We assume the PRE is already satisfied.
+                    // We read the channel and the value sent, which is the Petition created above for the BRAKE:
+                    PeticionLeerCambioFreno petBrake = (PeticionLeerCambioFreno) chLeerCambioFreno.in().read();
+                    // We now save straight away that petition, as we'll unlock it later.
+                    petLeerCambioFreno.enqueue(petBrake);
+                    // And exit:
                     break;
 
                 case LEER_CAMBIO_SEMAFORO:
-                    //@ assume pre
-                    // TODO : leer peticiÃ³n del canal
-                    PeticionLeerCambioSemaforo petSemaforo = (PeticionLeerCambioSemaforo) chLeerCambioSemaforo.in().read();
-                    // TODO : guardar la peticiÃ³n tal cual
-                    petLeerCambioSemaforo.enqueue(petSemaforo);
+                    // We assume the PRE is already satisfied.
+                    // We read the channel and the value sent, which is the Petition created, for the SEMAPHORE:
+                    PeticionLeerCambioSemaforo petSemaphore = (PeticionLeerCambioSemaforo) chLeerCambioSemaforo.in().read();
+                    // We now save straight away that petition, as we'll unlock it later.
+                    petLeerCambioSemaforo.enqueue(petSemaphore);
+                    // And exit:
                     break;
 
                 case AVISAR_PASO_POR_BALIZA:
-                    //@ assume pre && cpre
-                    // TODO : leer peticiÃ³n del canal
+                    // We assume the PRE & the are already satisfied.
+                    // We read the channel and the value sent, which is the number of the segment where there's a train
+                    // passing through:
                     int i = (Integer) chAvisarPasoPorBaliza.in().read();
-                    // TODO : actualizar estado del recurso
+                    // Then, we actualize the trains array:
                     if (i == 1) {
+                        // If it's in the first segment, we don't have to decrement the previous one, as there's none.
                         trains[1]++;
                     }else {
+                        // We decrement the previous segment number of trains, and add a train in the segment given, in
+                        // order to reflect the passing of the train in the railway.
                         trains[i - 1]--;
                         trains[i]++;
                     }
+
+                    // Then, we actualize the semaphore colors based on the recent changes:
                     coloresCorrectos(trains, colors, presence);
+                    // And exit:
                     break;
             } // switch
 
-            // CÃ³digo de desbloqueo
-            // TODO : cÃ³digo que recorre vuestras peticiones aplazadas
-            //        procesando aquellas cuya CPRE se cumple,
-            //        hasta que no quede ninguna
+            // Unblocking code: this will unlock every petition saved that satisfies it's CPRE.
 
-            // HOW T'WAS BEFORE:
-            /*
-            int total = petLeerCambioBarrera.size() + petLeerCambioFreno.size() + petLeerCambioSemaforo.size();
-            for (int i = 0; i < total; i++) {
-                ...
-                if (CPRE){
-                    i++;
-                    method call
-                }
-                ...
-            }
+            // Barrier:
+            // We get the size of the petition list:
+            int BarrierSize = petLeerCambioBarrera.size();
+            // Go through the petition, but just once per petition:
+            for (int i = 0; i < BarrierSize; i++) {
+                // We get the first petition in the list:
+                PeticionLeerCambioBarrera petBarrier = petLeerCambioBarrera.dequeue();
 
-             */
-            // YA SURE 'TIS LIKE THIS?:
-            while (!(petLeerCambioBarrera.isEmpty() && petLeerCambioFreno.isEmpty() && petLeerCambioSemaforo.isEmpty())) {
-                // Barrera:
-                if (!petLeerCambioBarrera.isEmpty()) {
-                    PeticionLeerCambioBarrera petBarrera = petLeerCambioBarrera.dequeue();
+                //And we check it's CPRE:
+                if (checkBarrierCPRE(petBarrier.value, trains)) {
+                    // If it's satisfied, we calculate the result, which will be true if there are no trains in segments
+                    // 1 and 2, and false otherwise:
                     boolean resBarrera = trains[1] + trains[2] == 0;
 
-                    if (checkBarrierCPRE(petBarrera.value, trains)) {
-                        leerCambioBarrera(resBarrera);
-                    } else {
-                        petLeerCambioBarrera.enqueue(petBarrera);
-                    }
-                }
-                // Freno:
-                if (!petLeerCambioFreno.isEmpty()) {
-                    PeticionLeerCambioFreno petFreno = petLeerCambioFreno.dequeue();
-                    boolean resFreno = trains[1] > 1 || trains[2] > 1 || (trains[2] == 1 && presence);
-
-                    if (checkBrakeCPRE(petFreno.value, trains, presence)) {
-                        leerCambioFreno(resFreno);
-                    } else {
-                        petLeerCambioFreno.enqueue(petFreno);
-                    }
-                }
-
-                //Semaforo:
-                if (!petLeerCambioSemaforo.isEmpty()) {
-                    PeticionLeerCambioSemaforo petSemaforo = petLeerCambioSemaforo.dequeue();
-                    Control.Color resSemaforo = colors[petSemaforo.index];
-
-                    if (checkSemaphoreCPRE(petSemaforo.index, petSemaforo.color, colors)) {
-                        leerCambioSemaforo(petSemaforo.index, resSemaforo);
-                    } else {
-                        petLeerCambioSemaforo.enqueue(petSemaforo);
-                    }
+                    // Afterwards, we send the result in the petition's channel:
+                    petBarrier.channel.out().write(resBarrera);
+                } else {
+                    // If the CPRE wasn't satisfied though, we put the petition back in the List:
+                    petLeerCambioBarrera.enqueue(petBarrier);
                 }
             }
-        } // end bucle servicio
+
+            // Brake:
+            // We get the size of the petition list:
+            int BrakeSize = petLeerCambioFreno.size();
+            // Go through the petition, but just once per petition:
+            for (int i = 0; i < BrakeSize; i++) {
+                // We get the first petition in the list:
+                PeticionLeerCambioFreno petBrake = petLeerCambioFreno.dequeue();
+
+                //And we check it's CPRE:
+                if (checkBrakeCPRE(petBrake.value, trains, presence)) {
+                    // If it's satisfied, we calculate the result, which will be true if there's more than one train in
+                    // the first or second segment, or if there's one train in the second and a car crossing the
+                    // railway; and false otherwise:
+                    boolean resFreno = trains[1] > 1 || trains[2] > 1 || (trains[2] == 1 && presence);
+
+                    // Then, we send the result in the petition's channel:
+                    petBrake.channel.out().write(resFreno);
+                } else{
+                    // If the CPRE wasn't satisfied though, we put the petition back in the List:
+                    petLeerCambioFreno.enqueue(petBrake);
+                }
+            }
+
+            // Semaphore:
+            // We get the size of the petition list:
+            int SemaphoreSize = petLeerCambioSemaforo.size();
+            // Go through the petition, but just once per petition:
+            for (int i = 0; i < SemaphoreSize; i++) {
+                // We get the first petition in the list:
+                PeticionLeerCambioSemaforo petSemaphore = petLeerCambioSemaforo.dequeue();
+
+                //And we check it's CPRE:
+                if (checkSemaphoreCPRE(petSemaphore.index, petSemaphore.color, colors)) {
+                    // If it's satisfied, we get the result, which is the previous color of the semaphore:
+                    Control.Color resSemaforo = colors[petSemaphore.index];
+
+                    // Then, we send the result in the petition's channel:
+                    petSemaphore.channel.out().write(resSemaforo);
+                } else{
+                    // If the CPRE wasn't satisfied though, we put the petition back in the List:
+                    petLeerCambioSemaforo.enqueue(petSemaphore);
+                }
+            }
+
+        } // end service loop
     } // end run method
 
-    // TODO : meted aquÃ­ vuestros mÃ©todos auxiliares para
-    //        ajustar luces, cÃ¡lculo de CPREs, etc.
+    // AUX METHODS:
+
+    /**
+     * Sets the correct colors of the semaphores, according to the number of trains in each segment and the presence or
+     * not of a car in the railway.
+     * @param trains    array with the number of trains in each segment
+     * @param colors    array with the colors of each semaphore
+     * @param presence  boolean saying if there's a car crossing the railway or not
+     */
     private void coloresCorrectos(int[] trains, Control.Color[] colors, boolean presence) {
         // About the first semaphore:
         if (trains[1] > 0) {
@@ -292,16 +334,38 @@ public class EnclavamientoCSP implements CSProcess, Enclavamiento {
         colors[3] = Control.Color.VERDE;
     }
 
+    /**
+     * Checks the CPRE for the Semaphores petitions
+     * @param index     the number of the semaphore in the array of colors
+     * @param actual    the new color of the semaphore
+     * @param colors    the array of colors shown by the semaphores
+     * @return          true -> if the colors are different,
+     *                  false -> if not
+     */
     private boolean checkSemaphoreCPRE (int index, Control.Color actual, Control.Color[] colors) {
         return !colors[index].equals(actual);
     }
 
-    // checks the value of the Brake CPRE:
+    /**
+     * Checks the CPRE for the Brakes petitions
+     * @param actual    the new value of the brake
+     * @param trains    the array of trains in each segment
+     * @param presence  whether there's a car crossing or not
+     * @return          true -> if there's more than one train in the first or second segment, or if there's one train
+     *                          in the second and a car crossing the railway
+     *                  false -> otherwise
+     */
     private boolean checkBrakeCPRE (boolean actual, int[] trains, boolean presence) {
         return actual != (trains[1] > 1 || trains[2] > 1 || trains[2] == 1 && presence);
     }
 
-    // checks the value of the Barrier CPRE:
+    /**
+     * Checks the CPRE for the Barriers petitions
+     * @param actual    the new value of the barrier
+     * @param trains    the array of trains in each segment
+     * @return          true -> if there are trains in the first or second segment
+     *                  false -> otherwise
+     */
     private boolean checkBarrierCPRE (boolean actual, int[] trains) {
         return actual != (trains[1] + trains[2] == 0);
     }

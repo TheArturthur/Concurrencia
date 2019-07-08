@@ -1,3 +1,8 @@
+import org.jcsp.lang.CSProcess;
+import org.jcsp.lang.Parallel;
+
+import static sun.misc.PostVMInitHook.run;
+
 public class Cruce {
     private static Control dispositivos = new ControlSimulado();
 
@@ -142,5 +147,27 @@ public class Cruce {
         enclavamiento.avisarPasoPorBaliza(2);
         */
 
+        // PRUEBAS CSP:
+
+//        new Parallel(new CSProcess[] {
+//            new CSProcess() {
+//                @Override
+//                public void run() {
+//                    enclavamiento.avisarPresencia(true);
+//                    System.out.println("presencia true");
+//                    enclavamiento.leerCambioFreno(true);
+//                    System.out.println("freno true");
+//                    enclavamiento.leerCambioFreno(false);
+//                    System.out.println("freno false");
+//                }
+//            }//,
+////            new CSProcess() {
+////                @Override
+////                public void run() {
+////                    enclavamiento.avisarPasoPorBaliza(1);
+////                    System.out.println("baliza 1");
+////                }
+////            }
+//        }).run();
     }
 }
